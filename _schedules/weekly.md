@@ -18,7 +18,6 @@ timeline:
   - '4:30 PM'
   - '5:00 PM'
   - '5:30 PM'
-  
 schedule:
   - name: Monday
     events:
@@ -26,44 +25,36 @@ schedule:
         start: 10:20 AM
         end: 11:10 AM
         location: ZACH 341
-
-  - name: Tuesday
-
   - name: Wednesday
     events:
       - name: Lecture
         start: 10:20 AM
         end: 11:10 AM
         location: ZACH 341
-
   - name: Wednesday
     events:
       - name: Lab (Section 503)
         start: 11:20 AM
         end: 2:10 PM
         location: ZACH 127
-
   - name: Wednesday
     events:
       - name: Lab (Section 502)
         start: 2:20 PM
         end: 5:10 PM
         location: ZACH 127
-
   - name: Thursday
     events:
       - name: Lab (Section 501)
         start: 6:00 PM
         end: 8:50 PM
         location: ZACH 127
-
   - name: Friday
     events:
       - name: Lecture
         start: 10:20 AM
         end: 11:10 AM
         location: ZACH 341
-
   - name: Friday
     events:
       - name: Lab (Section 500)
