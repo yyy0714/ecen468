@@ -1,8 +1,4 @@
 ---
-# Example weekly schedule grid, kept only as a syntax reference — it is NOT
-# shown on the site. Fill in the course's real meeting times and delete the
-# `published: false` line to show the grid on the Schedule page.
-published: false
 timeline:
   - '9:00 AM'
   - '9:30 AM'
@@ -22,15 +18,56 @@ timeline:
   - '4:30 PM'
   - '5:00 PM'
   - '5:30 PM'
+  
 schedule:
   - name: Monday
     events:
       - name: Lecture
-        start: 9:30 AM
-        end: 10:30 AM
-        location: TBD
+        start: 10:20 AM
+        end: 11:10 AM
+        location: ZACH 341
+
   - name: Tuesday
+
   - name: Wednesday
+    events:
+      - name: Lecture
+        start: 10:20 AM
+        end: 11:10 AM
+        location: ZACH 341
+
+  - name: Wednesday
+    events:
+      - name: Lab (Section 503)
+        start: 11:20 AM
+        end: 2:10 PM
+        location: ZACH 127
+
+  - name: Wednesday
+    events:
+      - name: Lab (Section 502)
+        start: 2:20 PM
+        end: 5:10 PM
+        location: ZACH 127
+
   - name: Thursday
+    events:
+      - name: Lab (Section 501)
+        start: 6:00 PM
+        end: 8:50 PM
+        location: ZACH 127
+
   - name: Friday
+    events:
+      - name: Lecture
+        start: 10:20 AM
+        end: 11:10 AM
+        location: ZACH 341
+
+  - name: Friday
+    events:
+      - name: Lab (Section 500)
+        start: 3:00 PM
+        end: 5:50 PM
+        location: ZACH 127
 ---
