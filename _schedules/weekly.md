@@ -31,14 +31,10 @@ schedule:
         start: 10:20 AM
         end: 11:10 AM
         location: ZACH 341
-  - name: Wednesday
-    events:
       - name: Lab (Section 503)
         start: 11:20 AM
         end: 2:10 PM
         location: ZACH 127
-  - name: Wednesday
-    events:
       - name: Lab (Section 502)
         start: 2:20 PM
         end: 5:10 PM
@@ -55,8 +51,6 @@ schedule:
         start: 10:20 AM
         end: 11:10 AM
         location: ZACH 341
-  - name: Friday
-    events:
       - name: Lab (Section 500)
         start: 3:00 PM
         end: 5:50 PM
