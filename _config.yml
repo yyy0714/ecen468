@@ -15,10 +15,10 @@
 # in the templates via {{ site.myvariable }}.
 title: ECEN 468
 tagline: Texas A&M University
-description: Course website for ECEN 468 at Texas A&M University
+description: Course website for ECEN 468
 author: ECEN 468 course staff
-baseurl: '/ecen468' # the subpath of your site — must match the repository name; use '' if publishing to <username>.github.io itself
-url: '' # TODO: the base hostname & protocol for your site, e.g. https://<username>.github.io
+baseurl: '/ecen468'
+url: 'https://yyy0714.github.io'
 exclude: ["Gemfile", "Gemfile.lock", "LICENSE"]
 
 # Theme settings
@@ -40,6 +40,7 @@ collections:
   modules:
   schedules:
   announcements:
+
 # Default layouts for each collection type
 defaults:
   - scope:
