@@ -12,13 +12,11 @@ seo:
 
 Welcome to the course website for ECEN 468 at Texas A&M University.
 
-Course information will be posted here before the semester begins:
-
-- [Announcements](announcements.md) — class announcements
-- [Calendar](calendar.md) — course modules and topics
-- [Schedule](schedule.md) — the weekly event schedule
-- [Staff](staff.md) — course staff
-- [Policies](policies.md) — grading and submission policies
+- [Announcements](announcements.md)
+- [Calendar](calendar.md)
+- [Schedule](schedule.md)
+- [Staff](staff.md)
+- [Policies](policies.md)
 
 <!--
 Maintainer notes (not rendered on the published site):
