@@ -1,6 +1,5 @@
 ---
-title: Week 2 (MM/DD – MM/DD)
+title: 'Lab 2: Design of UART Transmitter'
 ---
 
-Lab 2
-: [Manual (pdf)]({{ '/assets/files/lab02/lab02_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab02/lab02_code.tar.gz' | relative_url }})
+[Manual (pdf)]({{ '/assets/files/lab02/lab02_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab02/lab02_code.tar.gz' | relative_url }})

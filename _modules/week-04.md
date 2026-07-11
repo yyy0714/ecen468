@@ -1,6 +1,5 @@
 ---
-title: Week 4 (MM/DD – MM/DD)
+title: 'Lab 4: Design of Canny Edge Detector'
 ---
 
-Lab 4
-: [Manual (pdf)]({{ '/assets/files/lab04/lab04_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab04/lab04_code.tar.gz' | relative_url }})
+[Manual (pdf)]({{ '/assets/files/lab04/lab04_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab04/lab04_code.tar.gz' | relative_url }})

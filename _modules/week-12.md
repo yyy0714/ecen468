@@ -1,6 +1,5 @@
 ---
-title: Week 12 (MM/DD – MM/DD)
+title: 'Lab 12: Introduction to Verilog AMS and Simulator'
 ---
 
-Lab 12
-: [Manual (pdf)]({{ '/assets/files/lab12/lab12_manual.pdf' | relative_url }})
+[Manual (pdf)]({{ '/assets/files/lab12/lab12_manual.pdf' | relative_url }})

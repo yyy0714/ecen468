@@ -1,6 +1,5 @@
 ---
-title: Week 7 (MM/DD – MM/DD)
+title: 'Lab 7: Design of SRAM and Synthesis'
 ---
 
-Lab 7
-: [Manual (pdf)]({{ '/assets/files/lab07/lab07_manual.pdf' | relative_url }}) · [Code A (tar.gz)]({{ '/assets/files/lab07/lab07_code_a.tar.gz' | relative_url }}) · [Code B (tar.gz)]({{ '/assets/files/lab07/lab07_code_b.tar.gz' | relative_url }})
+[Manual (pdf)]({{ '/assets/files/lab07/lab07_manual.pdf' | relative_url }}) · [Code A (tar.gz)]({{ '/assets/files/lab07/lab07_code_a.tar.gz' | relative_url }}) · [Code B (tar.gz)]({{ '/assets/files/lab07/lab07_code_b.tar.gz' | relative_url }})
