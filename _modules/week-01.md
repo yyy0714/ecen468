@@ -1,15 +1,6 @@
 ---
-# Example calendar module, kept only as a syntax reference — it is NOT shown
-# on the site. Copy this file to add a week to the Calendar page and delete
-# the `published: false` line to publish it. Each entry is a kramdown
-# definition list: a date line, then `: `-prefixed lines for that day's events.
-published: false
-title: Week 1
+title: Week 1 (MM/DD – MM/DD)
 ---
 
-Mon
-: [Lecture 1](#)
-
-Wed
-: [Lecture 2](#)
-: **HW 1 due**{: .label .label-red }
+Lab 1
+: [Manual]({{ '/assets/files/lab01/lab01_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab01/lab01_code.tar.gz' | relative_url }})

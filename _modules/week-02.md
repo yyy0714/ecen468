@@ -1,4 +1,6 @@
 ---
-# Unused sample file from the template — not shown on the site; safe to delete.
-published: false
+title: Week 2 (MM/DD – MM/DD)
 ---
+
+Lab 2
+: [Manual]({{ '/assets/files/lab02/lab02_manual.pdf' | relative_url }}) · [Code (tar.gz)]({{ '/assets/files/lab02/lab02_code.tar.gz' | relative_url }})
