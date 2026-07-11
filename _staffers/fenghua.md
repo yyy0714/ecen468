@@ -1,7 +1,7 @@
 ---
-name: Yiyang Yan
+name: Fenghua Wu
 role: Teaching Assistant
-email: yyy2000@tamu.edu
+email: fhwu@tamu.edu
 meta:
   Office: TBD
   Office Hours: TBD
