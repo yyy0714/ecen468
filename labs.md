@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Calendar
+title: Labs
 ---
 
-# Calendar
+# Labs
 
 {% for module in site.modules %}
 {{ module }}
