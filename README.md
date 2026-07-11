@@ -18,7 +18,7 @@ Course information will be posted here before the semester begins:
 - [Calendar](calendar.md) — course modules and topics
 - [Schedule](schedule.md) — the weekly event schedule
 - [Staff](staff.md) — course staff
-- [About](about.md) — course policies and information
+- [Policies](policies.md) — grading and submission policies
 
 <!--
 Maintainer notes (not rendered on the published site):
@@ -34,7 +34,7 @@ To publish with GitHub Pages:
    "Deploy from a branch" → select the main branch, / (root).
 3. Add content: staff in _staffers/, announcements in _announcements/,
    calendar entries in _modules/, the weekly grid in _schedules/, and
-   policies in about.md. The remaining sample files are marked
+   policies in policies.md. The remaining sample files are marked
    `published: false` (invisible on the site) and are kept only as syntax
    references — they can be deleted at any time.
 -->
