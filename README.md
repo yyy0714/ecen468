@@ -3,9 +3,6 @@ layout: home
 title: Home
 nav_exclude: true
 permalink: /:path/
-seo:
-  type: Course
-  name: ECEN 468
 ---
 
 # ECEN 468
