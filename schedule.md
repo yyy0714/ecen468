@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Schedule
-description: Weekly event schedule.
+published: false
 ---
 
 # Weekly Schedule

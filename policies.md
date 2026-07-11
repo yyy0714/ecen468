@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Policies
-description: Grading and submission policies.
 ---
 
 # Policies

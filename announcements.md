@@ -2,7 +2,6 @@
 layout: page
 title: Announcements
 nav_exclude: true
-description: All class announcements.
 ---
 
 # Announcements
