@@ -5,13 +5,10 @@ nav_exclude: true
 permalink: /:path/
 ---
 
-# ECEN 468
-
-Welcome to the course website for ECEN 468 at Texas A&M University.
+# ECEN 468 Fall 2026
 
 - [Announcements](announcements.md)
-- [Calendar](calendar.md)
-- [Schedule](schedule.md)
+- [Labs](labs.md)
 - [Staff](staff.md)
 - [Policies](policies.md)
 
