@@ -15,7 +15,7 @@
           <a href="{{ '/' | relative_url }}" class="d-block fs-4 mb-3 link-body-emphasis text-decoration-none">{{ site.title }}</a>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a {% if page.url == '/labs/' %}class="nav-link active" aria-current="page"{% else %}class="nav-link"{% endif %} href="{{ '/labs/' | relative_url }}">Labs</a>
+              <a {% if page.url == '/' %}class="nav-link active" aria-current="page"{% else %}class="nav-link"{% endif %} href="{{ '/' | relative_url }}">Labs</a>
             </li>
             <li class="nav-item">
               <a {% if page.url == '/policies/' %}class="nav-link active" aria-current="page"{% else %}class="nav-link"{% endif %} href="{{ '/policies/' | relative_url }}">Policies</a>

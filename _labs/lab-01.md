@@ -1,4 +1,4 @@
-gi---
+---
 title: 'Lab 1: Introduction to SystemC and Simulator'
 downloads:
   - label: manual (pdf)

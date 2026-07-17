@@ -6,8 +6,8 @@ GitHub Pages. Math is typeset with MathJax.
 
 ## Layout
 
-- `index.md` — landing page with a table of contents.
-- `labs.md` — renders every document in `_labs/` as a card with download buttons.
+- `labs.md` — the landing page (served at the site root via `permalink: /`);
+  renders every document in `_labs/` as a card with download buttons.
 - `policies.md` — course policies, plain Markdown.
 - `staff.md` — renders every document in `_staff/` as a contact card,
   grouped by `role` (`Instructor` or `Teaching Assistant`).
