@@ -2,7 +2,6 @@
 name: Yiyang Yan
 role: Teaching Assistant
 email: yyy2000@tamu.edu
-meta:
-  Office: TBD
-  Office Hours: TBD
+office: TBD
+office_hours: TBD
 ---
