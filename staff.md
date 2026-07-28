@@ -3,8 +3,6 @@ layout: default
 title: Staff
 ---
 
-# Staff
-
 ## Instructor
 
 {% assign instructors = site.staff | where: 'role', 'Instructor' %}

@@ -4,8 +4,6 @@ title: Labs
 permalink: /
 ---
 
-# Labs
-
 {% for lab in site.labs %}
 <div class="card mb-3">
   <div class="card-body">

@@ -3,8 +3,6 @@ layout: default
 title: Policies
 ---
 
-# Policies
-
 ## Grading Policy
 - Attendence (20%)
 - Lab works (40%)

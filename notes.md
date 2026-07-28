@@ -3,8 +3,6 @@ layout: default
 title: Notes
 ---
 
-# Notes
-
 {% assign notes = site.notes | reverse %}
 <div class="accordion" id="notesAccordion">
   {% for note in notes %}
