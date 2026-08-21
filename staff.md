@@ -12,6 +12,7 @@ title: Staff
     <h3 class="card-title fs-5">{{ staffer.name }}</h3>
     <ul class="list-unstyled card-text mb-0">
       <li><strong>E-mail:</strong> <a href="mailto:{{ staffer.email }}">{{ staffer.email }}</a></li>
+      {% if staffer.sections %}<li><strong>Sections:</strong> {{ staffer.sections }}</li>{% endif %}
       <li><strong>Office:</strong> {{ staffer.office }}</li>
       <li><strong>Office Hours:</strong> {{ staffer.office_hours }}</li>
     </ul>
@@ -28,6 +29,7 @@ title: Staff
     <h3 class="card-title fs-5">{{ staffer.name }}</h3>
     <ul class="list-unstyled card-text mb-0">
       <li><strong>E-mail:</strong> <a href="mailto:{{ staffer.email }}">{{ staffer.email }}</a></li>
+      {% if staffer.sections %}<li><strong>Sections:</strong> {{ staffer.sections }}</li>{% endif %}
       <li><strong>Office:</strong> {{ staffer.office }}</li>
       <li><strong>Office Hours:</strong> {{ staffer.office_hours }}</li>
     </ul>
