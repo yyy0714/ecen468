@@ -9,7 +9,7 @@ permalink: /
   <div class="card-body">
     <h2 class="card-title fs-5">{{ lab.title }}</h2>
     {% if lab.session or lab.report_due %}
-    <ul class="list-unstyled card-text text-body-secondary small mb-3">
+    <ul class="list-unstyled card-text text-body-secondary mb-3">
       {% if lab.session %}<li><strong>Session:</strong> {{ lab.session }}</li>{% endif %}
       {% if lab.report_due %}<li><strong>Report due:</strong> {{ lab.report_due }}</li>{% endif %}
     </ul>
