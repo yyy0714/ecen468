@@ -1,7 +1,6 @@
 # Site settings
-title: ECEN 468
-tagline: Texas A&M University
-description: Course website for ECEN 468
+title: ECEN 468/719
+description: Course website for ECEN 468/719
 baseurl: '/ecen468'
 url: 'https://yyy0714.github.io'
 permalink: pretty
