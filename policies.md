@@ -5,19 +5,23 @@ title: Policies
 
 ## Grading Policy
 - Attendance (20%)
-- Lab works (40%)
-- Lab report (40%)
+- Laboratory work (40%)
+- Laboratory report (40%)
+
+## Attendance Policy
+Students are expected to attend the laboratory session in which they are enrolled. A student may, however, attend a laboratory session other than the one to which they are assigned, provided that vacancies are available in that session.
+
+For excused absences and make-up work, students should refer to [Student Rule 7](https://student-rules.tamu.edu/rule07/).
 
 ## Submission Policy
-- Lab reports should include all of the requirements in the lab manuals.
-- Lab reports are due one week after the scheduled lab session.
-- Please submit the hard copies of lab reports to the TA.
+- Laboratory reports should include all of the requirements in the laboratory manuals.
+- Laboratory reports are due one week after the scheduled laboratory session.
+- Hard copies of laboratory reports should be submitted to the teaching assistant.
 
 ## Late Policy
 A deduction of 20% of the total score will be applied for each subsequent weekday following the submission deadline.
 
 ## Generative AI Policy
-
 Laboratory reports are intended to demonstrate each student's own understanding of the experiment, data analysis, and technical writing. Students are therefore expected to complete their laboratory reports independently and must not use generative AI to produce that work.
 
 Students may not use generative AI tools to generate, draft, or rewrite any part of a laboratory report. This includes, but is not limited to:
