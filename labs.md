@@ -15,6 +15,9 @@ permalink: /
     </ul>
     {% endif %}
     <div class="d-flex flex-wrap gap-2">
+      {% for item in lab.manual %}
+      <a class="btn btn-primary" href="{{ item.file | relative_url }}">{{ item.label }}</a>
+      {% endfor %}
       {% for download in lab.downloads %}
       <a class="btn btn-primary" href="{{ download.file | relative_url }}">{{ download.label }}</a>
       {% endfor %}
