@@ -3,10 +3,6 @@ layout: default
 title: Policies
 ---
 
-## Grading Policy
-- Laboratory work (50%)
-- Laboratory report (50%)
-
 ## Attendance Policy
 - Students may attend the laboratory session in which they are enrolled or any other session in which vacancies are available.
 - For excused absences and make-up work, students should refer to [Student Rule 7](https://student-rules.tamu.edu/rule07/).
