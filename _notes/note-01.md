@@ -1,7 +1,7 @@
 ---
-title: Regarding Lab 5
+title: Useful Commands
 ---
 
-Please show UART output in `sim.out` or the waveform by
-- Adding `cout` in your code, or
-- Adding `Serial_out` to your waveform signal.
+Set up Vista: `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
+
+Set up WaveView: `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
