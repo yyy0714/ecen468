@@ -7,3 +7,7 @@ Gemfile.lock
 _site/
 node_modules/
 vendor/
+assets/files/.venv/
+assets/files/uv.lock
+assets/files/CLAUDE.md
+assets/files/pyproject.toml
