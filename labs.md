@@ -15,9 +15,10 @@ permalink: /
     </ul>
     {% endif %}
     <div class="d-flex flex-wrap gap-2">
-      {% for item in lab.manual %}
-      <a class="btn btn-primary" href="{{ item.file | relative_url }}">{{ item.label }}</a>
-      {% endfor %}
+      <a class="btn btn-primary" href="{{ lab.url | relative_url }}">manual</a>
+      {% if lab.manual_pdf %}
+      <a class="btn btn-outline-primary" href="{{ lab.manual_pdf | relative_url }}">PDF</a>
+      {% endif %}
       {% for download in lab.downloads %}
       <a class="btn btn-primary" href="{{ download.file | relative_url }}">{{ download.label }}</a>
       {% endfor %}

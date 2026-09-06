@@ -6,11 +6,14 @@ url: 'https://yyy0714.github.io'
 permalink: pretty
 exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
 
-# Content collections: labs (cards on the landing page), notes (accordion on
-# /notes/), staff (cards on /staff/). Documents are rendered onto those pages
-# and do not produce standalone pages of their own.
+# Content collections: labs (each renders a manual page at /labs/<name>/ plus a
+# card on the landing page), notes (accordion on /notes/), staff (cards on
+# /staff/). Notes and staff are rendered onto their host pages and do not
+# produce standalone pages of their own.
 collections:
   labs:
+    output: true
+    permalink: /labs/:name/
   notes:
   staff:
 
