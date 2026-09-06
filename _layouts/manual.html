@@ -7,24 +7,6 @@ layout: default
 
 <h1 class="mb-2">{{ page.title }}</h1>
 
-{% if page.session or page.report_due %}
-<ul class="list-unstyled text-body-secondary mb-3">
-  {% if page.session %}<li><strong>Session:</strong> {{ page.session }}</li>{% endif %}
-  {% if page.report_due %}<li><strong>Report due:</strong> {{ page.report_due }}</li>{% endif %}
-</ul>
-{% endif %}
-
-{% if page.manual_pdf or page.downloads %}
-<div class="d-flex flex-wrap gap-2 mb-4">
-  {% if page.manual_pdf %}
-  <a class="btn btn-outline-primary btn-sm" href="{{ page.manual_pdf | relative_url }}">PDF</a>
-  {% endif %}
-  {% for download in page.downloads %}
-  <a class="btn btn-primary btn-sm" href="{{ download.file | relative_url }}">{{ download.label }}</a>
-  {% endfor %}
-</div>
-{% endif %}
-
 <hr class="mb-4">
 
 {% assign body_text = content | strip_html | strip %}
