@@ -68,7 +68,18 @@ mkdir -p $HOME/ECEN468/Lab11/src
 cd $HOME/ECEN468/Lab11/src
 ```
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the files `WRAP_CANNY.v`, `Arbiter.v`, `systemtop.v`, `tb.v`, `tb_comp.v`, `generic.sdb`, `osu018_stdcells.v`, and `osu018_stdcells.db`. Copy them to the working directory.
+Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+
+- `WRAP_CANNY.v`
+- `Arbiter.v`
+- `systemtop.v`
+- `tb.v`
+- `tb_comp.v`
+- `generic.sdb`
+- `osu018_stdcells.v`
+- `osu018_stdcells.db`
+
+Copy them to the working directory.
 
 Please copy `WRAP_SRAM.v`, `SRAM.v`, `virtSRAM.v`, `WRAP_UART.v`, `UART_XMTR.v`, `Control_Unit.v`, `Datapath_Unit.v`, and `CannyEdge.v` from previous labs into the working directory. **For the Canny Edge design, please change the high threshold to 10 and the low threshold to 3.**
 
@@ -77,7 +88,7 @@ Please copy `WRAP_SRAM.v`, `SRAM.v`, `virtSRAM.v`, `WRAP_UART.v`, `UART_XMTR.v`,
 Commands for reference:
 
 ```bash
-load-ecen-468
+load-ecen-468   # skip this line on machines in ZACH 127
 source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh
 vcs -full64 tb.v   # if you use a two-dimensional array
 ./simv
@@ -105,13 +116,13 @@ design_vision &
 
 In Design Vision, please do the same steps as in the previous labs:
 
-- Link the libraries
-- Analyze
-- Elaborate
-- Compile
-- **File -> Save as** -> `systemtop_gate.v`
-- `write_sdf systemtop.sdf`
-- Copy `systemtop.sdf` and `systemtop_gate.v` to the parent directory
+1. Link the libraries
+2. Analyze
+3. Elaborate
+4. Compile
+5. **File -> Save as** -> `systemtop_gate.v`
+6. `write_sdf systemtop.sdf`
+7. Copy `systemtop.sdf` and `systemtop_gate.v` to the parent directory
 
 **Gate Simulation**
 

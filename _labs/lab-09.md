@@ -63,7 +63,19 @@ mkdir -p $HOME/ECEN468/Lab9/src
 cd $HOME/ECEN468/Lab9/src
 ```
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find `Arbiter.v`, `Mainsystem.v`, `WRAP_SRAM.v`, `WRAP_UART.v`, `tb.v`, `virtSRAM.v`, `generic.sdb`, `osu018_stdcells.v` and `osu018_stdcells.db`. You will design modules in these files after you decompress the file. Copy them to the working directory.
+Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+
+- `Arbiter.v`
+- `Mainsystem.v`
+- `WRAP_SRAM.v`
+- `WRAP_UART.v`
+- `tb.v`
+- `virtSRAM.v`
+- `generic.sdb`
+- `osu018_stdcells.v`
+- `osu018_stdcells.db`
+
+You will design modules in these files after you decompress the file. Copy them to the working directory.
 
 Please copy `Control_Unit.v`, `Datapath_Unit.v`, and `UART_XMTR.v` from the previous lab. You will implement your code in `WRAP_UART.v` and `WRAP_SRAM.v`.
 
@@ -72,7 +84,7 @@ Once you complete the implementation, please verify the correctness of your desi
 Commands for reference:
 
 ```bash
-load-ecen-468   # skip this line on machines in Zach 127
+load-ecen-468   # skip this line on machines in ZACH 127
 source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh
 vcs -full64 tb.v
 ```
@@ -81,7 +93,7 @@ If it shows compile errors, please recheck your design and fix your code. If the
 
 `./simv`
 
-**Please take screenshots of the terminal output and include them in the report.**
+Please take screenshots of the terminal output and include them in the report.
 
 To view the graphical waveform of the simulation results, run the following command to invoke WaveView, and open `wave.dump` in WaveView.
 
@@ -216,7 +228,7 @@ If no error occurs, do the next step.
 
 `./simv`
 
-**Please take a screenshot of the simulation output, and include it in the report.**
+Please take a screenshot of the simulation output, and include it in the report.
 
 ## Submission
 

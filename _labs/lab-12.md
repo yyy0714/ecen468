@@ -227,7 +227,7 @@ Now we set all settings for simulation. Then, select **Simulation -> Netlist and
    - a. It should control the `PLL` correctly.
    - b. Please make sure the net names and cell names are the same as those described in this manual.
    - c. Late penalty: 20% of the total score will be deducted for each subsequent day after the due date.
-2. Please only submit one PDF file with the following items:
+2. Please only submit one PDF file containing the following items:
    - a. Simulation results including the four nets in Table II (the one like Figure 21).
    - b. Let's assume that you want to generate a 1GHz output of the Voltage Controlled Oscillator with a 1MHz reference clock. Please mention what parts should be modified.
 

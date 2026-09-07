@@ -36,13 +36,10 @@ The input signals are provided by the host processor, and the output signal is t
 
 The controller has the inputs (primary/external and status (from the datapath)) listed below. We note that the signal `Load_XMT_datareg` could be passed directly to the datapath unit; instead, we pass `Load_XMT_datareg` to the control unit and assert `Load_XMT_DR` conditionally when the state is `idle`, and the external signal `Load_XMT_datareg` is asserted. The status signal, `BC_lt_BCmax`, is asserted while bits are being sent, i.e., if `bit_count` < `word_size` + 1.
 
-a. `Load_XMT_datareg`: assertion is state `idle` asserts `Load_XMT_DR`, which loads the content of the `Data_Bus` into `XMT_datareg`.
-
-b. `Byte_ready`: assertion causes `Load_XMT_shftreg` to assert, which loads the contents of `XMT_datareg` into `XMT_shftreg`.
-
-c. `T_byte`: assertion initiates transmission of a byte of data, including the stop, start, and parity bits.
-
-d. `BC_lt_BCmax`: indicates the status of the bit counter in the datapath unit.
+- `Load_XMT_datareg`: assertion is state `idle` asserts `Load_XMT_DR`, which loads the content of the `Data_Bus` into `XMT_datareg`.
+- `Byte_ready`: assertion causes `Load_XMT_shftreg` to assert, which loads the contents of `XMT_datareg` into `XMT_shftreg`.
+- `T_byte`: assertion initiates transmission of a byte of data, including the stop, start, and parity bits.
+- `BC_lt_BCmax`: indicates the status of the bit counter in the datapath unit.
 
 ![Figure 4. Algorithmic State Machine and Datapath Chart (ASMD) for the UART transmitter]({{ "/assets/files/lab08/img/4.png" | relative_url }})
 
@@ -99,7 +96,17 @@ mkdir -p $HOME/ECEN468/Lab8/src
 cd $HOME/ECEN468/Lab8/src
 ```
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find `UART_XMTR.v`, `Control_Unit.v`, `Datapath_Unit.v`, `UART_tb.v`, `generic.sdb`, `osu018_stdcells.v` and `osu018_stdcells.db`. You will design modules in these files after you decompress the file. Copy them to the working directory.
+Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+
+- `UART_XMTR.v`
+- `Control_Unit.v`
+- `Datapath_Unit.v`
+- `UART_tb.v`
+- `generic.sdb`
+- `osu018_stdcells.v`
+- `osu018_stdcells.db`
+
+You will design modules in these files after you decompress the file. Copy them to the working directory.
 
 You will implement your code in `UART_XMTR.v`, `Control_Unit.v`, and `Datapath_Unit.v`.
 
@@ -108,7 +115,7 @@ Once you complete the implementation, please verify the correctness of your desi
 Commands for reference:
 
 ```bash
-load-ecen-468   # skip this line on machines in Zach 127
+load-ecen-468   # skip this line on machines in ZACH 127
 source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh
 vcs -full64 UART_tb.v
 ```
@@ -117,7 +124,7 @@ If it shows compile errors, please recheck your design and fix your code. If the
 
 `./simv`
 
-**Please take screenshots of the terminal output and include them in the report.**
+Please take screenshots of the terminal output and include them in the report.
 
 To view the graphical waveform of the simulation results, run the following command to invoke WaveView, and open `wave.dump` in WaveView.
 
@@ -249,7 +256,7 @@ If no error occurs, do the next step.
 
 `./simv`
 
-**Please take a screenshot of the simulation output, and include it in the report.**
+Please take a screenshot of the simulation output, and include it in the report.
 
 ## Submission
 
