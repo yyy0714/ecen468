@@ -11,23 +11,23 @@ downloads:
 
 ## Objectives
 
-In this lab, we will verify a module using SystemC Verification Library (SCV), which is an additional library given in SystemC standard. SCV provides the infrastructure to create basic randomization, constrained randomization, and weighted randomization tests. In this lab, we will verify the SRAM module from Lab 1 using randomization methodology. We will cover the basics of the random demonstration. Specifically, two `sc_interface_if` templates will be used for randomization: `scv_smart_ptr` and `scv_bag`.
+In this lab, we will verify a module using the SystemC Verification Library (SCV), an add-on library to the SystemC standard. SCV provides the infrastructure to create basic, constrained, and weighted randomization tests. We will verify the SRAM module from Lab 1 using a randomization methodology and cover the basics of randomization. Specifically, we will use two `sc_interface_if` templates for randomization: `scv_smart_ptr` and `scv_bag`.
 
 ## Introduction
 
-SystemC Verification standard includes many add-on features to SystemC, including data introspection, weighted randomization, transaction-based verification, exception handling, and various verification tasks. This allows us to implement a reusable and easily readable test bench. More information can be found at [www.systemc.org](http://www.systemc.org).
+The SystemC Verification standard adds many features to SystemC, such as data introspection, weighted randomization, transaction-based verification, and exception handling. These features let us build reusable, readable test benches. More information can be found at [www.systemc.org](http://www.systemc.org).
 
 ### Randomization
 
-In general, it is essential to verify hardware designs with randomly distributed test coverage. Traditionally, the verification has been done by directed testing methodology. To cover it with higher reliability, random testing methodology gives more benefits. When it uses randomization tests to verify, the stimulus (test bench) is created through constrained randomization given by users. Users can set various constraints to verify their modules and test many cases without further modification on their test benches.
+It is generally essential to verify hardware designs with randomly distributed test coverage. Traditionally, verification has been done with a directed testing methodology, but a random testing methodology offers more benefits when higher reliability is needed. In randomized testing, the stimulus (test bench) is generated through constraints supplied by the user. Users can set various constraints to verify their modules and cover many cases without further modifying their test benches.
 
-The directed methodology is fundamental to testing the system model with the desired scenarios and the situations given. Also, a complete test can be achieved by directed test methodology for a relatively small model if the time for full verification is not too long and acceptable. However, the system volume has been increasing nowadays. It requires a faster and more efficient methodology to verify and acquire similar reliability to the full test, which is huge and time-consuming. In addition, it may be difficult and impossible to manually generate random scenarios and possible situations using direct verification methodology. In this sense, the randomization methodology is powerful and efficient.
+The directed methodology is fundamental for testing a system model against specific, predefined scenarios. For a relatively small model, it can even achieve complete test coverage, provided the time required for full verification is acceptable. As designs continue to grow, however, they require a faster, more efficient methodology that achieves reliability comparable to a full test without the huge, time-consuming effort. Moreover, it is difficult, if not impossible, to generate every random scenario manually with a directed methodology. In this respect, the randomization methodology is both powerful and efficient.
 
 ### `sc_interface_if` Templates
 
 We can use templates provided by SCV to handle the `scv_extensions` pointer.
 
-The `scv_smart_ptr` class operates like a C++ pointer to the `scv_extensions` object. The `scv_smart_ptr` templates include `scv_extensions` and `scv_shared_ptr` objects. The `scv_shared_ptr` can be used when multiple threads share the same data objects with the necessary memory management. You should instantiate the object with the appropriate data type, as shown below.
+The `scv_smart_ptr` class behaves like a C++ pointer to an `scv_extensions` object. The `scv_smart_ptr` template includes `scv_extensions` and `scv_shared_ptr` objects; `scv_shared_ptr` can be used when multiple threads share the same data objects and need memory management. Instantiate the object with the appropriate data type, as shown below.
 
 ```cpp
 scv_smart_ptr<Packet> pPkt;
@@ -35,7 +35,7 @@ pPkt->address = 0;
 pPkt->data = 0;
 ```
 
-`scv_bag` is one of the template classes used when you need more complicated distribution rules for data manipulation. We can define the relative weights of particular values as shown below.
+`scv_bag` is a template class used when you need more complex distribution rules for data. We can define the relative weights of particular values, as shown below.
 
 ```cpp
 scv_bag<int> intBag;
@@ -56,9 +56,9 @@ mkdir -p $HOME/ECEN468/Lab6/src
 cd $HOME/ECEN468/Lab6/src
 ```
 
-Download the tar.gz file from the lab website and extract it. Copy `test_RAM.cpp` to the working directory. Please also copy `RAM.cpp` from Lab 1 to the working directory. Please create a new project including those two files.
+Download the tar.gz file from the lab website and extract it. Copy `test_RAM.cpp` to the working directory, and also copy `RAM.cpp` from Lab 1. Then create a new project that includes these two files.
 
-**Link to SCV library:**
+Link the SCV library:
 
 1. In the menu bar, click on **Project -> Setting**;
 2. Click on the tab **Link**;
@@ -68,7 +68,7 @@ Download the tar.gz file from the lab website and extract it. Copy `test_RAM.cpp
 
 *Figure 1. Project settings window*
 
-In `test_RAM.cpp`, you will need to complete **Verification I & II**. Below are the requirements.
+In `test_RAM.cpp`, you will complete Verification I and II. The requirements are below.
 
 - For both Verifications I & II
   - Please use `[name].print()` instead of `cout` for printing.
@@ -98,7 +98,7 @@ wv &
 
 ## Submission
 
-Please only submit one PDF file containing the following items:
+Please submit a single PDF file containing the following:
 
 1. Screenshots of the waveform with analysis.
 2. Screenshots of the simulation output in Vista.

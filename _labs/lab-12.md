@@ -8,7 +8,7 @@ manual_pdf: /assets/files/lab12/lab12_manual.pdf
 
 ## Purpose
 
-Verilog-AMS HDL is a standard modeling language for analog circuits, and Virtuoso is a simulator for Verilog AMS. We will design a simple application: Phase Locked Loop with Verilog AMS and use Virtuoso for simulation.
+Verilog-AMS HDL is a standard modeling language for analog circuits, and Virtuoso is a simulator for Verilog-AMS. We will design a simple application — a phase-locked loop (PLL) — in Verilog-AMS and use Virtuoso for simulation.
 
 ## Preparation
 
@@ -20,7 +20,7 @@ We will simulate the functionality of a PLL. A phase-locked loop or phase lock l
 
 *Figure 1. Clock Distribution*
 
-Frequency is the derivative of phase. Keeping the input and output phase in the lock step implies keeping the input and output frequencies in the lock step. Consequently, a phase-locked loop can track an input frequency, or it can generate a frequency that is a multiple of the input frequency. We will simulate properties that are used for indirect frequency synthesis or demodulation.
+Frequency is the derivative of phase, so keeping the input and output phases in lock step also keeps the input and output frequencies in lock step. Consequently, a phase-locked loop can track an input frequency, or generate a frequency that is a multiple of the input frequency. We will simulate properties used for indirect frequency synthesis or demodulation.
 
 Figure 1 shows the clock distribution of the PLL block. Typically, the reference clock enters the chip and drives a phase-locked loop (PLL), which drives the system's clock distribution. The clock distribution is usually balanced so that the clock arrives at every endpoint simultaneously. One of those endpoints is the PLL's feedback input. The function of the PLL is to compare the distributed clock to the incoming reference clock and vary the phase and frequency of its output until the reference and feedback clocks are phase and frequency matched.
 
@@ -60,7 +60,7 @@ Then, this will load Virtuoso, and you will see the Command Interpreter Window (
 
 *Figure 4. Command Interpreter Window (CIW)*
 
-Select **Tools -> Library Manager** to open Library Manager (Figure 5). In Library Manager, there are three main sections: Library, Cell, and View. The Library section lists all libraries, which contain all their cells such as `vexp`, `vnpn`, `vpnp`, `vpulse`, and so on. Each cell can be viewed in different views such as symbols, schematics, and so on, as shown in the View section.
+Select **Tools -> Library Manager** to open the Library Manager (Figure 5). It has three main sections: Library, Cell, and View. The Library section lists all libraries, each containing cells such as `vexp`, `vnpn`, `vpnp`, and `vpulse`. Each cell can be viewed in several ways — for example, as a symbol or a schematic — as shown in the View section.
 
 ![Figure 5. Library Manager]({{ "/assets/files/lab12/img/5.png" | relative_url }})
 
@@ -76,7 +76,7 @@ You will follow these steps to design and simulate the PLL in this lab:
 
 #### 3.1. Creating Library
 
-You will create a library which will contain cells such as Phase Frequency Detector (PFD), Voltage Controlled Oscillator (VCO), Frequency Divider (FD), and top module. From the Library Manager, select **File -> New -> Library**. In the New Library window (Figure 6(a)), write `PLL` as the name of the library and click **OK**. And, you will use reference existing technology libraries as a technology file as shown in Figure 6(b). In the reference existing technology libraries window, move all technology libraries in the left box to the right box (Figure 6(c)). Then, you will see the `PLL` library in the Library section in Library Manager.
+You will create a library that will contain cells such as the Phase Frequency Detector (PFD), Voltage Controlled Oscillator (VCO), Frequency Divider (FD), and the top module. From the Library Manager, select **File -> New -> Library**. In the New Library window (Figure 6(a)), enter `PLL` as the library name and click **OK**. When prompted for a technology file, choose to reference existing technology libraries (Figure 6(b)), and move all technology libraries from the left box to the right box (Figure 6(c)). The `PLL` library will then appear in the Library section of the Library Manager.
 
 ![Figure 6. Creating a Library]({{ "/assets/files/lab12/img/6.png" | relative_url }})
 
@@ -84,7 +84,7 @@ You will create a library which will contain cells such as Phase Frequency Detec
 
 #### 3.2. Creating Cells
 
-We will create cells in `PLL` and start to design with the Phase Frequency Detector (PFD). Figure 7 shows the entire schematic of the input signal and PLL which will be implemented in this lab. To create a cell PFD, click `PLL` in the Library section, and select **File -> New -> Cell View**. And write `pfd` as a cell name and choose `VerilogA` as a type of the cell as shown in Figure 8(a). And click **OK**. If you see the question about the next license, click **Always** to keep this rule for the next license options (Figure 8(b)).
+We will create cells in `PLL`, starting with the Phase Frequency Detector (PFD). Figure 7 shows the complete schematic of the input signal and PLL to be implemented in this lab. To create the PFD cell, click `PLL` in the Library section and select **File -> New -> Cell View**. Enter `pfd` as the cell name, choose `VerilogA` as the cell type (Figure 8(a)), and click **OK**. If you are asked about the license, click **Always** to keep this setting for future licenses (Figure 8(b)).
 
 ![Figure 7. Schematic of the input signal and PLL]({{ "/assets/files/lab12/img/7.png" | relative_url }})
 
@@ -94,37 +94,37 @@ We will create cells in `PLL` and start to design with the Phase Frequency Detec
 
 *Figure 8. Processes of creating a cell*
 
-Then, an editor will be opened, and it has the default contents of the cell `pfd`. Write only the input and output signal names as shown in Figure 9. It will automatically generate the ports while we make a symbol of this cell.
+An editor opens with the default contents of the `pfd` cell. Enter only the input and output signal names, as shown in Figure 9; the ports will be generated automatically when we create the cell's symbol.
 
 ![Figure 9. Verilog A file of the PFD cell]({{ "/assets/files/lab12/img/9.png" | relative_url }})
 
 *Figure 9. Verilog A file of the PFD cell*
 
-After closing the editor, a dialog about a symbol will be viewed because we do not have a symbol of the PFD cell yet. Just click **Yes** to create it. The names of the default signals will be shown in the Symbol generation option dialog (Figure 10(a)) because we already defined the input and output signals with the Verilog A module. Change the pins to proper positions. For `ref` and `fb` (feedback), put them in the Left Pins editor, and for the `out` pin, put it in the Right Pins. And click the **List** button to select the direction of the signals. Change the direction of `ref` and `fb` to an input, and for `out`, change to an output.
+After you close the editor, a dialog about the symbol appears, because the PFD cell does not have a symbol yet. Click **Yes** to create one. The default signal names appear in the Symbol Generation Options dialog (Figure 10(a)), because we already defined the input and output signals in the Verilog-A module. Place the pins in their proper positions: put `ref` and `fb` (feedback) in the Left Pins field and `out` in the Right Pins field. Then click the **List** button to set the signal directions: set `ref` and `fb` to inputs and `out` to an output.
 
 ![Figure 10. Symbol generation option dialog for the PFD cell]({{ "/assets/files/lab12/img/10.png" | relative_url }})
 
 *Figure 10. Symbol generation option dialog for the PFD cell*
 
-Then, you will see the `pfd` symbol as shown in Figure 11. It is a default symbol for the `pfd` module. You can make it fancy or any shape you want. Then, just close the window.
+The default `pfd` symbol then appears, as shown in Figure 11. You can leave it as is or redraw it in any shape you like. Close the window when you are done.
 
 ![Figure 11. Symbol view of pfd module]({{ "/assets/files/lab12/img/11.png" | relative_url }})
 
 *Figure 11. Symbol view of pfd module*
 
-After closing the window, you will be back in Library Manager. Now it shows the `pfd` cell in the `PLL` library list (Figure 12).
+After you close the window, you return to the Library Manager, which now shows the `pfd` cell in the `PLL` library (Figure 12).
 
 ![Figure 12. Library Manager, pfd cell generation]({{ "/assets/files/lab12/img/12.png" | relative_url }})
 
 *Figure 12. Library Manager, pfd cell generation*
 
-In the View section, the Phase Frequency Detector cell has a symbol view and a veriloga view. If you click **symbol view** in the View section, you will see its symbol view (Figure 11). If **veriloga**, it will open an editor for veriloga.
+In the View section, the Phase Frequency Detector cell has a `symbol` view and a `veriloga` view. Clicking `symbol` shows its symbol (Figure 11), and clicking `veriloga` opens the Verilog-A editor.
 
-**If you are familiar with the editor, you can just describe the PFD module in the editor. Or, you can use any editor to modify a veriloga file. You will find the veriloga file (`veriloga.va`) at the path below. You may refer to the codes at the end of the manual.**
+You can describe the PFD module directly in this editor, or edit the Verilog-A file (`veriloga.va`) with any editor. You will find it at the path below. You may refer to the code at the end of this manual.
 
 `ECEN468/Lab12/src/PLL/PFD/veriloga`
 
-**Create the Frequency Divider and Voltage Controlled Oscillator referring to section 3.2.**
+Create the Frequency Divider and Voltage Controlled Oscillator by following Section 3.2.
 
 - **Frequency Divider**
   - name: `fd`
@@ -135,7 +135,7 @@ In the View section, the Phase Frequency Detector cell has a symbol view and a v
   - input name: `in` (to Left Pins)
   - output name: `out` (to Right Pins)
 
-And, describe their behavior in the veriloga files referring to the codes at the end of the manual. After making all cells of PLL, you will have three cells: `fd`, `pfd`, and `vco`, as shown in Figure 13.
+Describe their behavior in the Verilog-A files, referring to the code at the end of this manual. After creating all the PLL cells, you will have three cells — `fd`, `pfd`, and `vco` — as shown in Figure 13.
 
 ![Figure 13. Library Manager, pfd, fd and vco cells generation]({{ "/assets/files/lab12/img/13.png" | relative_url }})
 
@@ -143,19 +143,19 @@ And, describe their behavior in the veriloga files referring to the codes at the
 
 #### 3.3. Connect Cells and Make PLL
 
-Now we have all cells to make the PLL block. With the cells (`pfd`, `fd`, `vco`), we will connect them together and make the PLL top module. It is also a cell. To create a cell PLL top, click `PLL` in the Library section, and select **File -> New -> Cell View**. And write `plltop` as a cell name and choose schematic as a type of the cell as shown in Figure 14(a). And click **OK**. Then you will see a blank Virtuoso schematic editor (Figure 14(b)).
+Now we have all the cells needed to build the PLL block. We will connect the `pfd`, `fd`, and `vco` cells to form the PLL top module, which is also a cell. To create it, click `PLL` in the Library section and select **File -> New -> Cell View**. Enter `plltop` as the cell name, choose `schematic` as the cell type (Figure 14(a)), and click **OK**. A blank Virtuoso schematic editor then appears (Figure 14(b)).
 
 ![Figure 14. Creating a cell, plltop]({{ "/assets/files/lab12/img/14.png" | relative_url }})
 
 *Figure 14. Creating a cell, plltop*
 
-In the schematic editor, you will load three sub-cells and connect them. Select **Create -> Instance** and write `PLL` as a Library and `pfd` as a cell to place the pfd cell into the schematic editor (Figure 15). Place `fd` and `vco` as well.
+In the schematic editor, you will load the three sub-cells and connect them. Select **Create -> Instance**, enter `PLL` as the library and `pfd` as the cell, and place the `pfd` cell in the editor (Figure 15). Place `fd` and `vco` as well.
 
 ![Figure 15. Creating a cell, plltop]({{ "/assets/files/lab12/img/15.png" | relative_url }})
 
 *Figure 15. Creating a cell, plltop*
 
-Also, create a resistor and two capacitors using **Create -> Instance**. And, connect all cells referring to Figure 7 as shown in Figure 16. For the names of library and cell and values, please refer to Table I. To connect the instances, please use wires using **Create -> Wire (narrow)**.
+Also create a resistor and two capacitors using **Create -> Instance**. Then connect all the cells as in Figure 7, with the result shown in Figure 16. For the library names, cell names, and values, refer to Table I. To connect the instances, draw wires using **Create -> Wire (narrow)**.
 
 | Component | Library | Cell | Value |
 |---|---|---|---|
@@ -166,7 +166,7 @@ Also, create a resistor and two capacitors using **Create -> Instance**. And, co
 
 *Table I. Resistor, Capacitor and Ground*
 
-Figure 16 is the final schematic of the plltop. And, save the file using **File -> Save**.
+Figure 16 shows the final schematic of `plltop`. Save the file using **File -> Save**.
 
 ![Figure 16. The final schematic of plltop cell]({{ "/assets/files/lab12/img/16.png" | relative_url }})
 
@@ -174,13 +174,13 @@ Figure 16 is the final schematic of the plltop. And, save the file using **File 
 
 #### 3.4. Connect input pulse to PLL
 
-An input pulse source will be used as the input of the plltop. And it will connect to the `ref` port of the pfd cell. Select **Create -> Instance**, and write `analogLib` as a Library name and `vpulse` as a Cell name. Put the specifications of the `vpulse` as `+1V` for Vmax (voltage1), `-1V` for Vmin (voltage2), `100ns` for Period, and `1ns` for Rise time and Fall time. Now we made all circuits to simulate. And click the nets and put each net name for all nets as shown in Figure 17. And then save it to keep the schematic. Once you modify anything in the schematic, you should click **File -> Check and Save**.
+An input pulse source is used as the input to `plltop`, connected to the `ref` port of the `pfd` cell. Select **Create -> Instance** and enter `analogLib` as the library name and `vpulse` as the cell name. Set the `vpulse` parameters to `+1V` for Vmax (voltage1), `-1V` for Vmin (voltage2), `100ns` for Period, and `1ns` for both Rise time and Fall time. The circuit is now complete. Name all the nets as shown in Figure 17, then save the schematic. Whenever you modify the schematic, click **File -> Check and Save**.
 
 ![Figure 17. The schematic of plltop and input pulse]({{ "/assets/files/lab12/img/17.png" | relative_url }})
 
 *Figure 17. The schematic of plltop and input pulse*
 
-We will create net names for wires. Please use the net names of Table II. Click **Create -> Wire Name**, put the wire name, and click **Hide**. And, click the wire that you want to put the name on.
+Next, name the wires using the net names in Table II. Click **Create -> Wire Name**, enter the wire name, and click **Hide**, then click the wire you want to name.
 
 | Wires | Wire names |
 |---|---|
@@ -193,21 +193,21 @@ We will create net names for wires. Please use the net names of Table II. Click 
 
 #### 3.5. Simulation
 
-Now we will simulate the `plltop` module which has been described as a Verilog A and schematic. In the Virtuoso schematic editor, select **Launch -> ADE (Analog Design Environment) L** to invoke the simulator. And select the analysis type using **Analyses -> Choose** (Figure 18). Select `tran` as the Analysis type and put a proper simulation time as the Stop Time. We will simulate it for `50us` in this lab, thus write `50u` in the box. Then, check **moderate** as the Accuracy Defaults, and click **OK**.
+Now we will simulate the `plltop` module, which we described with Verilog-A and a schematic. In the Virtuoso schematic editor, select **Launch -> ADE (Analog Design Environment) L** to start the simulator. Choose the analysis type with **Analyses -> Choose** (Figure 18): select `tran` as the analysis type and enter an appropriate Stop Time. In this lab, we simulate for `50us`, so enter `50u`. Then set the Accuracy Defaults to **moderate** and click **OK**.
 
 ![Figure 18. Analyses Dialog]({{ "/assets/files/lab12/img/18.png" | relative_url }})
 
 *Figure 18. Analyses Dialog*
 
-In the **Outputs** section of the ADE window, click the right button of the mouse. Then, click **Edit** to choose the wires that we want to plot. And, click **From Schematic** and click the wires we want to plot. Click the nets you want to check and click **OK**. Choose nets `REF_PFD`, `OUT_FD`, `OUT_VCO`, and `IN_VCO`. Then the waveform will be displayed as shown in Figure 21.
+In the **Outputs** section of the ADE window, right-click and select **Edit** to choose the wires to plot. Click **From Schematic**, then click the nets you want to plot and click **OK**. Choose the nets `REF_PFD`, `OUT_FD`, `OUT_VCO`, and `IN_VCO`. The waveforms will then be displayed, as shown in Figure 21.
 
-You may want to save the current settings for future simulation, so you do not need to set the settings again later when you simulate. Save the current state by selecting **Sessions -> Save state**. Just check **CellView** and click **OK** as shown in Figure 19. When you want to load the saved state, select **Sessions -> Load state** and check **CellView**.
+You may want to save the current settings so you do not have to reconfigure them for future simulations. Save the current state by selecting **Sessions -> Save state**, checking **CellView**, and clicking **OK** (Figure 19). To reload the saved state later, select **Sessions -> Load state** and check **CellView**.
 
 ![Figure 19. Saving state]({{ "/assets/files/lab12/img/19.png" | relative_url }})
 
 *Figure 19. Saving state*
 
-Now we set all settings for simulation. Then, select **Simulation -> Netlist and run** to simulate the `plltop` with the settings. Then, it will show the simulation status as shown in Figure 20, and the waveform will be displayed as shown in Figure 21.
+With all settings in place, select **Simulation -> Netlist and Run** to simulate `plltop`. The simulation status appears as in Figure 20, and the waveforms are displayed as in Figure 21.
 
 ![Figure 20. Simulation process]({{ "/assets/files/lab12/img/20.png" | relative_url }})
 
@@ -225,11 +225,11 @@ Now we set all settings for simulation. Then, select **Simulation -> Netlist and
 
 1. General requirements.
    - a. It should control the `PLL` correctly.
-   - b. Please make sure the net names and cell names are the same as those described in this manual.
+   - b. Make sure the net and cell names match those described in this manual.
    - c. Late penalty: 20% of the total score will be deducted for each subsequent day after the due date.
-2. Please only submit one PDF file containing the following items:
-   - a. Simulation results including the four nets in Table II (the one like Figure 21).
-   - b. Let's assume that you want to generate a 1GHz output of the Voltage Controlled Oscillator with a 1MHz reference clock. Please mention what parts should be modified.
+2. Please submit a single PDF file containing the following:
+   - a. Simulation results including the four nets in Table II (like Figure 21).
+   - b. Suppose you want the Voltage Controlled Oscillator to generate a 1GHz output from a 1MHz reference clock. Which parts would need to be modified?
 
 ## Verilog-A Code
 

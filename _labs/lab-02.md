@@ -11,33 +11,33 @@ downloads:
 
 ## Objectives
 
-In this lab, we will design a transmitter of Universal Asynchronous receiver/transmitter (UART) with SystemC. This module will be attached to our entire system later to transmit data to other devices or processors.
+In this lab, we will design the transmitter of a Universal Asynchronous Receiver/Transmitter (UART) using SystemC. This module will later be attached to our complete system to transmit data to other devices or processors.
 
 ## Introduction
 
-The UART is a type of asynchronous receiver/transmitter, a computer hardware that translates data between parallel and serial forms. UARTs are commonly used with communication standards such as EIA RS-232, RS-422, or RS-485. The universal designation indicates that the data format and transmission speeds are configurable. Figure 1 shows a general description of communication between processors through a serial channel. Those processors communicate internally with parallel data to speed up and use a serial channel to communicate with other processors to reduce the number of wires, so decreasing the cost of hardware.
+A UART is a piece of computer hardware that translates data between parallel and serial forms. UARTs are commonly used with communication standards such as EIA RS-232, RS-422, and RS-485. The term *universal* indicates that the data format and transmission speed are configurable. Figure 1 shows communication between processors over a serial channel. These processors use parallel data internally for speed, but communicate with one another over a serial channel to reduce the number of wires, and therefore the hardware cost.
 
 ![Figure 1. Communication over a serial channel]({{ "/assets/files/lab02/img/1.png" | relative_url }})
 
 *Figure 1. Communication over a serial channel*
 
-For this lab, a UART transmits 8-bit data without a parity bit. For transmission, the modem wraps this 8-bit word with a start-bit in the least significant bit (LSB) and a stop-bit in the most significant bit (MSB), resulting in the 10-bit word format shown in Figure 2. The first 9 data bits of the word are transmitted in sequence, beginning with the start-bit, with each bit being asserted at the serial line for one cycle (bit-time) of the modem clock. The stop-bit may assert for more than one clock.
+Here, a UART transmits 8-bit data without a parity bit. For transmission, the modem wraps the 8-bit word with a start-bit at the least significant bit (LSB) and a stop-bit at the most significant bit (MSB), producing the 10-bit word format shown in Figure 2. The first nine bits of the word are transmitted in sequence, beginning with the start-bit, and each bit is asserted on the serial line for one cycle (bit-time) of the modem clock. The stop-bit may be asserted for more than one clock.
 
 ![Figure 2. Data format for UART transmission]({{ "/assets/files/lab02/img/2.png" | relative_url }})
 
 *Figure 2. Data format for UART transmission*
 
-The simplified architecture of a UART is presented in Figure 3. It shows the signals used by a host processor to control the UART and to move data to and from a data bus in the host machine.
+The simplified architecture of a UART is shown in Figure 3, including the signals a host processor uses to control the UART and to move data to and from the data bus in the host machine.
 
 ![Figure 3. Block diagram of the UART]({{ "/assets/files/lab02/img/3.png" | relative_url }})
 
 *Figure 3. Block diagram of the UART*
 
-The input signals are provided by the host processor, and the output signal is the serial data stream. The architecture of the transmitter consists of a control unit, a data register (`XMT_datareg`), a data shift register (`XMT_shftreg`), and a status register (`bit_count`), which counts the bits that are transmitted.
+The input signals are provided by the host processor, and the output is the serial data stream. The transmitter consists of a control unit, a data register (`XMT_datareg`), a data shift register (`XMT_shftreg`), and a status register (`bit_count`) that counts the transmitted bits.
 
-The controller has the inputs (primary/external and status (from the datapath)) listed below. We note that the signal `Load_XMT_datareg` could be passed directly to the datapath unit; instead, we pass `Load_XMT_datareg` to the control unit and assert `Load_XMT_DR` conditionally when the state is `idle`, and the external signal `Load_XMT_datareg` is asserted. The status signal, `BC_lt_BCmax`, is asserted while bits are being sent, i.e., if `bit_count` < `word_size` + 1.
+The controller's inputs are listed below: primary (external) inputs and status inputs from the datapath. Note that the signal `Load_XMT_datareg` could be passed directly to the datapath; instead, we pass it to the control unit and assert `Load_XMT_DR` only when the state is `idle` and the external `Load_XMT_datareg` signal is asserted. The status signal `BC_lt_BCmax` is asserted while bits are being sent, i.e., while `bit_count` < `word_size` + 1.
 
-- `Load_XMT_datareg`: assertion is state `idle` asserts `Load_XMT_DR`, which loads the content of the `Data_Bus` into `XMT_datareg`.
+- `Load_XMT_datareg`: when asserted in state `idle`, this asserts `Load_XMT_DR`, which loads the contents of `Data_Bus` into `XMT_datareg`.
 - `Byte_ready`: assertion causes `Load_XMT_shftreg` to assert, which loads the contents of `XMT_datareg` into `XMT_shftreg`.
 - `T_byte`: assertion initiates transmission of a byte of data, including the stop, start, and parity bits.
 - `BC_lt_BCmax`: indicates the status of the bit counter in the datapath unit.
@@ -46,17 +46,17 @@ The controller has the inputs (primary/external and status (from the datapath)) 
 
 *Figure 4. Algorithmic State Machine and Datapath Chart (ASMD) for the UART transmitter*
 
-The ASMD chart of the state machine controlling the transmitter is shown in Figure 4. The machine has three states: `idle`, `waiting`, and `sending`. When the active-low, synchronous reset signal `rst_b` is asserted, the machine enters `idle`, `bit_count` is flushed, and `XMT_shftreg` is loaded with 1s. In `idle`, if an active edge of `Clock` occurs while `Load_XMT_datareg` is asserted by the external host, it will load `XMT_datareg` with the contents of `Data_Bus`. The machine remains `idle` until the `start` is asserted to drop `XMT_shftreg[0]`.
+The ASMD chart of the state machine controlling the transmitter is shown in Figure 4. The machine has three states: `idle`, `waiting`, and `sending`. When the active-low, synchronous reset signal `rst_b` is asserted, the machine enters `idle`, `bit_count` is cleared, and `XMT_shftreg` is loaded with 1s. In `idle`, if an active edge of `Clock` occurs while the external host asserts `Load_XMT_datareg`, `XMT_datareg` is loaded with the contents of `Data_Bus`. The machine remains in `idle` until `start` is asserted to drop `XMT_shftreg[0]`.
 
 ![Figure 5. Waveforms of the 8-bit UART transmitter]({{ "/assets/files/lab02/img/5.png" | relative_url }})
 
 *Figure 5. Waveforms of the 8-bit UART transmitter*
 
-Figure 5 shows an example of the transmission timing. You can design your test bench referring to this timing graph. Also, you can check your result based on this timing graph.
+Figure 5 shows an example of the transmission timing. You can use this timing diagram both to design your test bench and to check your results.
 
 ## Implementation & Simulation
 
-**We will now implement the transmitter part of the UART design.**
+We will now implement the transmitter portion of the UART design.
 
 Please login to the Olympus server and create a working directory for this lab using the following commands.
 
@@ -76,13 +76,13 @@ Download the tar.gz file from the lab website and extract it. In the extracted f
 
 Copy them to the working directory.
 
-You will implement your code in `UART_XMTR.cpp`, `UART_XMTR.h`, and `main.cpp`. Figure 6 shows the hierarchical structure of the files in this lab.
+You will write your code in `UART_XMTR.cpp`, `UART_XMTR.h`, and `main.cpp`. Figure 6 shows the file hierarchy for this lab.
 
 ![Figure 6. Hierarchy of the files for the UART system]({{ "/assets/files/lab02/img/6.png" | relative_url }})
 
 *Figure 6. Hierarchy of the files for the UART system*
 
-Once you complete the implementation, please verify the correctness of your design by simulation and viewing the waveform as in lab 1. Please take screenshots of the simulation output and the waveform and include them in the report.
+Once you complete the implementation, verify your design by simulating it and viewing the waveform as in Lab 1. Take screenshots of the simulation output and the waveform, and include them in your report.
 
 Commands for reference:
 
@@ -94,7 +94,7 @@ wv &
 
 ## Submission
 
-Please only submit one PDF file containing the following items:
+Please submit a single PDF file containing the following:
 
 1. Screenshots of the waveform with analysis.
 2. Screenshots of the simulation output in Vista.
@@ -102,7 +102,7 @@ Please only submit one PDF file containing the following items:
 
 ## Code Example
 
-Pseudo code of UART state machine:
+Pseudocode of the UART state machine:
 
 ```
 // State Machine Initialization
