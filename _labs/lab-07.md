@@ -28,7 +28,6 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 # Part 1. Design of SRAM Cell
 
 ## Implementing SRAM Cell
-
 After extracting the tar.gz file, your directory should look like this:
 ```
 $HOME/ecen468/lab07/
@@ -52,21 +51,19 @@ $HOME/ecen468/lab07/
 
 You will implement your code in `SRAMCELL.v`. Please also review `SRAMCELL_tb.v` to understand the test bench.
 
-## SRAM Cell Specification
-
+The followings are the SRAM cell design specification:
 1. SRAM is sensitive to `CS` and `WE`.
 2. Output high impedance when `CS` is high.
 3. `WE` = 1: Read from SRAM; `WE` = 0: Write to SRAM.
 
-## Verifying SRAM Cell Design Using Synopsys VCS
-
+## Simulating SRAM Cell RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to open Synopsys VCS.
   - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
-  - `cd $HOME/ecen468/lab07/tb`
-  - `vcs -full64 sram_cell_tb.v -o simv_sram_cell_tb`
+  - `cd $HOME/ecen468/lab07/sim`
+  - `vcs -full64 ../tb/sram_cell_tb.v -o simv_sram_cell_tb`
 
 2. Execute the following command to run the simulation.
-  `./simv_sram_cell_tb`
+  - `./simv_sram_cell_tb`
 
 3. Take a screenshot of the terminal output for the lab report.
 
@@ -78,8 +75,7 @@ You will implement your code in `SRAMCELL.v`. Please also review `SRAMCELL_tb.v`
 
 6. Exit WaveView.
 
-## Synthesizing SRAM Cell Design Using Synopsys Design Vision
-
+## Synthesizing SRAM Cell RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
   - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
   - `cd $HOME/ecen468/lab07/syn`
@@ -91,108 +87,40 @@ You will implement your code in `SRAMCELL.v`. Please also review `SRAMCELL_tb.v`
   - `set_app_var symbol_library ../lib/osu018_stdcells.db`
 
 3. Execute the following command to analyze the design.
-  `analyze -format verilog {../rtl/sram_cell.v}`
+  - `analyze -format verilog {../rtl/sram_cell.v}`
 
 4. Execute the following command to elaborate the design.
-  `elaborate sram_cell`
+  - `elaborate sram_cell`
 
 5. Execute the following command to synthesize the design.
-  `compile -exact_map`
+  - `compile -exact_map`
 
 6. Execute the following command to save the optimized netlist.
-  `write -hierarchy -format verilog -output ./netlist/sram_cell.v`
+  - `write -hierarchy -format verilog -output ./netlist/sram_cell.v`
 
 7. Execute the following command to save the Standard Delay Format (SDF) file.
-  `write_sdf ./sdf/sram_cell.sdf`
+  - `write_sdf ./sdf/sram_cell.sdf`
 
 8. Exite Design Vision.
 
-## Simulating Gate-Level SRAM Cell Design
+## Simulating SRAM Cell Gate-Level Design Using Synopsys VCS
+Refer to Section Simulating SRAM Cell Design Using Synopsys VCS.
 
-```bash
-cp ./SRAMCELL_gate.v $HOME/ECEN468/Lab7/src1/
-cp ./SRAMCELL.sdf $HOME/ECEN468/Lab7/src1/
-cd $HOME/ECEN468/Lab7/src1/
-```
+# Part 2. Design of SRAM Array
 
-We will use the previous test bench as a template to create a test bench for the gate simulation.
+## Implementing, Simulating and Synthesizing SRAM Array
 
-`cp SRAMCELL_tb.v SRAMCELL_gate_tb.v`
+Complete "rtl/sram.v" and "tb/sram_tb.v".
 
-Please open the new test bench `SRAMCELL_gate_tb.v` and do the following modifications:
+# Submission
+Please submit one PDF file containing the following items:
 
-- Make sure the following three lines are on the top of the file.
+SRAM cell:
+1. Screenshot of the terminal output of `./simv_sram_cell_tb`.
+2. Justification of the correctness of the simulation results.
+3. Screenshot or copy of `sram_cell.v`.
 
-  ```verilog
-  `timescale 1ns/10ps
-  `include "SRAMCELL_gate.v"
-  `include "osu018_stdcells.v"
-  ```
-
-- Remove the following line if it exists.
-
-  ```verilog
-  `include "SRAMCELL.v"
-  ```
-
-- Make sure the following two lines are at the bottom of the file. (within the module entity)
-
-  ```verilog
-  initial
-      $sdf_annotate("SRAMCELL.sdf", SRAMCELL_01);
-  ```
-
-- Change the name of the dump file in the following line in the test bench.
-
-  `$dumpfile("wave_gate.dump");`
-
-Please make sure you have all the files listed below available in your current directory.
-
-- `SRAMCELL_gate.v`
-- `SRAMCELL.sdf`
-- `osu018_stdcells.v`
-- `SRAMCELL_gate_tb.v`
-
-Once we have the files ready, we can run the following command to start the simulation.
-
-```bash
-source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh
-vcs -full64 SRAMCELL_gate_tb.v
-```
-
-If no error occurs, do the next step.
-
-`./simv`
-
-Please take a screenshot of the simulation output, and include it in the report.
-
-## Implementation & Simulation for an SRAM Array
-
-Now we proceed to implement the SRAM array. We want to create another directory for it.
-
-```bash
-## Create and navigate to the working directory.
-mkdir -p $HOME/ECEN468/Lab7/src2
-cd $HOME/ECEN468/Lab7/src2
-```
-
-Copy `SRAM.v` and `SRAM_tb.v` from `lab7_code_b.tar.gz` to this directory.
-
-Please follow the procedure listed in the previous section, implement the SRAM Array design in `SRAM.v`, and use the test bench defined in `SRAM_tb.v` for simulation.
-
-## Submission
-
-Please only submit one PDF file containing the following items:
-
-SRAM Cell:
-
-1. Screenshots of the simulation output after running `./simv`.
-2. Justification of the correctness of the results.
-3. Screenshots of the code `SRAMCELL.v`.
-
-SRAM Array:
-
-1. Screenshots of the simulation output after running `./simv`.
-2. Justification of the correctness of the results.
-3. Screenshots of the code `SRAM.v`.
-
+SRAM array:
+1. Screenshot of the terminal output of `./simv_sram_tb`.
+2. Justification of the correctness of the simulation results.
+3. Screenshot or copy of `sram.v`.
