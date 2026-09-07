@@ -11,11 +11,11 @@ downloads:
     file: /assets/files/lab07/lab07_code_b.tar.gz
 ---
 
-# Objectives
+# 1. Objectives
 
 In this lab, we will implement a 256K x 8-bit SRAM design using Verilog. We will use Synopsys VCS to simulate the designed model for verification. We will also use Synopsys Design Vision to synthesize the design.
 
-# A Brief Introduction to SRAM
+# 2. Introduction of SRAM
 
 We will implement a Static Random Access Memory (SRAM) with a storage cell structure that does not require a refresh. Therefore, it operates faster than Dynamic Random Access Memory and is used as fast-cache memory in a computer.
 
@@ -27,9 +27,9 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 
 *Figure 1. Block Diagram of a Basic SRAM Cell*
 
-# Part 1. Design of SRAM Cell
+# 3. Design of SRAM Cell
 
-## Implementing SRAM Cell
+## 3.1 Implementing SRAM Cell
 After extracting the tar.gz file, your directory should look like this:
 ```
 $HOME/ecen468/lab07/
@@ -58,7 +58,8 @@ The followings are the SRAM cell design specification:
 2. Output high impedance when `CS` is high.
 3. `WE` = 1: Read from SRAM; `WE` = 0: Write to SRAM.
 
-## Simulating SRAM Cell RTL Design Using Synopsys VCS
+
+## 3.2 Simulating SRAM Cell RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to open Synopsys VCS.
   - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
   - `cd $HOME/ecen468/lab07/sim`
@@ -77,7 +78,8 @@ The followings are the SRAM cell design specification:
 
 6. Exit WaveView.
 
-## Synthesizing SRAM Cell RTL Design Using Synopsys Design Vision
+
+## 3.3 Synthesizing SRAM Cell RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
   - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
   - `cd $HOME/ecen468/lab07/syn`
@@ -105,16 +107,16 @@ The followings are the SRAM cell design specification:
 
 8. Exite Design Vision.
 
-## Simulating SRAM Cell Gate-Level Design Using Synopsys VCS
-Refer to Section Simulating SRAM Cell Design Using Synopsys VCS.
 
-# Part 2. Design of SRAM Array
+## 3.4 Simulating SRAM Cell Gate-Level Design Using Synopsys VCS
+Refer to Section Simulating SRAM Cell RTL Design Using Synopsys VCS.
 
-## Implementing, Simulating and Synthesizing SRAM Array
+# 4. Design of SRAM Array
 
+## 4.1 Implementing, Simulating and Synthesizing SRAM Array RTL Design
 Complete "rtl/sram.v" and "tb/sram_tb.v".
 
-# Submission
+# 5. Submission
 Please submit one PDF file containing the following items:
 
 SRAM cell:
