@@ -88,7 +88,7 @@ endprimitive
 # 4. Design of UART Transmitter
 
 ## 4.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
-1. Execute the following commands in sequence to open Synopsys VCS.
+1. Execute the following commands in sequence to generate simulation.
   - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
   - `cd $HOME/ecen468/lab08/sim`
   - `vcs -full64 ../tb/uart_tx_tb.v -o simv_uart_tx_tb`
@@ -102,7 +102,7 @@ endprimitive
   - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
   - `wv &`
 
-5. In WaveView, open "uart_tx_tb.dump" to view the simulation waveform.
+5. In WaveView, open `uart_tx_tb.dump` to view the simulation waveform.
 
 6. Exit WaveView.
 
@@ -147,7 +147,23 @@ To fix the error, use the line below to replace the UDP.
 
 
 ## 4.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
-Refer to Section Simulating UART Transmitter RTL Design Using Synopsys VCS.
+1. Execute the following commands in sequence to generate simulation.
+  - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
+  - `cd $HOME/ecen468/lab08/sim`
+  - `vcs -full64 ../tb/uart_tx_netlist_tb.v -o simv_uart_tx_netlist_tb`
+
+2. Execute the following command to run the simulation.
+  - `./simv_uart_tx_netlist_tb`
+
+3. Take a screenshot of the terminal output for the lab report.
+
+4. Execute the following commands in sequence to open Synopsys WaveView.
+  - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+  - `wv &`
+
+5. In WaveView, open `uart_tx_netlist_tb.dump` to view the simulation waveform.
+
+6. Exit WaveView.
 
 
 ## 5. Submission

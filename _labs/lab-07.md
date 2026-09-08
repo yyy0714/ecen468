@@ -29,38 +29,55 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 
 # 3. Design of SRAM Cell
 
+## 3.0 Setup
+
+1. Execute the following commands to create and enter the working directory.
+  - `mkdir $HOME/ecen468/lab07/`
+  - `cd $HOME/ecen468/lab07/`
+
+2. Download `lab07_code.tar.gz` from the lab website and put it the working directory.
+
+3. Execute the following commands to extract the files.
+  - `tar -xvf lab07_code.tar.gz`
+  - `rm lab07_code.tar.gz`
+
+4. Confirm that the following directories and files exist in the working directory.
+  - `lib` (directory for technology libraries)
+    - `osu018_stdcells.db`
+    - `osu018_stdcells.v`
+    - `generic.sdb`
+  - `rtl` (directory for RTL verilog code)
+    - `sram_cell.v`
+    - `sram.v`
+  - `sim` (directory where Synopsys VCS will be run)
+  - `syn` (directory where Synopsys Design Vision will be run)
+    - `netlist` (directory for gate-level verilog code)
+    - `sdf` (directory for SDF files)
+  - `tb` (directory for testbenches)
+    - `sram_cell_netlist_tb.v`
+    - `sram_cell_tb.v`
+    - `sram_netlist_tb.v`
+    - `sram_tb.v`
+
+
 ## 3.1 Implementing SRAM Cell
-After extracting the tar.gz file, your directory should look like this:
-```
-$HOME/ecen468/lab07/
-  - lib
-    - osu018_stdcells.db
-    - generic.sdb
-    - osu018_stdcells.v
-  - rtl
-    - sram_cell.v
-    - sram.v
-  - sim
-  - syn
-    - netlist
-    - sdf
-  - tb
-    sram_cell_netlist_tb.v
-    sram_cell_tb.v
-    sram_netlist_tb.v
-    sram_tb.v
-```
+The functionality and operating modes of the SRAM cell are as follow:
+- Disabled (high-impedance) mode (`cs_ni = 1`)
+  - The SRAM cell is deselected regardless of the `we_ni` signal.
+  - `data_o` should output high impedance.
+  
+- Read operation (`cs_ni = 0`, `we_ni = 1`)
+  - `data_o` should output the stored bit value.
 
-You will implement your code in `SRAMCELL.v`. Please also review `SRAMCELL_tb.v` to understand the test bench.
+- Write operation (`cs_ni = 0`, `we_ni = 0`)
+  - `data_i` shoudl be written into a internal storage latch.
+  - `data_o` should output high impedance.
 
-The followings are the SRAM cell design specification:
-1. SRAM is sensitive to `CS` and `WE`.
-2. Output high impedance when `CS` is high.
-3. `WE` = 1: Read from SRAM; `WE` = 0: Write to SRAM.
+You will implement the SRAM cell in `rtl/sram_cell.v`.
 
 
 ## 3.2 Simulating SRAM Cell RTL Design Using Synopsys VCS
-1. Execute the following commands in sequence to open Synopsys VCS.
+1. Execute the following commands in sequence to generate simulation.
   - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
   - `cd $HOME/ecen468/lab07/sim`
   - `vcs -full64 ../tb/sram_cell_tb.v -o simv_sram_cell_tb`
@@ -74,7 +91,7 @@ The followings are the SRAM cell design specification:
   - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
   - `wv &`
 
-5. In WaveView, open "sram_cell_tb.dump" to view the simulation waveform.
+5. In WaveView, open `sram_cell_tb.dump` to view the simulation waveform.
 
 6. Exit WaveView.
 
@@ -105,7 +122,7 @@ The followings are the SRAM cell design specification:
 7. Execute the following command to save the Standard Delay Format (SDF) file.
   - `write_sdf ./sdf/sram_cell.sdf`
 
-8. Exite Design Vision.
+8. Exit Design Vision.
 
 
 ## 3.4 Simulating SRAM Cell Gate-Level Design Using Synopsys VCS
@@ -114,7 +131,10 @@ Refer to Section Simulating SRAM Cell RTL Design Using Synopsys VCS.
 # 4. Design of SRAM Array
 
 ## 4.1 Implementing, Simulating and Synthesizing SRAM Array RTL Design
-Complete "rtl/sram.v" and "tb/sram_tb.v".
+1. Implement SRAM array in `rtl/sram.v` and write testbench in `tb/sram_tb.v`.
+2. Refer to Section 3.2 for simulating the RTL design.
+3. Refer to Section 3.3 for synthesizing the RTL design.
+
 
 # 5. Submission
 Please submit one PDF file containing the following items:
