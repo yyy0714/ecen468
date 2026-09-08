@@ -70,33 +70,7 @@ The UART transmitter has 6 operations as shown in the table below.
 | Increment bit counter          | `bit_counter_increment` is asserted | `bit_counter <= bit_counter + 1`         |
 | Reset                          | `reset` is asserted                 | `tsr <= 8'b11111111`, `bit_counter <= 0` |
 
-1. Load byte to TDR from data bus
-  - when `tdr_load` is asserted
-  - `tdr <= data_bus`
-  - IDLE -> IDLE
-2. Load byte to TSR from TDR
-  - when `tsr_load` is asserted
-  - `tsr <= {tdr[7:0], 1'b1}`
-  - IDLE -> WAIT
-3. Set start bit in TSR
-  - when `tsr_set_start_bit` is asserted
-  - `tsr[0] <= 0`
-  -  WAIT -> SEND
-4. Shift one bit out of TSR
-  - when `tsr_shift_bit` is asserted
-  - `tsr <= {1'b1, tsr[8:1]}`
-  - SEND -> SEND
-5. Increment bit counter
-  - when `bit_counter_increment` is asserted
-  -`bit_counter <= bit_counter + 1`
-  - SEND -> SEND
-5. Reset
-  - when `reset` is asserted
-  - `tsr <= 8'b11111111`
-  - `bit_counter <= 0`
-  - SEND -> IDLE
-
-You will implement the controller (`uart_tx_controller`) and datapath (`uart_tx_datapath`) of the UART transmitter.
+You will implement the controller (`uart_tx_controller.v`) and datapath (`uart_tx_datapath.v`) of the UART transmitter.
 
 
 # 3. Design of UART Transmitter
