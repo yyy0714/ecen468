@@ -9,11 +9,12 @@ downloads:
 ---
 
 # 1. Objectives
-
-In this lab, we will implement a 256K x 8-bit SRAM design using Verilog. We will use Synopsys VCS to simulate the designed model for verification. We will also use Synopsys Design Vision to synthesize the design.
+- Complete RTL design of SRAM cell and SRAM array in Verilog.
+- Simulate the RTL designs.
+- Synthesize the RTL designs and generate gate-level designs.
+- Simulate the gate-level designs.
 
 # 2. Introduction of SRAM
-
 We will implement a Static Random Access Memory (SRAM) with a storage cell structure that does not require a refresh. Therefore, it operates faster than Dynamic Random Access Memory and is used as fast-cache memory in a computer.
 
 We will start with implementing a simple SRAM cell. Then we will do (1) functional simulation, (2) synthesis, and (3) gate simulation with netlist on the simple SRAM cell. After that, we will implement a 256K SRAM and only do a functional simulation. The 256K SRAM will be used in future labs.
@@ -55,6 +56,9 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
         - `sram_cell_tb.v`
         - `sram_netlist_tb.v`
         - `sram_tb.v`
+
+5. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
 
 
 ## 3.1 Implementing SRAM Cell

@@ -123,6 +123,10 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
         - `uart_tx_netlist_tb.v`
         - `uart_tx_tb.v`
 
+5. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
+
+
 ## 3.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
