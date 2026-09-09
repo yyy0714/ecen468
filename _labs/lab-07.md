@@ -63,33 +63,33 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 ## 3.1 Implementing SRAM Cell
 The functionality and operating modes of the SRAM cell are as follow:
 - Disabled (high-impedance) mode (`cs_ni = 1`)
-  - The SRAM cell is deselected regardless of the `we_ni` signal.
-  - `data_o` should output high impedance.
+    - The SRAM cell is deselected regardless of the `we_ni` signal.
+    - `data_o` should output high impedance.
   
 - Read operation (`cs_ni = 0`, `we_ni = 1`)
-  - `data_o` should output the stored bit value.
+    - `data_o` should output the stored bit value.
 
 - Write operation (`cs_ni = 0`, `we_ni = 0`)
-  - `data_i` shoudl be written into a internal storage latch.
-  - `data_o` should output high impedance.
+    - `data_i` shoudl be written into a internal storage latch.
+    - `data_o` should output high impedance.
 
 You will implement the SRAM cell in `rtl/sram_cell.v`.
 
 
 ## 3.2 Simulating SRAM Cell RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
-  - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
-  - `cd $HOME/ecen468/lab07/sim`
-  - `vcs -full64 ../tb/sram_cell_tb.v -o simv_sram_cell_tb`
+    - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
+    - `cd $HOME/ecen468/lab07/sim`
+    - `vcs -full64 ../tb/sram_cell_tb.v -o simv_sram_cell_tb`
 
 2. Execute the following command to run the simulation.
-  - `./simv_sram_cell_tb`
+    - `./simv_sram_cell_tb`
 
 3. Take a screenshot of the terminal output for the lab report.
 
 4. Execute the following commands in sequence to open Synopsys WaveView.
-  - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
-  - `wv &`
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
 
 5. In WaveView, open `sram_cell_tb.dump` to view the simulation waveform.
 
@@ -98,29 +98,29 @@ You will implement the SRAM cell in `rtl/sram_cell.v`.
 
 ## 3.3 Synthesizing SRAM Cell RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
-  - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
-  - `cd $HOME/ecen468/lab07/syn`
-  - `design_vision &`
+    - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
+    - `cd $HOME/ecen468/lab07/syn`
+    - `design_vision &`
 
 2. Execute the following commands to set up Design Vision.
-  - `set_app_var link_path ../lib/osu018_stdcells.db`
-  - `set_app_var target_library ../lib/osu018_stdcells.db`
-  - `set_app_var symbol_library ../lib/osu018_stdcells.db`
+    - `set_app_var link_path ../lib/osu018_stdcells.db`
+    - `set_app_var target_library ../lib/osu018_stdcells.db`
+    - `set_app_var symbol_library ../lib/osu018_stdcells.db`
 
 3. Execute the following command to analyze the design.
-  - `analyze -format verilog {../rtl/sram_cell.v}`
+    - `analyze -format verilog {../rtl/sram_cell.v}`
 
 4. Execute the following command to elaborate the design.
-  - `elaborate sram_cell`
+    - `elaborate sram_cell`
 
 5. Execute the following command to synthesize the design.
-  - `compile -exact_map`
+    - `compile -exact_map`
 
 6. Execute the following command to save the optimized netlist.
-  - `write -hierarchy -format verilog -output ./netlist/sram_cell.v`
+    - `write -hierarchy -format verilog -output ./netlist/sram_cell.v`
 
 7. Execute the following command to save the Standard Delay Format (SDF) file.
-  - `write_sdf ./sdf/sram_cell.sdf`
+    - `write_sdf ./sdf/sram_cell.sdf`
 
 8. Exit Design Vision.
 
