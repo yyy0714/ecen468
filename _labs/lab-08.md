@@ -171,12 +171,6 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 8. Exite Design Vision.
 
-<!-- Save the optimized Verilog netlist.
-- Select **TOP** design (`UART_XMTR`)
-- **File -> Save as**
-- Enter `UART_gate.v` as the file name and choose **Verilog** as the file type.
-- Check the option **Save All Designs in Hierarchy**. -->
-
 
 ## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
@@ -204,7 +198,7 @@ Please submit a single PDF file containing the following:
 UART transmitter RTL design:
 1. Screenshot of the terminal output of `./simv_uart_tx_tb`.
 2. Justification of the simulation results.
-3. Screenshots or copy of `uart_tx.v`, `control_unit.v` and `datapath_unit.v`.
+3. Screenshots or copy of `uart_tx.v`, `uart_tx_controller.v` and `uart_tx_datapath.v`.
 
 UART transmitter gate-level design:
 1. Screenshot of the terminal output of `./simv_uart_tx_netlist_tb`.
