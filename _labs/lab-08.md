@@ -116,7 +116,7 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
         - `uart_tx_datapath.v`
         - `uart_tx.v`
     - `sim` (directory where Synopsys VCS will be run)
-        - `syn` (directory where Synopsys Design Vision will be run)
+    - `syn` (directory where Synopsys Design Vision will be run)
         - `netlist` (directory for gate-level verilog code)
         - `sdf` (directory for SDF files)
     - `tb` (directory for testbenches)
