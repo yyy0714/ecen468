@@ -32,32 +32,32 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 ## 3.0 Setup
 
 1. Execute the following commands to create and enter the working directory.
-  - `mkdir $HOME/ecen468/lab07/`
-  - `cd $HOME/ecen468/lab07/`
+    - `mkdir $HOME/ecen468/lab07/`
+    - `cd $HOME/ecen468/lab07/`
 
 2. Download `lab07_code.tar.gz` from the lab website and put it the working directory.
 
 3. Execute the following commands to extract the files.
-  - `tar -xvf lab07_code.tar.gz`
-  - `rm lab07_code.tar.gz`
+    - `tar -xvf lab07_code.tar.gz`
+    - `rm lab07_code.tar.gz`
 
 4. Confirm that the following directories and files exist in the working directory.
-  - `lib` (directory for technology libraries)
-    - `osu018_stdcells.db`
-    - `osu018_stdcells.v`
-    - `generic.sdb`
-  - `rtl` (directory for RTL verilog code)
-    - `sram_cell.v`
-    - `sram.v`
-  - `sim` (directory where Synopsys VCS will be run)
-  - `syn` (directory where Synopsys Design Vision will be run)
-    - `netlist` (directory for gate-level verilog code)
-    - `sdf` (directory for SDF files)
-  - `tb` (directory for testbenches)
-    - `sram_cell_netlist_tb.v`
-    - `sram_cell_tb.v`
-    - `sram_netlist_tb.v`
-    - `sram_tb.v`
+    - `lib` (directory for technology libraries)
+        - `osu018_stdcells.db`
+        - `osu018_stdcells.v`
+        - `generic.sdb`
+    - `rtl` (directory for RTL verilog code)
+        - `sram_cell.v`
+        - `sram.v`
+    - `sim` (directory where Synopsys VCS will be run)
+    - `syn` (directory where Synopsys Design Vision will be run)
+        - `netlist` (directory for gate-level verilog code)
+        - `sdf` (directory for SDF files)
+    - `tb` (directory for testbenches)
+        - `sram_cell_netlist_tb.v`
+        - `sram_cell_tb.v`
+        - `sram_netlist_tb.v`
+        - `sram_tb.v`
 
 
 ## 3.1 Implementing SRAM Cell
