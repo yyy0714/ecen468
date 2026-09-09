@@ -132,15 +132,21 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 2. Execute the following command to run the simulation.
     - `./simv_uart_tx_tb`
 
-3. Take a screenshot of the terminal output for the lab report.
-
-4. Execute the following commands in sequence to open Synopsys WaveView.
+3. Execute the following commands in sequence to open Synopsys WaveView.
     - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
     - `wv &`
 
-5. In WaveView, open `uart_tx_tb.dump` to view the simulation waveform.
+4. In WaveView, open `uart_tx_tb.dump` to view the simulation waveform.
 
-6. Exit WaveView.
+5. Add the following signals
+    - `uart_tx_tb/dut/uart_tx_datapath_inst/bit_counter`
+    - `uart_tx_tb/dut/uart_tx_datapath_inst/tdr`
+    - `uart_tx_tb/dut/uart_tx_datapath_inst/tsr`
+    - `uart_tx_tb/dut/uart_tx_datapath_inst/txd_o`
+
+6. Take a screenshot of the waveforms for the lab report.
+
+7. Exit WaveView.
 
 
 ## 3.2 Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
@@ -181,25 +187,31 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 2. Execute the following command to run the simulation.
     - `./simv_uart_tx_netlist_tb`
 
-3. Take a screenshot of the terminal output for the lab report.
-
-4. Execute the following commands in sequence to open Synopsys WaveView.
+3. Execute the following commands in sequence to open Synopsys WaveView.
     - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
     - `wv &`
 
-5. In WaveView, open `uart_tx_netlist_tb.dump` to view the simulation waveform.
+4. In WaveView, open `uart_tx_netlist_tb.dump` to view the simulation waveform.
 
-6. Exit WaveView.
+5. Add the following signals
+    - `uart_tx_netlist_tb/dut/uart_tx_datapath_inst/bit_counter`
+    - `uart_tx_netlist_tb/dut/uart_tx_datapath_inst/tdr`
+    - `uart_tx_netlist_tb/dut/uart_tx_datapath_inst/tsr`
+    - `uart_tx_netlist_tb/dut/uart_tx_datapath_inst/txd_o`
+
+6. Take a screenshot of the waveforms for the lab report.
+
+7. Exit WaveView.
 
 
 # 4. Submission
 Please submit a single PDF file containing the following:
 
 UART transmitter RTL design:
-1. Screenshot of the terminal output of `./simv_uart_tx_tb`.
+1. Screenshot of the waveforms of `uart_tx_tb`.
 2. Justification of the simulation results.
 3. Screenshots or copy of `uart_tx.v`, `uart_tx_controller.v` and `uart_tx_datapath.v`.
 
 UART transmitter gate-level design:
-1. Screenshot of the terminal output of `./simv_uart_tx_netlist_tb`.
+1. Screenshot of the waveforms of `uart_tx_netlist_tb`.
 2. Justification of the simulation results.
