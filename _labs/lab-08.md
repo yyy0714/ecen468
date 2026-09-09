@@ -107,36 +107,36 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
   - `rm lab08_code.tar.gz`
 
 4. Confirm that the following directories and files exist in the working directory.
-  - `lib` (directory for technology libraries)
-    - `osu018_stdcells.db`
-    - `osu018_stdcells.v`
-    - `generic.sdb`
-  - `rtl` (directory for RTL verilog code)
-    - `uart_tx_controller.v`
-    - `uart_tx_datapath.v`
-    - `uart_tx.v`
-  - `sim` (directory where Synopsys VCS will be run)
-  - `syn` (directory where Synopsys Design Vision will be run)
-    - `netlist` (directory for gate-level verilog code)
-    - `sdf` (directory for SDF files)
-  - `tb` (directory for testbenches)
-    - `uart_tx_netlist_tb.v`
-    - `uart_tx_tb.v`
+    - `lib` (directory for technology libraries)
+        - `osu018_stdcells.db`
+        - `osu018_stdcells.v`
+        - `generic.sdb`
+    - `rtl` (directory for RTL verilog code)
+        - `uart_tx_controller.v`
+        - `uart_tx_datapath.v`
+        - `uart_tx.v`
+    - `sim` (directory where Synopsys VCS will be run)
+        - `syn` (directory where Synopsys Design Vision will be run)
+        - `netlist` (directory for gate-level verilog code)
+        - `sdf` (directory for SDF files)
+    - `tb` (directory for testbenches)
+        - `uart_tx_netlist_tb.v`
+        - `uart_tx_tb.v`
 
 ## 3.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
-  - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
-  - `cd $HOME/ecen468/lab08/sim`
-  - `vcs -full64 ../tb/uart_tx_tb.v -o simv_uart_tx_tb`
+    - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
+    - `cd $HOME/ecen468/lab08/sim`
+    - `vcs -full64 ../tb/uart_tx_tb.v -o simv_uart_tx_tb`
 
 2. Execute the following command to run the simulation.
-  - `./simv_uart_tx_tb`
+    - `./simv_uart_tx_tb`
 
 3. Take a screenshot of the terminal output for the lab report.
 
 4. Execute the following commands in sequence to open Synopsys WaveView.
-  - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
-  - `wv &`
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
 
 5. In WaveView, open `uart_tx_tb.dump` to view the simulation waveform.
 
@@ -145,29 +145,29 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 ## 3.2 Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
-  - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
-  - `cd $HOME/ecen468/lab08/syn`
-  - `design_vision &`
+    - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
+    - `cd $HOME/ecen468/lab08/syn`
+    - `design_vision &`
 
 2. Execute the following commands to set up Design Vision.
-  - `set_app_var link_path ../lib/osu018_stdcells.db`
-  - `set_app_var target_library ../lib/osu018_stdcells.db`
-  - `set_app_var symbol_library ../lib/osu018_stdcells.db`
+    - `set_app_var link_path ../lib/osu018_stdcells.db`
+    - `set_app_var target_library ../lib/osu018_stdcells.db`
+    - `set_app_var symbol_library ../lib/osu018_stdcells.db`
 
 3. Execute the following command to analyze the design.
-  - `analyze -format verilog {../rtl/uart_tx.v}`
+    - `analyze -format verilog {../rtl/uart_tx.v}`
 
 4. Execute the following command to elaborate the design.
-  - `elaborate uart_tx`
+    - `elaborate uart_tx`
 
 5. Execute the following command to synthesize the design.
-  - `compile -exact_map`
+    - `compile -exact_map`
 
 6. Execute the following command to save the optimized netlist.
-  - `write -hierarchy -format verilog -output ./netlist/uart_tx.v`
+    - `write -hierarchy -format verilog -output ./netlist/uart_tx.v`
 
 7. Execute the following command to save the Standard Delay Format (SDF) file.
-  - `write_sdf ./sdf/uart_tx.sdf`
+    - `write_sdf ./sdf/uart_tx.sdf`
 
 8. Exite Design Vision.
 
@@ -177,25 +177,21 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 - Enter `UART_gate.v` as the file name and choose **Verilog** as the file type.
 - Check the option **Save All Designs in Hierarchy**. -->
 
-You will see an error message stating that the UDP design is not synthesizable.
-To fix the error, use the line below to replace the UDP.
-`assign BC_lt_BCmax = (bit_count < word_size + 1);`
-
 
 ## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
-  - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
-  - `cd $HOME/ecen468/lab08/sim`
-  - `vcs -full64 ../tb/uart_tx_netlist_tb.v -o simv_uart_tx_netlist_tb`
+    - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
+    - `cd $HOME/ecen468/lab08/sim`
+    - `vcs -full64 ../tb/uart_tx_netlist_tb.v -o simv_uart_tx_netlist_tb`
 
 2. Execute the following command to run the simulation.
-  - `./simv_uart_tx_netlist_tb`
+    - `./simv_uart_tx_netlist_tb`
 
 3. Take a screenshot of the terminal output for the lab report.
 
 4. Execute the following commands in sequence to open Synopsys WaveView.
-  - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
-  - `wv &`
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
 
 5. In WaveView, open `uart_tx_netlist_tb.dump` to view the simulation waveform.
 
