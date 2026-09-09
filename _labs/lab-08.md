@@ -41,7 +41,7 @@ state IDLE:
 
 state WAIT:
   if tx_start_i asserted:
-    assert tsr_shift_bit_o
+    assert tsr_set_start_bit_o
     goto SEND
   else:
     goto WAIT
