@@ -15,65 +15,113 @@ downloads:
 - Simulate the gate-level design.
 
 # 2. Introduction of UART
-Below is the psuedocode of UART transmitter that your code should base on:
+
+## 2.1 UART Transmitter Controller
+The UART transmitter controller (psuedocode shown below) sends signal to datapath and handles state transitions.
+
 ```
 state IDLE:
-  if rst_n == 0:
-    bit_counter <= 0
-    tsr <= 9'b111111111
+  if rst_ni asserted:
+    deassert tdr_load_o
+    deassert tsr_load_o
+    deassert tsr_set_start_bit_o
+    deassert tsr_shift_bit_o
+    deassert reset_o
     goto IDLE
   else:
-    if load_tdr:
-      tdr <= data_bus
+    if load_tdr_i asserted:
+      assert tdr_load_o
       goto IDLE
     else:
-      if load_tsr:
-        tsr <= {tdr[7:0], 1'b1}
+      if load_tsr_i asserted:
+        assert tsr_load_o
         goto WAIT
       else:
         goto IDLE
 
 state WAIT:
-  if tsr_get_ready == 1:
-    tsr[0] <= 0
+  if tx_start_i asserted:
+    assert tsr_shift_bit_o
     goto SEND
   else:
     goto WAIT
 
 state SEND:
-  if bit_counter < 9:
-    txd <= tsr[0]
-    tsr <= {1'b1, tsr[8:1]}
-    bit_counter <= bit_counter + 1
+  if tx_busy_i asserted:
+    assert tsr_shift_bit_o
     goto SEND
   else:
-    bit_counter <= 0
-    tsr <= 9'b111111111
+    assert reset_o
     goto IDLE
 ```
 
-Figure 1 shows the expected behavior of the UART transmitter when transmitting `0xA7`.
+
+## 2.2 UART Transmitter Datapath
+The UART transmitter datapath (psuedocode shown below) performes various operations based on the signals received from the controller.
+
+```
+if tdr_load_i asserted:
+  tdr <= data_bus
+
+else if tsr_load_i asserted:
+  tsr <= {tdr[7:0], 1'b1}
+
+else if tsr_set_start_bit asserted:
+  tsr[0] <= 0
+
+else if tsr_shift_bit asserted:
+  tsr <= {1'b1, tsr[8:1]}
+  bit_counter <= bit_counter + 1
+
+else if reset asserted:
+  tsr <= 9'b111111111
+  bit_counter <= 0
+```
+
+
+## 2.3 UART Transmitter Timing Diagram
+The expected behavior of the UART transmitter when transmitting `0xA7` is shown in figure 1.
 
 ![Waveform of UART Transmission]({{ "/assets/files/lab08/img/1.png" | relative_url }})
 
 *Figure 1. Waveform of UART Transmission*
 
 
-The UART transmitter has 6 operations as shown in the table below.
-
-| Operation                      | Condition                           | Effects                                  |
-| ------------------------------ | ----------------------------------- | ---------------------------------------- |
-| Load byte to TDR from data bus | `tdr_load` is asserted              | `tdr <= data_bus`                        |
-| Load byte to TSR from TDR      | `tsr_load` is asserted              | `tsr <= {tdr[7:0], 1'b1}`                |
-| Set start bit in TSR           | `tsr_set_start_bit` is asserted     | `tsr[0] <= 0`                            |
-| Shift one bit out of TSR       | `tsr_shift_bit` is asserted         | `tsr <= {1'b1, tsr[8:1]}`                |
-| Increment bit counter          | `bit_counter_increment` is asserted | `bit_counter <= bit_counter + 1`         |
-| Reset                          | `reset` is asserted                 | `tsr <= 8'b11111111`, `bit_counter <= 0` |
-
-You will implement the controller (`uart_tx_controller.v`) and datapath (`uart_tx_datapath.v`) of the UART transmitter.
+## 2.4 UART Transmitter Implementation Requirement
+- Implement UART transimitter controller module in `uart_tx_controller.v`.
+- Implement UART transmitter datapath modeule in `uart_tx_datapath.v`.
+- Implement UART transmitter top module in `uart_tx.v`
 
 
 # 3. Design of UART Transmitter
+
+## 3.0 Setup
+1. Execute the following commands to create and enter the working directory.
+  - `mkdir $HOME/ecen468/lab08/`
+  - `cd $HOME/ecen468/lab08/`
+
+2. Download `lab08_code.tar.gz` from the lab website and put it the working directory.
+
+3. Execute the following commands to extract the files.
+  - `tar -xvf lab08_code.tar.gz`
+  - `rm lab08_code.tar.gz`
+
+4. Confirm that the following directories and files exist in the working directory.
+  - `lib` (directory for technology libraries)
+    - `osu018_stdcells.db`
+    - `osu018_stdcells.v`
+    - `generic.sdb`
+  - `rtl` (directory for RTL verilog code)
+    - `uart_tx_controller.v`
+    - `uart_tx_datapath.v`
+    - `uart_tx.v`
+  - `sim` (directory where Synopsys VCS will be run)
+  - `syn` (directory where Synopsys Design Vision will be run)
+    - `netlist` (directory for gate-level verilog code)
+    - `sdf` (directory for SDF files)
+  - `tb` (directory for testbenches)
+    - `uart_tx_netlist_tb.v`
+    - `uart_tx_tb.v`
 
 ## 3.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
