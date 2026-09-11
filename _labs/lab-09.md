@@ -28,6 +28,7 @@ Figure 1 shows the system that you will implement in this lab. The system bus co
 *Figure 1. System Overview (clock and reset signals are ommited)*
 
 In this lab, the width of the buses are as follows:
+
 | Item        | Width  |
 | ----------- | ------ |
 | Address Bus | 32-bit |
@@ -54,6 +55,7 @@ Figure 2 shows an example of such arbitration. The procedure is as follows:
 *Figure 2. An Example of Bus Arbitration*
 
 In this lab, the priorities of the devices are as follows:
+
 | Item             | Priority |
 | ---------------- | -------- |
 | Testbench        | Highest  |
@@ -73,6 +75,7 @@ In Figure 1, the SRAM and UART transmitter are connected to their respective wra
 *Figure 4. UART Transmitter Address Map*
 
 In this lab, the ID of the devices are as follows:
+
 | Item             | ID   |
 | ---------------- | ---- |
 | SRAM             | 0001 |
