@@ -23,7 +23,7 @@ Figure 1 shows the system that you will implement in this lab. The system bus co
 - The data bus carries the actual data that will be exchanged between the devices.
 - The control bus carris the control signal sent by the devices.
 
-![System Overview]({{ "/assets/files/lab09/img/system_overview.png" | relative_url }}){: style="zoom: 0.8;" }
+![System Overview]({{ "/assets/files/lab09/img/system_overview.png" | relative_url }}){: style="zoom: 0.6;" }
 
 *Figure 1. System Overview (clock and reset signals are ommited)*
 
@@ -66,11 +66,11 @@ In this lab, the priorities of the devices are as follows:
 ## 2.3 System Bus SRAM Wrapper and UART Transmitter Wrapper
 In Figure 1, the SRAM and UART transmitter are connected to their respective wrappers which decode signals sent via the address bus. Figure 3 and Figure 4 show the address map of SRAM and UART transmitter respectively. 
 
-![SRAM Address Map]({{ "/assets/files/lab09/img/sram_addr_map.png" | relative_url }}){: style="zoom: 0.8;" }
+![SRAM Address Map]({{ "/assets/files/lab09/img/sram_addr_map.png" | relative_url }}){: style="zoom: 0.6;" }
 
 *Figure 3. SRAM Address Map*
 
-![UART Transmitter Address Map]({{ "/assets/files/lab09/img/uart_tx_addr_map.png" | relative_url }}){: style="zoom: 0.8;" }
+![UART Transmitter Address Map]({{ "/assets/files/lab09/img/uart_tx_addr_map.png" | relative_url }}){: style="zoom: 0.6;" }
 
 *Figure 4. UART Transmitter Address Map*
 
