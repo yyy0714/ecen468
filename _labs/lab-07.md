@@ -30,7 +30,7 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 ## 3.0 Setup
 
 1. Execute the following commands to create and enter the working directory.
-    - `mkdir $HOME/ecen468/lab07/`
+    - `mkdir -p $HOME/ecen468/lab07/`
     - `cd $HOME/ecen468/lab07/`
 
 2. Download `lab07_code.tar.gz` from the lab website and put it the working directory.

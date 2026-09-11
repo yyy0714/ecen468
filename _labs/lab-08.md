@@ -89,7 +89,7 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 ## 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
-  - `mkdir $HOME/ecen468/lab08/`
+  - `mkdir -p $HOME/ecen468/lab08/`
   - `cd $HOME/ecen468/lab08/`
 
 2. Download `lab08_code.tar.gz` from the lab website and put it the working directory.

@@ -94,7 +94,7 @@ In this lab, the ID of the devices are as follows:
 
 ## 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
-  - `mkdir $HOME/ecen468/lab09/`
+  - `mkdir -p $HOME/ecen468/lab09/`
   - `cd $HOME/ecen468/lab09/`
 
 2. Download `lab09_code.tar.gz` from the lab website and put it the working directory.
