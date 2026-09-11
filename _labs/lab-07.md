@@ -134,7 +134,7 @@ Refer to Section Simulating SRAM Cell RTL Design Using Synopsys VCS.
 ## 4.1 Implementing, Simulating and Synthesizing SRAM Array RTL Design
 1. Implement SRAM array in `rtl/sram.v` and write testbench in `tb/sram_tb.v`.
 2. Refer to Section 3.2 for simulating the RTL design.
-3. Refer to Section 3.3 for synthesizing the RTL design.
+3. Refer to Section 3.3 for synthesizing the RTL design (optional).
 
 
 # 5. Submission

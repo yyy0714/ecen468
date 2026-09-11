@@ -14,7 +14,7 @@ downloads:
 - Synthesize the RTL design and generate gate-level design.
 - Simulate the gate-level design.
 
-# 2. Introduction of UART
+# 2. Introduction of UART Transmitter
 
 ## 2.1 UART Transmitter Controller
 The UART transmitter controller (psuedocode shown below) sends signal to datapath and handles state transitions.
@@ -87,13 +87,13 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 *Figure 1. Waveform of UART Transmission*
 
 
-## 2.4 UART Transmitter Implementation Requirement
+## 2.4 Implementation Requirements
 - Implement UART transimitter controller module in `uart_tx_controller.v`.
 - Implement UART transmitter datapath modeule in `uart_tx_datapath.v`.
 - Implement UART transmitter top module in `uart_tx.v`
 
 
-# 3. Design of UART Transmitter
+# 3. Lab Procedures
 
 ## 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
