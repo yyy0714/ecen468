@@ -21,14 +21,6 @@ The UART transmitter controller (psuedocode shown below) sends signal to datapat
 
 ```
 state IDLE:
-  if rst_ni asserted:
-    deassert tdr_load_o
-    deassert tsr_load_o
-    deassert tsr_set_start_bit_o
-    deassert tsr_shift_bit_o
-    deassert reset_o
-    goto IDLE
-  else:
     if load_tdr_i asserted:
       assert tdr_load_o
       goto IDLE

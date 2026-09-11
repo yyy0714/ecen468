@@ -27,7 +27,7 @@ downloads:
 - Implement system bus arbiter in `system_bus_arbiter.v`.
 - Implement system bus SRAM wrapper in `system_bus_sram_wrapper.v`.
 - Implement system bus UART transmitter wrapper in `system_bus_uart_tx_wrapper.v`.
-- Implement system bus top module in `system_bus_top.v`.
+- Implement the top module in `top.v`.
 
 # 3. Lab Procedures
 
@@ -49,10 +49,10 @@ downloads:
         - `generic.sdb`
     - `rtl` (directory for RTL verilog code)
         - `_sram.v`
-        - `arbiter.v`
-        - `sram_wrapper.v`
+        - `system_bus_arbiter.v`
+        - `system_bus_sram_wrapper.v`
+        - `system_bus_uart_tx_wrapper.v`
         - `top.v`
-        - `uart_tx_wrapper.v`
     - `sim` (directory where Synopsys VCS will be run)
     - `syn` (directory where Synopsys Design Vision will be run)
         - `netlist` (directory for gate-level verilog code)
@@ -65,7 +65,7 @@ downloads:
     - `load-ecen-468`
 
 
-## 3.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
+## 3.1 Simulating System Bus RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
     - `cd $HOME/ecen468/lab09/sim`
@@ -88,14 +88,13 @@ downloads:
 
 
 ## Submission
-
 Please submit a single PDF file containing the following:
 
 `top` RTL design:
-1. Screenshots of the terminal output after running `./simv`.
+1. Screenshots of the terminal output after running `./simv_top_tb`.
 2. Justification of the correctness of the results.
-3. Screenshots or copy of `arbiter.v`, `uart_tx_wrapper.v`, `sram_wrapper.v` and `top.v`.
+3. Screenshots or copy of `system_bus_arbiter.v`, `uart_tx_wrapper.v`, `sram_wrapper.v` and `top.v`.
 
 `top` gate-level design:
-1. Screenshots of the simulation output after running `./simv`.
+1. Screenshots of the simulation output after running `./simv_top_netlist_tb`.
 2. Justification of the correctness of the results.
