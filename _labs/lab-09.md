@@ -92,9 +92,13 @@ Please submit a single PDF file containing the following:
 
 `top` RTL design:
 1. Screenshots of the terminal output after running `./simv_top_tb`.
-2. Justification of the correctness of the results.
-3. Screenshots or copy of `system_bus_arbiter.v`, `uart_tx_wrapper.v`, `sram_wrapper.v` and `top.v`.
+2. Justification of the simulation results.
+3. Screenshots or copy of the content of the following files:
+    - `system_bus_arbiter.v`
+    - `system_bus_uart_tx_wrapper.v`
+    - `system_bus_sram_wrapper.v`
+    - `top.v`.
 
 `top` gate-level design:
 1. Screenshots of the simulation output after running `./simv_top_netlist_tb`.
-2. Justification of the correctness of the results.
+2. Justification of the simulation results.

@@ -206,7 +206,10 @@ Please submit a single PDF file containing the following:
 UART transmitter RTL design:
 1. Screenshot of the waveforms of `uart_tx_tb`.
 2. Justification of the simulation results.
-3. Screenshots or copy of `uart_tx.v`, `uart_tx_controller.v` and `uart_tx_datapath.v`.
+3. Screenshots or copy of the content of the following files:
+  - `uart_tx.v`
+  - `uart_tx_controller.v`
+  - `uart_tx_datapath.v`.
 
 UART transmitter gate-level design:
 1. Screenshot of the waveforms of `uart_tx_netlist_tb`.

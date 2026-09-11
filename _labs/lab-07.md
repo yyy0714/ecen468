@@ -142,10 +142,10 @@ Please submit one PDF file containing the following items:
 
 SRAM cell:
 1. Screenshot of the terminal output of `./simv_sram_cell_tb`.
-2. Justification of the correctness of the simulation results.
-3. Screenshot or copy of `sram_cell.v`.
+2. Justification of the simulation results.
+3. Screenshot or copy of the content of `sram_cell.v`.
 
 SRAM array:
 1. Screenshot of the terminal output of `./simv_sram_tb`.
-2. Justification of the correctness of the simulation results.
-3. Screenshot or copy of `sram.v`.
+2. Justification of the simulation results.
+3. Screenshot or copy of the content of `sram.v`.
