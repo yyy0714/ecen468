@@ -1,0 +1,16 @@
+{
+  "signal": [
+    { "name": "clk",              "wave": "pppppppppppppppppppppppppppp" },
+    { "name": "rst_n",            "wave": "01.........................." },
+    { "name": "load_tdr",         "wave": "x010...........10..10......." },
+    { "name": "load_tsr",         "wave": "x0.....10..................." },
+    { "name": "tx_start",         "wave": "x0.........10..............." },
+    { "name": "curr_state[2:0]",  "wave": "x=......=...=.........=.....", "data": ["IDLE","WAIT","SEND","IDLE"] },
+    { "name": "bit_counter[3:0]", "wave": "x=...........==========.....", "data": ["0","1","2","3","4","5","6","7","8","9","0"] },
+    { "name": "data_bus[7:0]",    "wave": "x=............x...x.........", "data": ["A7"] },
+    { "name": "tdr[7:0]",         "wave": "x..=............x...x.......", "data": ["A7"] },
+    { "name": "tsr[8:0]",         "wave": "x=......=...=========.......", "data": ["1FF","14F","14E","1A7","1D3","1E9","1F4","1FA","1FD","1FE","1FF"] },
+    { "name": "txd",              "wave": "x1..........01..0.101......." }
+  ],
+  "head": { "text": "Transmitting 0xA7 (LSB first, start bit is 0, stop bit is 1)" }
+}

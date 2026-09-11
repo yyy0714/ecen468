@@ -74,9 +74,9 @@ else if reset asserted:
 ## 2.3 UART Transmitter Timing Diagram
 The expected behavior of the UART transmitter when transmitting `0xA7` is shown in figure 1.
 
-![Waveform of UART Transmission]({{ "/assets/files/lab08/img/1.png" | relative_url }})
+![Waveform of UART Transmission]({{ "/assets/files/lab08/img/uart_transmission.png" | relative_url }})
 
-*Figure 1. Waveform of UART Transmission*
+*Figure 1. An Example of UART Transmission*
 
 
 ## 2.4 Implementation Requirements
