@@ -9,8 +9,8 @@ title: Policies
 
 ## Submission Policy
 - Laboratory reports should include all of the requirements in the laboratory manuals.
-- Laboratory reports are due one week after the scheduled laboratory session.
-- A deduction of 20% of the total score will be applied for each subsequent weekday following the submission deadline.
+- Laboratory reports are due on Friday after the week of the scheduled laboratory session.
+- A deduction of 25% of the total score will be applied for each subsequent weekday following the submission deadline.
 
 ## Generative AI Policy
 - Students must complete laboratory reports independently and may not use generative AI to generate, draft, rewrite, or paraphrase any part of a laboratory report, including its text, data analysis, plots, tables, code, and answers to laboratory questions.
