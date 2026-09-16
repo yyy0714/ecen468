@@ -39,7 +39,7 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
     - `tar -xvf lab07_code.tar.gz`
     - `rm lab07_code.tar.gz`
 
-4. Confirm that the following directories and files exist in the working directory.
+4. Confirm the following directories and files exist in the working directory.
     - `lib` (directory for technology libraries)
         - `osu018_stdcells.db`
         - `osu018_stdcells.v`

@@ -84,10 +84,8 @@ In this lab, the ID of the devices are as follows:
 
 
 ## 2.4 Implementation Requirements
-- Implement system bus arbiter in `system_bus_arbiter.v`.
 - Implement system bus SRAM wrapper in `system_bus_sram_wrapper.v`.
 - Implement system bus UART transmitter wrapper in `system_bus_uart_tx_wrapper.v`.
-- Implement the top module in `top.v`.
 
 
 # 3. Lab Procedures
@@ -103,7 +101,7 @@ In this lab, the ID of the devices are as follows:
   - `tar -xvf lab09_code.tar.gz`
   - `rm lab09_code.tar.gz`
 
-4. Confirm that the following directories and files exist in the working directory.
+4. Confirm the following directories and files exist in the working directory.
     - `lib` (directory for technology libraries)
         - `osu018_stdcells.db`
         - `osu018_stdcells.v`
@@ -122,7 +120,12 @@ In this lab, the ID of the devices are as follows:
         - `top_netlist_tb.v`
         - `top_tb.v`
 
-5. Execute the following command if you are not using a computer in ZACH 127.
+5. Copy and paste the following Verilog code into the `rtl` directory:
+    - `uart_tx_controller.v`
+    - `uart_tx_datapath.v`
+    - `uart_tx.v`
+
+6. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
 
@@ -135,31 +138,64 @@ In this lab, the ID of the devices are as follows:
 2. Execute the following command to run the simulation.
     - `./simv_top_tb`
 
-3. Execute the following commands in sequence to open Synopsys WaveView.
-    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
-    - `wv &`
-
-4. In WaveView, open `top_tb.dump` to view the simulation waveform.
-
-5. Add the following signals
-
-6. Take a screenshot of the waveforms for the lab report.
-
-7. Exit WaveView.
+3. Take a screenshot of the terminal outputs of the simulation.
 
 
-## Submission
+## 3.2 Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
+1. Execute the following commands in sequence to open Design Vision:
+    - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
+    - `cd $HOME/ecen468/lab09/syn`
+    - `design_vision &`
+
+2. Execute the following commands to set up Design Vision.
+    - `set_app_var link_path ../lib/osu018_stdcells.db`
+    - `set_app_var target_library ../lib/osu018_stdcells.db`
+    - `set_app_var symbol_library ../lib/osu018_stdcells.db`
+
+3. Execute the following command to analyze the design.
+    - `analyze -format verilog {../rtl/top.v}`
+
+4. Execute the following command to elaborate the design.
+    - `elaborate top`
+
+5. Execute the following command to synthesize the design.
+    - `compile -exact_map`
+
+6. Execute the following command to save the optimized netlist.
+    - `write -hierarchy -format verilog -output ./netlist/top.v`
+
+7. Execute the following command to save the Standard Delay Format (SDF) file.
+    - `write_sdf ./sdf/top.sdf`
+
+8. Exit Design Vision.
+
+
+## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
+1. Execute the following commands in sequence to generate simulation.
+    - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
+    - `cd $HOME/ecen468/lab09/sim`
+    - `vcs -full64 ../tb/top_netlist_tb.v -o simv_top_netlist_tb`
+
+2. Execute the following command to run the simulation.
+    - `./simv_top_netlist_tb`
+
+3. If you get the inout port connection width mismatch error for the `addr_bus_io` ports of the `system_bus_sram_wrapper` and `system_bus_uart_tx` modules, do the following:
+    - Change `tri [19:0] addr_bus_io` to `tri [31:0] addr_bus_io`
+    - Change `tri [31:28] addr_bus_io` to `tri [31:0] addr_bus_io`
+
+3. Take a screenshot of the terminal outputs of the simulation.
+
+
+## 4. Submission
 Please submit a single PDF file containing the following:
 
 Top module RTL design:
-1. Screenshots of the terminal output after running `./simv_top_tb`.
+1. Screenshot of the terminal output after running `./simv_top_tb`.
 2. Justification of the simulation results.
 3. Screenshots or copy of the content of the following files:
-    - `system_bus_arbiter.v`
     - `system_bus_uart_tx_wrapper.v`
     - `system_bus_sram_wrapper.v`
-    - `top.v`
 
 Top module gate-level design:
-1. Screenshots of the simulation output after running `./simv_top_netlist_tb`.
+1. Screenshot of the simulation output after running `./simv_top_netlist_tb`.
 2. Justification of the simulation results.

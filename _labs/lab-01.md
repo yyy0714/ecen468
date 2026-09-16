@@ -49,42 +49,29 @@ We will now implement a 256K (262,144) x 8 SRAM, which has 18 address pins and 8
 
 We will use Vista to implement the design. Vista is a native electronic system level (ESL) platform for architecture design, verification, analysis, and virtual prototyping, with an advanced toolset aimed at high-level transaction-level modeling (TLM) hardware platforms.
 
-Please login to the Olympus server and create a working directory for this lab using the following commands.
+# 3. Lab Procedures
 
-```bash
-## Create and navigate to the working directory.
-mkdir -p $HOME/ECEN468/Lab1/src
-cd $HOME/ECEN468/Lab1/src
-```
+## 3.0 Setup
+1. Execute the following commands to create and enter the working directory.
+  - `mkdir -p $HOME/ecen468/lab01/`
+  - `cd $HOME/ecen468/lab01/`
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+2. Download `lab01_code.tar.gz` from the lab website and put it the working directory.
 
-- `RAM.cpp`
-- `test_RAM.cpp`
+3. Execute the following commands to extract the files.
+  - `tar -xvf lab01_code.tar.gz`
+  - `rm lab01_code.tar.gz`
 
-Copy them to the working directory.
+4. Confirm the following directories and files exist in the working directory.
+    - 
 
-In the terminal, open Vista using the following commands.
+5. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
 
-```bash
-load-ecen-468   # skip this line on machines in ZACH 127
-source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash
-vista &
-```
 
-Once Vista is launched, create a new project: click **Project -> New Project**, set the project name to `RAM.v2p`, go to the **Files** tab (Figure 5), click **Add Files**, and add `RAM.cpp` and `test_RAM.cpp`.
+## 3.1 Building SystemC Design Using Siemens Vista
 
-![Figure 5. Project settings window]({{ "/assets/files/lab01/img/5.png" | relative_url }})
-
-*Figure 5. Project settings window*
-
-Now implement the RAM design in `RAM.cpp`. For reference, an implementation of a 4-bit adder is provided at the end of this manual.
-
-Once you finish your design, compile it to check for syntax and behavioral errors by right-clicking the tab of your design (`RAM`) and selecting **Build**, as shown in Figure 6.
-
-![Figure 6. Screenshot of building project]({{ "/assets/files/lab01/img/6.png" | relative_url }})
-
-*Figure 6. Screenshot of building project*
+## 3.2 Simulating SystemC Design Using Siemens Vista
 
 ## Simulation
 

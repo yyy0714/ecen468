@@ -98,7 +98,7 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
   - `tar -xvf lab08_code.tar.gz`
   - `rm lab08_code.tar.gz`
 
-4. Confirm that the following directories and files exist in the working directory.
+4. Confirm the following directories and files exist in the working directory.
     - `lib` (directory for technology libraries)
         - `osu018_stdcells.db`
         - `osu018_stdcells.v`
@@ -171,7 +171,7 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 7. Execute the following command to save the Standard Delay Format (SDF) file.
     - `write_sdf ./sdf/uart_tx.sdf`
 
-8. Exite Design Vision.
+8. Exit Design Vision.
 
 
 ## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
