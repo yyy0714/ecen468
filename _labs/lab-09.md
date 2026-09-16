@@ -1,8 +1,10 @@
 ---
 layout: manual
 title: 'Lab 9: Design of System Bus (Verilog)'
-session: 'Week 10 (Oct 26 – Oct 30)'
-report_due: 'Week 11 (Nov 2 – Nov 6)'
+# session: 'Week 10 (Oct 26 – Oct 30)'
+# report_due: 'Week 11 (Nov 2 – Nov 6)'
+session: 'Week 4 (Sep 14 – Sep 18)'
+report_due: 'Week 5 (Sep 21 – Sep 25)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab09/lab09_code.tar.gz
@@ -14,6 +16,7 @@ downloads:
 - Synthesize the RTL design and generate gate-level design.
 - Simulate the gate-level design.
 
+---
 
 # 2. Introduction
 
@@ -34,7 +37,6 @@ In this lab, the width of the buses are as follows:
 | Address Bus | 32-bit |
 | Data Bus    | 8-bit  |
 | Control Bus | 1-bit  |
-
 
 ## 2.2 System Bus Arbiter
 Since a bus is shared amongst devices, multiple devices may try to access the bus at the same time. A method used to determine which device is granted access to the bus at a given time is called bus arbitration. In this lab, you will implement the centralized fixed-priority arbitration.
@@ -62,7 +64,6 @@ In this lab, the priorities of the devices are as follows:
 | SRAM             |          |
 | UART Transmitter | Lowest   |
 
-
 ## 2.3 System Bus SRAM Wrapper and UART Transmitter Wrapper
 In Figure 1, the SRAM and UART transmitter are connected to their respective wrappers which decode signals sent via the address bus. Figure 3 and Figure 4 show the address map of SRAM and UART transmitter respectively. 
 
@@ -82,11 +83,11 @@ In this lab, the ID of the devices are as follows:
 | UART Transmitter | 0010 |
 | Testbench        | 0011 |
 
-
 ## 2.4 Implementation Requirements
 - Implement system bus SRAM wrapper in `system_bus_sram_wrapper.v`.
 - Implement system bus UART transmitter wrapper in `system_bus_uart_tx_wrapper.v`.
 
+---
 
 # 3. Lab Procedures
 
@@ -140,8 +141,7 @@ In this lab, the ID of the devices are as follows:
 
 3. Take a screenshot of the terminal outputs of the simulation.
 
-
-## 3.2 Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
+## 3.2 [Optional] Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
     - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
     - `cd $HOME/ecen468/lab09/syn`
@@ -168,9 +168,8 @@ In this lab, the ID of the devices are as follows:
     - `write_sdf ./sdf/top.sdf`
 
 8. Exit Design Vision.
-
-
-## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
+s
+## 3.3 [Optional] Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
     - `cd $HOME/ecen468/lab09/sim`
@@ -185,6 +184,7 @@ In this lab, the ID of the devices are as follows:
 
 3. Take a screenshot of the terminal outputs of the simulation.
 
+---
 
 ## 4. Submission
 Please submit a single PDF file containing the following:
@@ -195,7 +195,3 @@ Top module RTL design:
 3. Screenshots or copy of the content of the following files:
     - `system_bus_uart_tx_wrapper.v`
     - `system_bus_sram_wrapper.v`
-
-Top module gate-level design:
-1. Screenshot of the simulation output after running `./simv_top_netlist_tb`.
-2. Justification of the simulation results.

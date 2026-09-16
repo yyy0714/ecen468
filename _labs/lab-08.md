@@ -1,8 +1,10 @@
 ---
 layout: manual
 title: 'Lab 8: Design of UART Transmitter (Verilog)'
-session: 'Week 9 (Oct 19 – Oct 23)'
-report_due: 'Week 10 (Oct 26 – Oct 30)'
+# session: 'Week 9 (Oct 19 – Oct 23)'
+# report_due: 'Week 10 (Oct 26 – Oct 30)'
+session: 'Week 3 (Sep 7 – Sep 11)'
+report_due: 'Week 4 (Sep 14 – Sep 18)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab08/lab08_code.tar.gz
@@ -13,6 +15,8 @@ downloads:
 - Simulate the RTL design.
 - Synthesize the RTL design and generate gate-level design.
 - Simulate the gate-level design.
+
+---
 
 # 2. Introduction of UART Transmitter
 
@@ -47,7 +51,6 @@ state SEND:
     goto IDLE
 ```
 
-
 ## 2.2 UART Transmitter Datapath
 The UART transmitter datapath (psuedocode shown below) performes various operations based on the signals received from the controller.
 
@@ -70,7 +73,6 @@ else if reset asserted:
   bit_counter <= 0
 ```
 
-
 ## 2.3 UART Transmitter Timing Diagram
 The expected behavior of the UART transmitter when transmitting `0xA7` is shown in figure 1.
 
@@ -78,12 +80,12 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 *Figure 1. An Example of UART Transmission*
 
-
 ## 2.4 Implementation Requirements
 - Implement UART transimitter controller module in `uart_tx_controller.v`.
 - Implement UART transmitter datapath modeule in `uart_tx_datapath.v`.
 - Implement UART transmitter top module in `uart_tx.v`
 
+---
 
 # 3. Lab Procedures
 
@@ -118,7 +120,6 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 5. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-
 ## 3.1 Simulating UART Transmitter RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
@@ -143,7 +144,6 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 6. Take a screenshot of the waveforms for the lab report.
 
 7. Exit WaveView.
-
 
 ## 3.2 Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
@@ -173,7 +173,6 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 8. Exit Design Vision.
 
-
 ## 3.3 Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
@@ -199,6 +198,7 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 
 7. Exit WaveView.
 
+---
 
 # 4. Submission
 Please submit a single PDF file containing the following:

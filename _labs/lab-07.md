@@ -1,8 +1,10 @@
 ---
 layout: manual
 title: 'Lab 7: Design of SRAM and Synthesis'
-session: 'Week 8 (Oct 12 – Oct 16)'
-report_due: 'Week 9 (Oct 19 – Oct 23)'
+# session: 'Week 8 (Oct 12 – Oct 16)'
+# report_due: 'Week 9 (Oct 19 – Oct 23)'
+session: 'Week 2 (Aug 31 – Sep 4)'
+report_due: 'Week 3 (Sep 7 – Sep 11)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab07/lab07_code.tar.gz
@@ -13,6 +15,8 @@ downloads:
 - Simulate the RTL designs.
 - Synthesize the RTL designs and generate gate-level designs.
 - Simulate the gate-level designs.
+
+---
 
 # 2. Introduction of SRAM
 We will implement a Static Random Access Memory (SRAM) with a storage cell structure that does not require a refresh. Therefore, it operates faster than Dynamic Random Access Memory and is used as fast-cache memory in a computer.
@@ -25,10 +29,11 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 
 *Figure 1. Block Diagram of a Basic SRAM Cell*
 
+---
+
 # 3. Design of SRAM Cell
 
 ## 3.0 Setup
-
 1. Execute the following commands to create and enter the working directory.
     - `mkdir -p $HOME/ecen468/lab07/`
     - `cd $HOME/ecen468/lab07/`
@@ -60,7 +65,6 @@ The block diagram of a basic SRAM cell is shown in the figure below. It has acti
 5. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-
 ## 3.1 Implementing SRAM Cell
 The functionality and operating modes of the SRAM cell are as follow:
 - Disabled (high-impedance) mode (`cs_ni = 1`)
@@ -75,7 +79,6 @@ The functionality and operating modes of the SRAM cell are as follow:
     - `data_o` should output high impedance.
 
 You will implement the SRAM cell in `rtl/sram_cell.v`.
-
 
 ## 3.2 Simulating SRAM Cell RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
@@ -95,7 +98,6 @@ You will implement the SRAM cell in `rtl/sram_cell.v`.
 5. In WaveView, open `sram_cell_tb.dump` to view the simulation waveform.
 
 6. Exit WaveView.
-
 
 ## 3.3 Synthesizing SRAM Cell RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
@@ -125,9 +127,10 @@ You will implement the SRAM cell in `rtl/sram_cell.v`.
 
 8. Exit Design Vision.
 
-
 ## 3.4 Simulating SRAM Cell Gate-Level Design Using Synopsys VCS
 Refer to Section Simulating SRAM Cell RTL Design Using Synopsys VCS.
+
+---
 
 # 4. Design of SRAM Array
 
@@ -136,6 +139,7 @@ Refer to Section Simulating SRAM Cell RTL Design Using Synopsys VCS.
 2. Refer to Section 3.2 for simulating the RTL design.
 3. Refer to Section 3.3 for synthesizing the RTL design (optional).
 
+---
 
 # 5. Submission
 Please submit one PDF file containing the following items:
