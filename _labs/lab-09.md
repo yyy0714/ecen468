@@ -129,7 +129,6 @@ In this lab, the ID of the devices are as follows:
 6. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-
 ## 3.1 Simulating System Bus RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
@@ -168,7 +167,7 @@ In this lab, the ID of the devices are as follows:
     - `write_sdf ./sdf/top.sdf`
 
 8. Exit Design Vision.
-s
+
 ## 3.3 [Optional] Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
@@ -186,7 +185,7 @@ s
 
 ---
 
-## 4. Submission
+# 4. Submission
 Please submit a single PDF file containing the following:
 
 Top module RTL design:
