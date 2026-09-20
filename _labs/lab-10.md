@@ -18,7 +18,57 @@ downloads:
 
 # 2. Introduction
 
-## 2.1 Overview
+Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the Canny algorithm is implemented in **Verilog** as a hardware-oriented processing system. The input is a **200 × 200 grayscale image (Image 0)**, and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+
+## 2.1 Blurred Image
+**Image 1** is obtained by applying a **5 × 5 Gaussian filter** to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages. In the hardware design, this operation is performed using the `gf` 5 × 5 filter.
+
+Conceptually,
+
+$$
+I_1(x,y)=G(x,y)*I_0(x,y),
+$$
+
+where \(G\) is the Gaussian kernel and \(*\) denotes convolution.
+
+## 2.2 Gradient Image
+**Image 2** is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two **3 × 3 Sobel filters**, `sobel_x` and `sobel_y`, to obtain
+
+$$
+G_x=S_x*I_1,\qquad
+G_y=S_y*I_1.
+$$
+
+The gradient magnitude indicates how strongly the image intensity changes at each pixel:
+
+$$
+G=\sqrt{G_x^2+G_y^2}.
+$$
+
+Pixels with large gradient magnitude are therefore potential edge pixels.
+
+## Direction Image
+**Image 3** represents the **gradient direction** at each pixel. It is calculated from the horizontal and vertical gradient components using
+
+$$
+\theta=\operatorname{atan2}(G_y,G_x).
+$$
+
+The direction determines the orientation of the local intensity change and is required by the non-maximum suppression stage. In the displayed image, different colors are used to visualize different gradient directions; the colors themselves are only a representation of the direction information.
+
+## Non-Maximum Suppression (NMS) Image
+**Image 4** is produced by **non-maximum suppression (NMS)** using the gradient magnitude from Image 2 and the direction information from Image 3. For each pixel, its gradient magnitude is compared with neighboring pixels along the gradient direction. The pixel is retained only if it is a local maximum.
+
+This process suppresses weaker responses around an edge and reduces thick gradient regions to **thin edge candidates**, ideally close to one pixel wide.
+
+## Hysteresis Image
+**Image 5** is the final edge image produced by **double-threshold hysteresis**. The NMS result is compared with a high and a low threshold:
+
+* Pixels above the **high threshold** are classified as strong edges.
+* Pixels below the **low threshold** are rejected.
+* Pixels between the two thresholds are classified as weak edges and are retained when they are connected to strong edges.
+
+This stage removes isolated weak responses while preserving meaningful, continuous edges. The resulting Image 5 is the final Canny edge map.
 
 ---
 
@@ -64,7 +114,7 @@ downloads:
 
 3. Take a screenshot of the terminal outputs of the simulation.
 
-## 3.2 [Optional] Synthesizing UART Transmitter RTL Design Using Synopsys Design Vision
+## 3.2 [Optional] Synthesizing Canny Edge Detector RTL Design Using Synopsys Design Vision
 1. Execute the following commands in sequence to open Design Vision:
     - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
     - `cd $HOME/ecen468/lab10/syn`
@@ -92,7 +142,7 @@ downloads:
 
 8. Exit Design Vision.
 
-## 3.3 [Optional] Simulating UART Transmitter Gate-Level Design Using Synopsys VCS
+## 3.3 [Optional] Simulating Canny Edge Detector Gate-Level Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
     - `cd $HOME/ecen468/lab09/sim`
@@ -101,10 +151,6 @@ downloads:
 2. Execute the following command to run the simulation.
     - `./simv_top_netlist_tb`
 
-3. If you get the inout port connection width mismatch error for the `addr_bus_io` ports of the `system_bus_sram_wrapper` and `system_bus_uart_tx` modules, do the following:
-    - Change `tri [19:0] addr_bus_io` to `tri [31:0] addr_bus_io`
-    - Change `tri [31:28] addr_bus_io` to `tri [31:0] addr_bus_io`
-
 3. Take a screenshot of the terminal outputs of the simulation.
 
 ---
@@ -112,8 +158,8 @@ downloads:
 # 4. Submission
 Please submit a single PDF file containing the following:
 
-Top module RTL design:
-1. Screenshot of the terminal output after running `./simv_top_tb`.
+Canny edge detector RTL design:
+1. Screenshot of the terminal output after running `./simv_canny_edge_detector_tb`.
 2. Justification of the simulation results.
 3. Screenshots or copy of the content of the following files:
     - `system_bus_uart_tx_wrapper.v`

@@ -178,10 +178,10 @@ In this lab, the ID of the devices are as follows:
     - `./simv_top_netlist_tb`
 
 3. If you get the inout port connection width mismatch error for the `addr_bus_io` ports of the `system_bus_sram_wrapper` and `system_bus_uart_tx` modules, do the following:
-    - Change `tri [19:0] addr_bus_io` to `tri [31:0] addr_bus_io`
-    - Change `tri [31:28] addr_bus_io` to `tri [31:0] addr_bus_io`
+    - Change `tri [19:0] addr_bus_io` to `tri [31:0] addr_bus_io`.
+    - Change `tri [31:28] addr_bus_io` to `tri [31:0] addr_bus_io`.
 
-3. Take a screenshot of the terminal outputs of the simulation.
+4. Take a screenshot of the terminal outputs of the simulation.
 
 ---
 
