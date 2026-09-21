@@ -32,14 +32,14 @@ Figure 2 shows the system that you will implement in this lab.
 In the equations below, \\(b_i\\) denotes `buf_x[i]` and \\(z_i\\) denotes `buf_z[i]` (the pixel windows written in by the testbench), and `buf_y[6]` holds the direction code \\(\theta\\). Each stage writes the result register shown; the module spreads the arithmetic over a few clock cycles.
 
 ## 2.1 Blurred Image
-Gaussian smoothing with the \\(5 \times 5\\) kernel `gf` (its weights sum to 128, so the division is a right shift by 7):
+This stage blurs the input image to suppress noise, preventing small intensity fluctuations from being mistaken for edges in later stages. It is computed as a \\(5 \times 5\\) Gaussian smoothing with the kernel `gf`, whose weights sum to 128 (so the division becomes a right shift by 7):
 
 $$
 \text{tmp\_1} = \left( \sum_{i=0}^{24} b_i \cdot \text{gf}[i] \right) \gg 7
 $$
 
 ## 2.2 Gradient Image
-Sobel gradients, then a magnitude approximated as \\(|G_x| + |G_y|\\) (instead of \\(\sqrt{G_x^2 + G_y^2}\\)) and scaled by \\(\tfrac{1}{8}\\):
+This stage measures the edge strength at each pixel — how sharply the brightness changes — so that likely edge pixels can be identified. Sobel operators produce the gradients \\(G_x\\) and \\(G_y\\), and their magnitude is approximated by \\(|G_x| + |G_y|\\) instead of \\(\sqrt{G_x^2 + G_y^2}\\), then scaled by \\(\tfrac{1}{8}\\):
 
 $$
 G_x = (b_2 + 2b_7 + b_{12}) - (b_0 + 2b_5 + b_{10})
@@ -54,7 +54,7 @@ $$
 $$
 
 ## 2.3 Direction Image
-Quantize the gradient direction \\(\theta = \operatorname{atan2}(G_y, G_x)\\) into four codes. First fold to \\(G_y \ge 0\\): if \\(G_y < 0\\), replace \\((G_x, G_y)\\) with \\((-G_x, -G_y)\\). Then, using the folded \\(G_x, G_y\\):
+This stage determines the orientation of each edge — the direction of steepest brightness change — which the next stage needs in order to compare each pixel against the correct neighbors. The gradient angle \\(\theta = \operatorname{atan2}(G_y, G_x)\\) is quantized into four codes. Because orientation repeats every 180°, the gradient is first folded so that \\(G_y \ge 0\\): if \\(G_y < 0\\), it is replaced by \\((-G_x, -G_y)\\). The folded \\(G_x\\) and \\(G_y\\) then give:
 
 $$
 \text{tmp\_3} =
@@ -69,7 +69,7 @@ $$
 The thresholds \\(\tfrac{1}{2}\\) and \\(\tfrac{5}{2}\\) approximate \\(\tan 22.5^\circ\\) and \\(\tan 67.5^\circ\\). The colors in the displayed image only visualize these codes.
 
 ## 2.4 Non-Maximum Suppression (NMS) Image
-Keep a magnitude pixel only if it is a local maximum along the gradient (this thins edges to about one pixel). The center is \\(b_6\\); its two neighbors along the gradient are \\(b_{6-n}\\) and \\(b_{6+n}\\), with \\(n = 5\,dy + dx\\) selected from the direction:
+This stage thins the thick gradient response into edges about one pixel wide, by keeping a pixel only where it is a local maximum along the gradient. The center pixel is \\(b_6\\), and its two neighbors along the gradient are \\(b_{6-n}\\) and \\(b_{6+n}\\), where \\(n = 5\,dy + dx\\) is taken from the direction:
 
 $$
 (dx, dy) =
@@ -81,10 +81,10 @@ $$
 \end{cases}
 $$
 
-Copy the window into `tmp_4`; then if \\(b_6 \ge b_{6-n}\\) **and** \\(b_6 \ge b_{6+n}\\), set \\(\text{tmp\_4}[6-n] = \text{tmp\_4}[6+n] = 0\\); otherwise set \\(\text{tmp\_4}[6] = 0\\).
+The window is copied into `tmp_4`. If \\(b_6 \ge b_{6-n}\\) and \\(b_6 \ge b_{6+n}\\), the two neighbors \\(\text{tmp\_4}[6-n]\\) and \\(\text{tmp\_4}[6+n]\\) are cleared to 0; otherwise the center \\(\text{tmp\_4}[6]\\) is cleared to 0.
 
 ## 2.5 Hysteresis Image
-Final edge map from double thresholds `THRESHOLD_UPPER = 10` and `THRESHOLD_LOWER = 3`:
+This stage produces the final binary edge map: it keeps strong pixels as edges, discards very weak pixels, and keeps in-between pixels only when they connect to a strong edge. Two thresholds are used, `THRESHOLD_UPPER = 10` and `THRESHOLD_LOWER = 3`:
 
 $$
 \text{tmp\_5} =
