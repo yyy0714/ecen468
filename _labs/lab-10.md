@@ -18,55 +18,53 @@ downloads:
 
 # 2. Introduction
 
-Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the Canny algorithm is implemented in **Verilog** as a hardware-oriented processing system. The input is a **200 × 200 grayscale image (Image 0)**, and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a $200 \times 200$ grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
 
 ## 2.1 Blurred Image
-**Image 1** is obtained by applying a **5 × 5 Gaussian filter** to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages. In the hardware design, this operation is performed using the `gf` 5 × 5 filter.
-
+Image 1 is obtained by applying a $5 \times 5$ Gaussian filter to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
 Conceptually,
 
 $$
-I_1(x,y)=G(x,y)*I_0(x,y),
+I_1(x,y) = G(x,y) * I_0(x,y)
 $$
 
-where \(G\) is the Gaussian kernel and \(*\) denotes convolution.
+where $G$ is the Gaussian kernel and $*$ denotes convolution.
 
 ## 2.2 Gradient Image
-**Image 2** is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two **3 × 3 Sobel filters**, `sobel_x` and `sobel_y`, to obtain
+Image 2 is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two $3 \times 3$ Sobel filters, `sobel_x` and `sobel_y`, to obtain
 
 $$
-G_x=S_x*I_1,\qquad
-G_y=S_y*I_1.
+G_x = S_x * I_1 \qquad
+G_y = S_y * I_1
 $$
 
 The gradient magnitude indicates how strongly the image intensity changes at each pixel:
 
 $$
-G=\sqrt{G_x^2+G_y^2}.
+G = \sqrt{G_x^2 + G_y^2}
 $$
 
 Pixels with large gradient magnitude are therefore potential edge pixels.
 
-## Direction Image
-**Image 3** represents the **gradient direction** at each pixel. It is calculated from the horizontal and vertical gradient components using
+## 2.3 Direction Image
+Image 3** represents the gradient direction at each pixel. It is calculated from the horizontal and vertical gradient components using
 
 $$
-\theta=\operatorname{atan2}(G_y,G_x).
+\theta = \operatorname{atan2}(G_y, G_x)
 $$
 
 The direction determines the orientation of the local intensity change and is required by the non-maximum suppression stage. In the displayed image, different colors are used to visualize different gradient directions; the colors themselves are only a representation of the direction information.
 
-## Non-Maximum Suppression (NMS) Image
-**Image 4** is produced by **non-maximum suppression (NMS)** using the gradient magnitude from Image 2 and the direction information from Image 3. For each pixel, its gradient magnitude is compared with neighboring pixels along the gradient direction. The pixel is retained only if it is a local maximum.
+## 2.4 Non-Maximum Suppression (NMS) Image
+Image 4 is produced by non-maximum suppression (NMS) using the gradient magnitude from Image 2 and the gradient direction from Image 3. For each pixel, its gradient magnitude is compared with neighboring pixels along the gradient direction. The pixel is retained only if it is a local maximum.
 
-This process suppresses weaker responses around an edge and reduces thick gradient regions to **thin edge candidates**, ideally close to one pixel wide.
+This process suppresses weaker responses around an edge and reduces thick gradient regions to thin edge candidates, ideally close to one pixel wide.
 
-## Hysteresis Image
-**Image 5** is the final edge image produced by **double-threshold hysteresis**. The NMS result is compared with a high and a low threshold:
-
-* Pixels above the **high threshold** are classified as strong edges.
-* Pixels below the **low threshold** are rejected.
-* Pixels between the two thresholds are classified as weak edges and are retained when they are connected to strong edges.
+## 2.5 Hysteresis Image
+Image 5 is the final edge image produced by double-threshold hysteresis. The NMS result is compared with a high and a low threshold:
+- Pixels above the high threshold are classified as strong edges.
+- Pixels below the low threshold are rejected.
+- Pixels between the two thresholds are classified as weak edges and are retained when they are connected to strong edges.
 
 This stage removes isolated weak responses while preserving meaningful, continuous edges. The resulting Image 5 is the final Canny edge map.
 
