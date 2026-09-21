@@ -29,65 +29,79 @@ Figure 2 shows the system that you will implement in this lab.
 
 *Figure 2. System Overview (clock and reset signals are ommited)*
 
-Each of the five stages is one **operation** of a small state machine inside the module. While an operation is enabled, the internal `state` register counts clock cycles — it starts at `0`, advances one step per clock, and returns to `0` when the operation ends — so a stage's work is spread across a few `state` steps. The pixel window is held in `buf_x` (and, where noted, `buf_y`/`buf_z`), and each stage writes its result to one of `tmp_1`–`tmp_5`, which the testbench reads back.
+In the equations below, \\(b_i\\) denotes `buf_x[i]` and \\(z_i\\) denotes `buf_z[i]` (the pixel windows written in by the testbench), and `buf_y[6]` holds the direction code \\(\theta\\). Each stage writes the result register shown; the module spreads the arithmetic over a few clock cycles.
 
 ## 2.1 Blurred Image
-Image 1 is Image 0 smoothed with a \\(5 \times 5\\) Gaussian filter `gf` (its weights sum to 128) to suppress noise so it does not become false edges:
+Gaussian smoothing with the \\(5 \times 5\\) kernel `gf` (its weights sum to 128, so the division is a right shift by 7):
 
 $$
-I_1 = G * I_0 = \left( \sum_{i=0}^{24} b_i \, g_i \right) \gg 7
+\text{tmp\_1} = \left( \sum_{i=0}^{24} b_i \cdot \text{gf}[i] \right) \gg 7
 $$
-
-where \\(b_i =\\) `buf_x[i]` and \\(g_i =\\) `gf[i]`; dividing the weighted sum by 128 is a right shift by 7.
-
-**States (`MODE_GAUSSIAN`):**
-- `state 0`: accumulate the 25-term weighted sum into `gaussian_sum`.
-- `state 1`: shift right by 7 and store the blurred pixel in `tmp_1`.
-- `state 2`: hold the result.
 
 ## 2.2 Gradient Image
-Image 2 is the edge strength of Image 1. Two \\(3 \times 3\\) Sobel operators give the horizontal and vertical gradients, \\(G_x = S_x * I_1\\) and \\(G_y = S_y * I_1\\). The exact magnitude \\(\sqrt{G_x^2 + G_y^2}\\) needs a square root, so the design uses the cheaper \\(L_1\\) (Manhattan) approximation, scaled down by 8:
+Sobel gradients, then a magnitude approximated as \\(|G_x| + |G_y|\\) (instead of \\(\sqrt{G_x^2 + G_y^2}\\)) and scaled by \\(\tfrac{1}{8}\\):
 
 $$
-I_2 = \frac{|G_x| + |G_y|}{8} = \big(|G_x| + |G_y|\big) \gg 3
+G_x = (b_2 + 2b_7 + b_{12}) - (b_0 + 2b_5 + b_{10})
 $$
 
-**States (`MODE_SOBEL`, magnitude):**
-- `state 0`: compute the Sobel gradients `gradient_x` and `gradient_y`.
-- `state 1`: form \\(|G_x| + |G_y|\\), shift right by 3, and store the magnitude in `tmp_2`.
+$$
+G_y = (b_0 + 2b_1 + b_2) - (b_{10} + 2b_{11} + b_{12})
+$$
 
-The same operation continues into `state 2`–`state 3` to compute the direction (Section 2.3).
+$$
+\text{tmp\_2} = \big(|G_x| + |G_y|\big) \gg 3
+$$
 
 ## 2.3 Direction Image
-Image 3 is the gradient direction that NMS needs. Instead of computing \\(\theta = \operatorname{atan2}(G_y, G_x)\\), which requires an arctangent, the design **quantizes** the direction into four orientations — `0`, `45`, `90`, `135` (degrees) — using only comparisons and shifts on \\(G_x, G_y\\).
+Quantize the gradient direction \\(\theta = \operatorname{atan2}(G_y, G_x)\\) into four codes. First fold to \\(G_y \ge 0\\): if \\(G_y < 0\\), replace \\((G_x, G_y)\\) with \\((-G_x, -G_y)\\). Then, using the folded \\(G_x, G_y\\):
 
-**States (`MODE_SOBEL`, direction):**
-- `state 2`: because orientation repeats every 180°, fold the gradient so its vertical part is non-negative (negate both \\(G_x, G_y\\) when \\(G_y < 0\\)); keep the folded pair in `abs_gradient_x`/`abs_gradient_y`.
-- `state 3`: choose the orientation by comparing \\(|G_y|\\) against \\(\approx \tfrac{1}{2}|G_x|\\) and \\(\approx \tfrac{5}{2}|G_x|\\) (the 22.5° and 67.5° sector boundaries) and store the code in `tmp_3`.
+$$
+\text{tmp\_3} =
+\begin{cases}
+0   & |G_y| \le |G_x|/2 \\
+45  & G_x \ge 0 \ \text{and}\ |G_y| \le 5|G_x|/2 \\
+135 & G_x < 0 \ \text{and}\ |G_y| \le 5|G_x|/2 \\
+90  & \text{otherwise}
+\end{cases}
+$$
 
-The colored direction image is only a visualization of these four codes and is produced by the testbench.
+The thresholds \\(\tfrac{1}{2}\\) and \\(\tfrac{5}{2}\\) approximate \\(\tan 22.5^\circ\\) and \\(\tan 67.5^\circ\\). The colors in the displayed image only visualize these codes.
 
 ## 2.4 Non-Maximum Suppression (NMS) Image
-Image 4 thins the edges: a magnitude pixel is kept only if it is a local maximum **along the gradient direction**, otherwise it is set to 0. This reduces thick gradient ridges to edges about one pixel wide. The stage uses the magnitude window in `buf_x` (center = current pixel) and the direction in `buf_y`.
+Keep a magnitude pixel only if it is a local maximum along the gradient (this thins edges to about one pixel). The center is \\(b_6\\); its two neighbors along the gradient are \\(b_{6-n}\\) and \\(b_{6+n}\\), with \\(n = 5\,dy + dx\\) selected from the direction:
 
-**States (`MODE_NMS`):**
-- `state 0`: convert the direction code into the offset `(dx, dy)` that selects the two neighbors lying along the gradient.
-- `state 1`: if the center pixel is \\(\ge\\) both neighbors, keep it and zero the two neighbors; otherwise zero the center. The resulting window is stored in `tmp_4`.
+$$
+(dx, dy) =
+\begin{cases}
+(1, 0)  & \theta = 0 \\
+(1, -1) & \theta = 45 \\
+(0, 1)  & \theta = 90 \\
+(1, 1)  & \theta = 135
+\end{cases}
+$$
+
+Copy the window into `tmp_4`; then if \\(b_6 \ge b_{6-n}\\) **and** \\(b_6 \ge b_{6+n}\\), set \\(\text{tmp\_4}[6-n] = \text{tmp\_4}[6+n] = 0\\); otherwise set \\(\text{tmp\_4}[6] = 0\\).
 
 ## 2.5 Hysteresis Image
-Image 5 is the final binary edge map, produced by double-threshold hysteresis on the NMS magnitude (`buf_x`) using a high and a low threshold (`THRESHOLD_UPPER = 10`, `THRESHOLD_LOWER = 3`):
+Final edge map from double thresholds `THRESHOLD_UPPER = 10` and `THRESHOLD_LOWER = 3`:
 
-- magnitude \\(\ge\\) high threshold → strong edge (`1`);
-- magnitude \\(\le\\) low threshold → discarded (`0`);
-- in between → a candidate, kept (`1`) only if it connects to an edge, else `0`.
+$$
+\text{tmp\_5} =
+\begin{cases}
+1 & b_6 \ge \text{UPPER} \\
+0 & b_6 \le \text{LOWER} \\
+c & \text{otherwise (candidate)}
+\end{cases}
+$$
 
-Connectivity is checked **along the edge** (perpendicular to the gradient): a candidate is kept if an along-edge neighbor is already strong, or is already marked as an edge in the running edge map `buf_z` (which holds Image 5 so far and is supplied by the testbench each pixel).
+A candidate is kept (\\(c = 1\\)) if an along-edge neighbor is already strong or already an edge, otherwise \\(c = 0\\):
 
-**States (`MODE_HYSTERESIS`):**
-- `state 0`: convert the direction code into the along-edge offset `(dx, dy)`.
-- `state 1`: apply the threshold-and-connectivity rule and store the 1-bit result in `tmp_5`.
+$$
+c = (b_{6-n} \ge \text{UPPER}) \ \text{or}\ (b_{6+n} \ge \text{UPPER}) \ \text{or}\ (z_{6-n} = 1) \ \text{or}\ (z_{6+n} = 1)
+$$
 
-The result is the final Canny edge map.
+The offset uses the **along-edge** direction (perpendicular to the gradient), \\(n = 5\,dy + dx\\) with \\((dx, dy) = (0,1), (1,1), (1,0), (1,-1)\\) for \\(\theta = 0, 45, 90, 135\\). `buf_z` (\\(z_i\\)) is the edge map computed so far, supplied by the testbench.
 
 ## 2.6 Implementation Requirements
 - Implement Canny edge detector in `canny_edge_detector.v`.
