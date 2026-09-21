@@ -188,9 +188,9 @@ In this lab, the ID of the devices are as follows:
 # 4. Submission
 Please submit a single PDF file containing the following:
 
-Top module RTL design:
-1. Screenshot of the terminal output after running `./simv_top_tb`.
-2. Justification of the simulation results.
-3. Screenshots or copy of the content of the following files:
-    - `system_bus_uart_tx_wrapper.v`
-    - `system_bus_sram_wrapper.v`
+- Top module RTL design:
+    1. Screenshot of the terminal output after running `./simv_top_tb`.
+    2. Justification of the simulation results.
+    3. Screenshots or copy of the content of the following files:
+        - `system_bus_uart_tx_wrapper.v`
+        - `system_bus_sram_wrapper.v`

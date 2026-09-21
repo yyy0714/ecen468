@@ -203,14 +203,14 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 # 4. Submission
 Please submit a single PDF file containing the following:
 
-UART transmitter RTL design:
-1. Screenshot of the waveforms of `uart_tx_tb`.
-2. Justification of the simulation results.
-3. Screenshots or copy of the content of the following files:
-  - `uart_tx.v`
-  - `uart_tx_controller.v`
-  - `uart_tx_datapath.v`.
+- UART transmitter RTL design:
+    1. Screenshot of the waveforms of `uart_tx_tb`.
+    2. Justification of the simulation results.
+    3. Screenshots or copy of the content of the following files:
+        - `uart_tx.v`
+        - `uart_tx_controller.v`
+        - `uart_tx_datapath.v`.
 
-UART transmitter gate-level design:
-1. Screenshot of the waveforms of `uart_tx_netlist_tb`.
-2. Justification of the simulation results.
+- UART transmitter gate-level design:
+    1. Screenshot of the waveforms of `uart_tx_netlist_tb`.
+    2. Justification of the simulation results.

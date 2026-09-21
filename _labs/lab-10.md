@@ -30,7 +30,7 @@ Figure 2 shows the system that you will implement in this lab.
 *Figure 2. System Overview (clock and reset signals are ommited)*
 
 ## 2.1 Blurred Image
-Image 1 is obtained by applying a \(5 \times 5\) Gaussian filter (`gf`) to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
+Image 1 is obtained by applying a \\(5 \times 5\\) Gaussian filter (`gf`) to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
 
 Conceptually,
 
@@ -38,10 +38,10 @@ $$
 I_1(x,y) = G(x,y) * I_0(x,y)
 $$
 
-where \(G\) is the Gaussian kernel and \(*\) denotes convolution.
+where \\(G\\) is the Gaussian kernel and \\(*\\) denotes convolution.
 
 ## 2.2 Gradient Image
-Image 2 is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two \(3 \times 3\) Sobel filters (`sobel_x` and `sobel_y`) to obtain
+Image 2 is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two \\(3 \times 3\\) Sobel filters (`sobel_x` and `sobel_y`) to obtain
 
 $$
 G_x = S_x * I_1 \qquad
@@ -124,55 +124,16 @@ This stage removes isolated weak responses while preserving meaningful, continuo
 2. Execute the following command to run the simulation.
     - `./simv_canny_edge_detector_tb`
 
-3. Take a screenshot of the terminal outputs of the simulation.
-
-## 3.2 [Optional] Synthesizing Canny Edge Detector RTL Design Using Synopsys Design Vision
-1. Execute the following commands in sequence to open Design Vision:
-    - `source /opt/coe/synopsys/syn/V-2023.12-SP1/setup.syn.sh`
-    - `cd $HOME/ecen468/lab10/syn`
-    - `design_vision &`
-
-2. Execute the following commands to set up Design Vision.
-    - `set_app_var link_path ../lib/osu018_stdcells.db`
-    - `set_app_var target_library ../lib/osu018_stdcells.db`
-    - `set_app_var symbol_library ../lib/osu018_stdcells.db`
-
-3. Execute the following command to analyze the design.
-    - `analyze -format verilog {../rtl/canny_edge_detector.v}`
-
-4. Execute the following command to elaborate the design.
-    - `elaborate canny_edge_detector`
-
-5. Execute the following command to synthesize the design.
-    - `compile -exact_map`
-
-6. Execute the following command to save the optimized netlist.
-    - `write -hierarchy -format verilog -output ./netlist/canny_edge_detector.v`
-
-7. Execute the following command to save the Standard Delay Format (SDF) file.
-    - `write_sdf ./sdf/canny_edge_detector.sdf`
-
-8. Exit Design Vision.
-
-## 3.3 [Optional] Simulating Canny Edge Detector Gate-Level Design Using Synopsys VCS
-1. Execute the following commands in sequence to generate simulation.
-    - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
-    - `cd $HOME/ecen468/lab09/sim`
-    - `vcs -full64 ../tb/top_netlist_tb.v -o simv_top_netlist_tb`
-
-2. Execute the following command to run the simulation.
-    - `./simv_top_netlist_tb`
-
-3. Take a screenshot of the terminal outputs of the simulation.
+3. Execute the following command to compare the generated images with the reference images.
+    - `python compare.py`
 
 ---
 
 # 4. Submission
 Please submit a single PDF file containing the following:
 
-Canny edge detector RTL design:
-1. Screenshot of the terminal output after running `./simv_canny_edge_detector_tb`.
-2. Justification of the simulation results.
-3. Screenshots or copy of the content of the following files:
-    - `system_bus_uart_tx_wrapper.v`
-    - `system_bus_sram_wrapper.v`
+- Canny edge detector RTL design:
+    1. Screenshot of the terminal output after running `./simv_canny_edge_detector_tb`.
+    2. Screenshots or copy of the content of the following files:
+        - `canny_edge_detector.v`
+        - `system_bus_canny_edge_detector_wrapper.v`
