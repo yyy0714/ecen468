@@ -81,8 +81,8 @@ The expected behavior of the UART transmitter when transmitting `0xA7` is shown 
 *Figure 1. An Example of UART Transmission*
 
 ## 2.4 Implementation Requirements
-- Implement UART transimitter controller module in `uart_tx_controller.v`.
-- Implement UART transmitter datapath modeule in `uart_tx_datapath.v`.
+- Implement UART transimitter controller in `uart_tx_controller.v`.
+- Implement UART transmitter datapath in `uart_tx_datapath.v`.
 - Implement UART transmitter top module in `uart_tx.v`
 
 ---

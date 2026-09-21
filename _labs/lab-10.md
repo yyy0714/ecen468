@@ -79,7 +79,7 @@ Image 5 is the final edge image produced by double-threshold hysteresis. The NMS
 This stage removes isolated weak responses while preserving meaningful, continuous edges. The resulting Image 5 is the final Canny edge map.
 
 ## 2.6 Implementation Requirements
-- Implement Canny edge detector module in `canny_edge_detector.v`.
+- Implement Canny edge detector in `canny_edge_detector.v`.
 - Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector_wrapper.v`.
 
 ---
@@ -115,7 +115,7 @@ This stage removes isolated weak responses while preserving meaningful, continuo
 5. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-## 3.1 Simulating System Bus RTL Design Using Synopsys VCS
+## 3.1 Simulating Canny Edge Detector RTL Design Using Synopsys VCS
 1. Execute the following commands in sequence to generate simulation.
     - `source /opt/coe/synopsys/vcs/W-2024.09-SP2-4/setup.vcs.sh`
     - `cd $HOME/ecen468/lab10/sim`
