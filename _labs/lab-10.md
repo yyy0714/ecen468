@@ -9,29 +9,32 @@ downloads:
 ---
 
 # 1. Objectives
-- Complete RTL design of a canny edge detector in Verilog.
+- Complete RTL design of a Canny edge detector in Verilog.
 - Simulate the RTL design.
-- Synthesize the RTL design and generate gate-level design.
-- Simulate the gate-level design.
 
 ---
 
 # 2. Introduction
 
-Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a $200 \times 200$ grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \(200 \times 200\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+
+![System Overview]({{ "/assets/files/lab10/img/system_overview.png" | relative_url }}){: style="zoom: 0.6;" }
+
+*Figure 1. System Overview (clock and reset signals are ommited)*
 
 ## 2.1 Blurred Image
-Image 1 is obtained by applying a $5 \times 5$ Gaussian filter to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
+Image 1 is obtained by applying a \(5 \times 5\) Gaussian filter (`gf`) to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
+
 Conceptually,
 
 $$
 I_1(x,y) = G(x,y) * I_0(x,y)
 $$
 
-where $G$ is the Gaussian kernel and $*$ denotes convolution.
+where \(G\) is the Gaussian kernel and \(*\) denotes convolution.
 
 ## 2.2 Gradient Image
-Image 2 is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two $3 \times 3$ Sobel filters, `sobel_x` and `sobel_y`, to obtain
+Image 2 is generated from the blurred image by calculating the image-intensity gradients in the horizontal and vertical directions. The design uses two \(3 \times 3\) Sobel filters (`sobel_x` and `sobel_y`) to obtain
 
 $$
 G_x = S_x * I_1 \qquad
@@ -47,7 +50,7 @@ $$
 Pixels with large gradient magnitude are therefore potential edge pixels.
 
 ## 2.3 Direction Image
-Image 3** represents the gradient direction at each pixel. It is calculated from the horizontal and vertical gradient components using
+Image 3 represents the gradient direction at each pixel. It is calculated from the horizontal and vertical gradient components using
 
 $$
 \theta = \operatorname{atan2}(G_y, G_x)
