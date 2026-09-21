@@ -16,7 +16,7 @@ report_due: 'Week 12 (Nov 9 – Nov 13)'
 
 # 2. Introduction
 
-Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \(200 \times 200\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \\(200 \times 200\\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
 
 ![System Overview]({{ "/assets/files/lab10/img/system_overview.png" | relative_url }}){: style="zoom: 0.6;" }
 
