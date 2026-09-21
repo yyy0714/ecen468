@@ -15,12 +15,19 @@ report_due: 'Week 12 (Nov 9 – Nov 13)'
 ---
 
 # 2. Introduction
+Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \\(200 \times 200\\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench.
 
-Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \\(200 \times 200\\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench. The overall image-processing flow is shown in figure 1.
+Figure 1 shows the overall image-processing flow.
+
+![Canny Edge Detector Workflow]({{ "/assets/files/lab10/img/workflow.png" | relative_url }}){: style="zoom: 0.6;" }
+
+*Figure 1. Canny Edge Detector Workflow*
+
+Figure 2 shows the system that you will implement in this lab.
 
 ![System Overview]({{ "/assets/files/lab10/img/system_overview.png" | relative_url }}){: style="zoom: 0.6;" }
 
-*Figure 1. System Overview (clock and reset signals are ommited)*
+*Figure 2. System Overview (clock and reset signals are ommited)*
 
 ## 2.1 Blurred Image
 Image 1 is obtained by applying a \(5 \times 5\) Gaussian filter (`gf`) to the original image. The purpose of this stage is to reduce high-frequency noise and small intensity variations that could otherwise generate false edges in later stages.
@@ -70,6 +77,10 @@ Image 5 is the final edge image produced by double-threshold hysteresis. The NMS
 - Pixels between the two thresholds are classified as weak edges and are retained when they are connected to strong edges.
 
 This stage removes isolated weak responses while preserving meaningful, continuous edges. The resulting Image 5 is the final Canny edge map.
+
+## 2.6 Implementation Requirements
+- Implement Canny edge detector module in `canny_edge_detector.v`.
+- Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector_wrapper.v`.
 
 ---
 
