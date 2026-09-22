@@ -84,7 +84,7 @@ $$
 
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following two steps:
 
-$$
+<!-- $$
 \begin{multline}
 \texttt{if}\ G_y < 0: \\
     \quad G_x = -G_x \\
@@ -110,7 +110,18 @@ $$
     \quad \texttt{if} -2.5G_x < G_y \\
         \quad \quad \theta = 90
 \end{multline}
-$$
+$$ -->
+
+
+| \\(G_x\\) Condition | Slope Threshold Formula | Resulting Sector |
+| :--- | :--- | :---: |
+| **\\(G_x \ge 0\\)** | \\(G_y \le 0.5 \cdot G_x\\) | **\\(0^\circ\\)** |
+| | \(0.5 \cdot G_x < G_y \le 2.5 \cdot G_x\\) | **\\(45^\circ\\)** |
+| | \\(G_y > 2.5 \cdot G_x\\) | **\\(90^\circ\\)** |
+| **\\(G_x < 0\\)** | \\(G_y \le -0.5 \cdot G_x\\) | **\\(0^\circ\\)** |
+| | \\(-0.5 \cdot G_x < G_y \le -2.5 \cdot G_x\\) | **\\(135^\circ\\)** |
+| | \\(G_y > -2.5 \cdot G_x\\) | **\\(90^\circ\\)** |
+
 
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
@@ -180,16 +191,16 @@ Where
 The final edge image \\(E_{\text{final}}(x,y)\\) can be obtained by
 
 $$
-E_{\text{final}}(x, y) = 
-\begin{cases} 
-    1 & \text{if } E_{\text{final}}(x, y) = 0^\circ \text{ and } \big(E_{\text{pre}}(x, y-1) = \text{Strong} \lor E_{\text{pre}}(x, y+1) = \text{Strong}\big) \\ 
-    1 & \text{if } E_{\text{final}}(x, y) = 90^\circ \text{ and } \big(E_{\text{pre}}(x-1, y) = \text{Strong} \lor E_{\text{pre}}(x+1, y) = \text{Strong}\big) \\ 
-    1 & \text{if } E_{\text{final}}(x, y) = 45^\circ \text{ and } \big(E_{\text{pre}}(x-1, y+1) = \text{Strong} \lor E_{\text{pre}}(x+1, y-1) = \text{Strong}\big) \\ 
-    1 & \text{if } E_{\text{final}}(x, y) = 135^\circ \text{ and } \big(E_{\text{pre}}(x-1, y-1) = \text{Strong} \lor E_{\text{pre}}(x+1, y+1) = \text{Strong}\big) \\ 
-    0 & \text{otherwise} 
+E_{\text{final}}(x, y) = \begin{cases} 
+1 & \text{if } \alpha(x, y) = 0^\circ \text{ and } \big(E_{\text{pre}}(x, y-1) = \text{Strong} \lor E_{\text{pre}}(x, y+1) = \text{Strong}\big) \\ 
+1 & \text{if } \alpha(x, y) = 90^\circ \text{ and } \big(E_{\text{pre}}(x-1, y) = \text{Strong} \lor E_{\text{pre}}(x+1, y) = \text{Strong}\big) \\ 
+1 & \text{if } \alpha(x, y) = 45^\circ \text{ and } \big(E_{\text{pre}}(x-1, y+1) = \text{Strong} \lor E_{\text{pre}}(x+1, y-1) = \text{Strong}\big) \\ 
+1 & \text{if } \alpha(x, y) = 135^\circ \text{ and } \big(E_{\text{pre}}(x-1, y-1) = \text{Strong} \lor E_{\text{pre}}(x+1, y+1) = \text{Strong}\big) \\ 
+0 & \text{otherwise} 
 \end{cases}
-
 $$
+
+Where \\(\alpha = \theta + 90^\circ\\)
 
 ## 3. Implementation
 The block diagram of a Canny edge detector and testbench is shown in figure 2. 
