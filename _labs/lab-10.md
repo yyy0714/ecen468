@@ -90,21 +90,21 @@ $$
 $$
 
 $$
-\texttt{if} G_x \geq 0:
-    \texttt{if} G_y \leq 0.5G_x:
-        \theta = 0
-    \texttt{elif} 0.5G_x < G_y \leq 2.5G_x:
-        \theta = 45
-    \texttt{elif} 2.5G_x < G_y:
-        \theta = 90
+\texttt{if}\ G_x \geq 0: \\
+    \quad \texttt{if} G_y \leq 0.5G_x: \\
+        \quad \quad \theta = 0 \\
+    \quad \texttt{elif} 0.5G_x < G_y \leq 2.5G_x: \\
+        \quad \quad \theta = 45 \\
+    \quad \texttt{elif}\ 2.5G_x < G_y: \\
+        \quad \quad \theta = 90 \\
 
-\texttt{if} G_x < 0:
-    \texttt{if} G_y \leq -0.5G_x:
-        \theta = 0
-    \texttt{elif} -0.5G_x < G_y \leq -2.5G_x:
-        \theta = 135
-    \texttt{if} -2.5G_x < G_y:
-        \theta = 90
+\texttt{if}\ G_x < 0: \\
+    \quad \texttt{if} G_y \leq -0.5G_x: \\
+        \quad \quad \theta = 0 \\
+    \quad \texttt{elif} -0.5G_x < G_y \leq -2.5G_x: \\
+        \quad \quad \theta = 135 \\
+    \quad \texttt{if} -2.5G_x < G_y: \\
+        \quad \quad \theta = 90 \\
 $$
 
 ### 2.5 Non-Maximum Suppression
