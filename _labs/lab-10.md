@@ -90,16 +90,6 @@ $$
 $$
 
 $$
-\texttt{if} G_x \geq 0 \texttt{and} G_y \leq 0.5G_x:
-    \theta = 0
-
-\texttt{elif} G_x < 0 \texttt{and} G_y \leq -0.5G_x:
-    \theta = 0
-
-
-\texttt{elif} -0.5G_x < G_y \leq -2.5G_x:
-    \theta = 135
-
 \texttt{if} G_x \geq 0:
     \texttt{if} G_y \leq 0.5G_x:
         \theta = 0
