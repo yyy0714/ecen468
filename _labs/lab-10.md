@@ -62,20 +62,20 @@ G_x = I * S_x, \quad G_y = I * G_y
 $$
 
 #### 2.4.1 Gradient Magnitude Calculation
-The gradient magnitude \(|G|\) can be calculated by
+The gradient magnitude image \(M\) can be obtained by
 
 $$
-|G| = \sqrt{G_x^2 + G_y^2}
+M = \sqrt{G_x^2 + G_y^2}
 $$
 
 In this lab, the following approximation will be used for faster calculation:
 
 $$
-|G| = \frac{|G_x| + |G_y|}{8}
+M = \frac{|G_x| + |G_y|}{8}
 $$
 
 #### 2.4.2 Gradient Direction Calculation
-The gradient direction \(\theta\) can be calculated by
+The gradient direction image \(\theta\) can be obtained by
 
 $$
 \theta = \operatorname{arctan2}(G_y, G_x)
@@ -111,6 +111,48 @@ $$
 
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
+
+The NMS image \(N(x,y)\) can be calcualted using the gradient magnitude image \(M(x,y)\) and gradient direction image \(\theta\):
+
+For \(\theta(x,y) = 0\):
+
+$$
+N(x,y) = 
+\begin{cases} 
+M(x,y) & \text{if } M(x,y) \geq M(x+1, y) \text{ and } M(x,y) \geq M(x-1, y) \\ 
+0 & \text{otherwise} 
+\end{cases}
+$$
+
+For \(\theta(x,y) = 45\):
+
+$$
+N(x,y) = 
+\begin{cases} 
+M(x,y) & \text{if } M(x,y) \geq M(x+1, y+1) \text{ and } M(x,y) \geq M(x-1, y-1) \\ 
+0 & \text{otherwise} 
+\end{cases}
+$$
+
+For \(\theta(x,y) = 90\):
+
+$$
+N(x,y) = 
+\begin{cases} 
+M(x,y) & \text{if } M(x,y) \geq M(x, y+1) \text{ and } M(x,y) \geq M(x, y-1) \\ 
+0 & \text{otherwise} 
+\end{cases}
+$$
+
+For \(\theta(x,y) = 90\):
+
+$$
+N(x,y) = 
+\begin{cases} 
+M(x,y) & \text{if } M(x,y) \geq M(x-1, y+1) \text{ and } M(x,y) \geq M(x+1, y-1) \\ 
+0 & \text{otherwise} 
+\end{cases}
+$$
 
 
 ### 2.6 Hysteresis Thresholding
