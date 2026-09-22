@@ -35,7 +35,7 @@ In the equations below, \\(b_i\\) denotes `buf_x[i]` and \\(z_i\\) denotes `buf_
 This stage blurs the input image to suppress noise, preventing small intensity fluctuations from being mistaken for edges in later stages. It is computed as a \\(5 \times 5\\) Gaussian smoothing with the kernel `gf`, whose weights sum to 128 (so the division becomes a right shift by 7):
 
 $$
-\text{tmp\_1} = \left( \sum_{i=0}^{24} b_i \cdot \text{gf}[i] \right) \gg 7
+\texttt{tmp_1} = \left( \sum_{i=0}^{24} b_i \cdot \texttt{gf}[i] \right) \gg 7
 $$
 
 ## 2.2 Gradient Image
@@ -50,18 +50,18 @@ G_y = (b_0 + 2b_1 + b_2) - (b_{10} + 2b_{11} + b_{12})
 $$
 
 $$
-\text{tmp\_2} = \big(|G_x| + |G_y|\big) \gg 3
+\texttt{tmp_2} = \frac{\big(|G_x| + |G_y|\big)}{8}
 $$
 
 ## 2.3 Direction Image
 This stage determines the orientation of each edge — the direction of steepest brightness change — which the next stage needs in order to compare each pixel against the correct neighbors. The gradient angle \\(\theta = \operatorname{atan2}(G_y, G_x)\\) is quantized into four codes. Because orientation repeats every 180°, the gradient is first folded so that \\(G_y \ge 0\\): if \\(G_y < 0\\), it is replaced by \\((-G_x, -G_y)\\). The folded \\(G_x\\) and \\(G_y\\) then give:
 
 $$
-\text{tmp\_3} =
+\texttt{tmp_3} =
 \begin{cases}
-0   & |G_y| \le |G_x|/2 \\
-45  & G_x \ge 0 \ \text{and}\ |G_y| \le 5|G_x|/2 \\
-135 & G_x < 0 \ \text{and}\ |G_y| \le 5|G_x|/2 \\
+0   & |G_y| \le \frac{1}{2}|G_x| \\
+45  & G_x \ge 0 \ \text{and}\ |G_y| \le \frac{5}{2}|G_x| \\
+135 & G_x < 0 \ \text{and}\ |G_y| \le \frac{5}{2}|G_x| \\
 90  & \text{otherwise}
 \end{cases}
 $$
@@ -81,7 +81,7 @@ $$
 \end{cases}
 $$
 
-The window is copied into `tmp_4`. If \\(b_6 \ge b_{6-n}\\) and \\(b_6 \ge b_{6+n}\\), the two neighbors \\(\text{tmp\_4}[6-n]\\) and \\(\text{tmp\_4}[6+n]\\) are cleared to 0; otherwise the center \\(\text{tmp\_4}[6]\\) is cleared to 0.
+The window is copied into `tmp_4`. If \\(b_6 \ge b_{6-n}\\) and \\(b_6 \ge b_{6+n}\\), the two neighbors `tmp_4[6-n]` and `tmp_4[6+n]` are cleared to 0; otherwise the center `tmp_4[6]` is cleared to 0.
 
 ## 2.5 Hysteresis Image
 This stage produces the final binary edge map: it keeps strong pixels as edges, discards very weak pixels, and keeps in-between pixels only when they connect to a strong edge. Two thresholds are used, `THRESHOLD_UPPER = 10` and `THRESHOLD_LOWER = 3`:
