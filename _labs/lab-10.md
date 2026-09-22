@@ -84,12 +84,13 @@ $$
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \(0\degree\), \(45\degree\), \(90\degree\), or \(135\degree\) using the following two steps:
 
 $$
-\texttt{if} G_y < 0:
-    G_x = -G_x
-    G_y = -G_y
+\texttt{if}\ G_y < 0: \\
+    \quad G_x = -G_x \\
+    \quad G_y = -G_y
 $$
 
 $$
+\begin{align*}
 \texttt{if}\ G_x \geq 0: \\
     \quad \texttt{if} G_y \leq 0.5G_x: \\
         \quad \quad \theta = 0 \\
@@ -104,10 +105,12 @@ $$
     \quad \texttt{elif} -0.5G_x < G_y \leq -2.5G_x: \\
         \quad \quad \theta = 135 \\
     \quad \texttt{if} -2.5G_x < G_y: \\
-        \quad \quad \theta = 90 \\
+        \quad \quad \theta = 90
+\end{align*}
 $$
 
 ### 2.5 Non-Maximum Suppression
+The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
 
 
 ### 2.6 Hysteresis Thresholding
