@@ -59,9 +59,9 @@ This stage determines the orientation of each edge — the direction of steepest
 $$
 \texttt{tmp_3} =
 \begin{cases}
-0   & |G_y| \le \frac{1}{2}|G_x| \\
-45  & G_x \ge 0 \ \text{and}\ |G_y| \le \frac{5}{2}|G_x| \\
-135 & G_x < 0 \ \text{and}\ |G_y| \le \frac{5}{2}|G_x| \\
+0   & |G_y| \le \dfrac{1}{2}|G_x| \\
+45  & G_x \ge 0 \ \text{and}\ |G_y| \le \dfrac{5}{2}|G_x| \\
+135 & G_x < 0 \ \text{and}\ |G_y| \le \dfrac{5}{2}|G_x| \\
 90  & \text{otherwise}
 \end{cases}
 $$
@@ -87,7 +87,7 @@ The window is copied into `tmp_4`. If \\(b_6 \ge b_{6-n}\\) and \\(b_6 \ge b_{6+
 This stage produces the final binary edge map: it keeps strong pixels as edges, discards very weak pixels, and keeps in-between pixels only when they connect to a strong edge. Two thresholds are used, `THRESHOLD_UPPER = 10` and `THRESHOLD_LOWER = 3`:
 
 $$
-\text{tmp\_5} =
+\texttt{tmp_5} =
 \begin{cases}
 1 & b_6 \ge \text{UPPER} \\
 0 & b_6 \le \text{LOWER} \\
