@@ -82,7 +82,7 @@ $$
 \theta = \operatorname{arctan2}(G_y, G_x)
 $$
 
-In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0\degree\\), \\(45\degree\\), \\(90\degree\\), or \\(135\degree\\) using the following two steps:
+In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following two steps:
 
 $$
 \begin{multline}
