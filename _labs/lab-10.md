@@ -85,13 +85,15 @@ $$
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0\degree\\), \\(45\degree\\), \\(90\degree\\), or \\(135\degree\\) using the following two steps:
 
 $$
+\begin{multline}
 \texttt{if}\ G_y < 0: \\
     \quad G_x = -G_x \\
     \quad G_y = -G_y
+\end{multline}
 $$
 
 $$
-\begin{align*}
+\begin{multline}
 \texttt{if}\ G_x \geq 0 \\
     \quad \texttt{if} G_y \leq 0.5G_x \\
         \quad \quad \theta = 0 \\
@@ -107,7 +109,7 @@ $$
         \quad \quad \theta = 135 \\
     \quad \texttt{if} -2.5G_x < G_y \\
         \quad \quad \theta = 90
-\end{align*}
+\end{multline}
 $$
 
 ### 2.5 Non-Maximum Suppression
@@ -165,8 +167,8 @@ $$
 E_{\text{pre}}(x,y) = 
 \begin{cases} 
     \text{Strong} & \text{if } N(x,y) \geq T_{\text{high}} \\ 
-    \text{Weak} & \text{if } T_{\text{low}} \leq N(x,y) < T_{\text{high}} \\ 
-    0 & \text{if } N(x,y) < T_{\text{low}} 
+    \text{Weak} & \text{if } T_{\text{low}} < N(x,y) < T_{\text{high}} \\ 
+    0 & \text{if } N(x,y) \leq T_{\text{low}} 
 \end{cases}
 $$
 
