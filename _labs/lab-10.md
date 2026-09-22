@@ -109,8 +109,8 @@ $$
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following logic:
 
 
-|      |      |       |
-| :--- | :--- | :---: |
+| \\(G_x\\) Condition | Slope Threshold Formula           | Resulting Direction |
+| :------------------ | :-------------------------------- | :-----------------: |
 | **\\(G_x \ge 0\\)** | \\(G_y \le 0.5 G_x\\)             | **\\(0^\circ\\)**   |
 |                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | **\\(45^\circ\\)**  |
 |                     | \\(G_y > 2.5 G_x\\)               | **\\(90^\circ\\)**  |
