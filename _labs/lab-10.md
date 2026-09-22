@@ -118,7 +118,6 @@ In this lab, the exact continuous angle will be rounded to the nearest of four s
 |                     | \\(-0.5 G_x < G_y \le -2.5 G_x\\) | **\\(135^\circ\\)** |
 |                     | \\(G_y > -2.5 G_x\\)              | **\\(90^\circ\\)**  |
 
-
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
 
