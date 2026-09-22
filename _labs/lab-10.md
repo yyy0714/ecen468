@@ -27,7 +27,7 @@ The processing steps of the Canny edge detector is shown in figure 1. Each proce
 4. Hysteresis Thresholding
 
 ### 2.3 Noise Reduction
-The purpose of this step is to smooth the original image using a 2D Gaussian filter (\(GF\)). This is achieve by convolving the original image with the Gaussian filter:
+The purpose of this step is to smooth the original image using a 2D Gaussian filter \(GF\). This is achieve by convolving the original image with the Gaussian filter:
 
 $$
 I(x,y) = f(x,y) * GF(x,y)
@@ -55,14 +55,14 @@ $$
 ### 2.4 Gradient Calculation
 The purpose of gradient calculation is to measure the **magnitude** and **direction** of pixel intensity changes across the image to locate potential edge boundaries.
 
-The horizontal gradient (\(G_x\)) and vertical gradient (\(G_y\)) can be calculated by convolving the smoothed image (\(I(x,y)\)) with two Sobel kernels (\(S_x\) and \(S_y\)):
+The horizontal gradient \(G_x\) and vertical gradient \(G_y\) can be calculated by convolving the smoothed image \(I(x,y)\) with two Sobel kernels \(S_x\) and \(S_y\):
 
 $$
 G_x = I * S_x, \quad G_y = I * G_y
 $$
 
 #### 2.4.1 Gradient Magnitude Calculation
-The gradient magnitude (\(|G|\)) can be calculated by
+The gradient magnitude \(|G|\) can be calculated by
 
 $$
 |G| = \sqrt{G_x^2 + G_y^2}
@@ -71,11 +71,11 @@ $$
 In this lab, the following approximation will be used for faster calculation:
 
 $$
-|G| = |G_x| + |G_y|
+|G| = \frac{|G_x| + |G_y|}{8}
 $$
 
 #### 2.4.2 Gradient Direction Calculation
-The gradient direction (\(\theta\)) can be calculated by
+The gradient direction \(\theta\) can be calculated by
 
 $$
 \theta = \operatorname{arctan2}(G_y, G_x)
@@ -83,15 +83,47 @@ $$
 
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \(0\degree\), \(45\degree\), \(90\degree\), or \(135\degree\) using the following two steps:
 
-If \(G_y < 0\):
 $$
-G_x = -G_x \quad G_y = -G_y
+\texttt{if} G_y < 0:
+    G_x = -G_x
+    G_y = -G_y
+$$
+
+$$
+\texttt{if} G_x \geq 0 \texttt{and} G_y \leq 0.5G_x:
+    \theta = 0
+
+\texttt{elif} G_x < 0 \texttt{and} G_y \leq -0.5G_x:
+    \theta = 0
+
+
+\texttt{elif} -0.5G_x < G_y \leq -2.5G_x:
+    \theta = 135
+
+\texttt{if} G_x \geq 0:
+    \texttt{if} G_y \leq 0.5G_x:
+        \theta = 0
+    \texttt{elif} 0.5G_x < G_y \leq 2.5G_x:
+        \theta = 45
+    \texttt{elif} 2.5G_x < G_y:
+        \theta = 90
+
+\texttt{if} G_x < 0:
+    \texttt{if} G_y \leq -0.5G_x:
+        \theta = 0
+    \texttt{elif} -0.5G_x < G_y \leq -2.5G_x:
+        \theta = 135
+    \texttt{if} -2.5G_x < G_y:
+        \theta = 90
 $$
 
 ### 2.5 Non-Maximum Suppression
 
 
 ### 2.6 Hysteresis Thresholding
+
+## 3. Implementation
+The block diagram of a Canny edge detector and testbench is shown in figure 2. 
 
 Figure 1 shows the overall image-processing flow.
 
