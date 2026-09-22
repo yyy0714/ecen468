@@ -91,20 +91,20 @@ $$
 
 $$
 \begin{align*}
-\texttt{if}\ G_x \geq 0: \\
-    \quad \texttt{if} G_y \leq 0.5G_x: \\
+\texttt{if}\ G_x \geq 0 \\
+    \quad \texttt{if} G_y \leq 0.5G_x \\
         \quad \quad \theta = 0 \\
-    \quad \texttt{elif} 0.5G_x < G_y \leq 2.5G_x: \\
+    \quad \texttt{elif} 0.5G_x < G_y \leq 2.5G_x \\
         \quad \quad \theta = 45 \\
-    \quad \texttt{elif}\ 2.5G_x < G_y: \\
+    \quad \texttt{elif}\ 2.5G_x < G_y \\
         \quad \quad \theta = 90 \\
 
-\texttt{if}\ G_x < 0: \\
-    \quad \texttt{if} G_y \leq -0.5G_x: \\
+\texttt{if}\ G_x < 0 \\
+    \quad \texttt{if} G_y \leq -0.5G_x \\
         \quad \quad \theta = 0 \\
-    \quad \texttt{elif} -0.5G_x < G_y \leq -2.5G_x: \\
+    \quad \texttt{elif} -0.5G_x < G_y \leq -2.5G_x \\
         \quad \quad \theta = 135 \\
-    \quad \texttt{if} -2.5G_x < G_y: \\
+    \quad \texttt{if} -2.5G_x < G_y \\
         \quad \quad \theta = 90
 \end{align*}
 $$
