@@ -45,11 +45,11 @@ $$
 GF(x,y) = 
 \frac{1}{128}
 \begin{bmatrix}
-1 & 3 & 4 & 3 & 1 \\
-3 & 7 & 10 & 7 & 3 \\
-4 & 10 & 16 & 10 & 4 \\
-3 & 7 & 10 & 7 & 3 \\
-1 & 3 & 4 & 3 & 1
+    1 & 3 & 4 & 3 & 1 \\
+    3 & 7 & 10 & 7 & 3 \\
+    4 & 10 & 16 & 10 & 4 \\
+    3 & 7 & 10 & 7 & 3 \\
+    1 & 3 & 4 & 3 & 1
 \end{bmatrix}
 $$
 
@@ -120,8 +120,8 @@ For \\(\theta(x,y) = 0\\):
 $$
 N(x,y) = 
 \begin{cases} 
-M(x,y) & \text{if } M(x,y) \geq M(x+1, y) \text{ and } M(x,y) \geq M(x-1, y) \\ 
-0 & \text{otherwise} 
+    M(x,y) & \text{if } M(x,y) \geq M(x+1, y) \text{ and } M(x,y) \geq M(x-1, y) \\ 
+    0 & \text{otherwise}
 \end{cases}
 $$
 
@@ -130,8 +130,8 @@ For \\(\theta(x,y) = 45\\):
 $$
 N(x,y) = 
 \begin{cases} 
-M(x,y) & \text{if } M(x,y) \geq M(x+1, y+1) \text{ and } M(x,y) \geq M(x-1, y-1) \\ 
-0 & \text{otherwise} 
+    M(x,y) & \text{if } M(x,y) \geq M(x+1, y+1) \text{ and } M(x,y) \geq M(x-1, y-1) \\ 
+    0 & \text{otherwise}
 \end{cases}
 $$
 
@@ -140,8 +140,8 @@ For \\(\theta(x,y) = 90\\):
 $$
 N(x,y) = 
 \begin{cases} 
-M(x,y) & \text{if } M(x,y) \geq M(x, y+1) \text{ and } M(x,y) \geq M(x, y-1) \\ 
-0 & \text{otherwise} 
+    M(x,y) & \text{if } M(x,y) \geq M(x, y+1) \text{ and } M(x,y) \geq M(x, y-1) \\ 
+    0 & \text{otherwise}
 \end{cases}
 $$
 
@@ -150,13 +150,13 @@ For \\(\theta(x,y) = 135\\):
 $$
 N(x,y) = 
 \begin{cases} 
-M(x,y) & \text{if } M(x,y) \geq M(x-1, y+1) \text{ and } M(x,y) \geq M(x+1, y-1) \\ 
-0 & \text{otherwise} 
+    M(x,y) & \text{if } M(x,y) \geq M(x-1, y+1) \text{ and } M(x,y) \geq M(x+1, y-1) \\ 
+    0 & \text{otherwise}
 \end{cases}
 $$
 
 ### 2.6 Hysteresis Thresholding
-The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values (double thresholding) and resolving the "weak" pixels by looking at their 8-connected neighborhood (hysteresis tracking).
+The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values \\(T_{\text{low}}\\) and \\(T_{\text{high}}\\) (**double thresholding**) and resolving the "weak" pixels by looking at their 8-connected neighborhood \\(\mathcal{N}_8(x,y)\\) (**hysteresis tracking**).
 
 #### 2.6.1 Double Thresholding
 A preliminary edge image \\(E_{\text{pre}}(x,y)\\) can be obtained by
@@ -164,18 +164,27 @@ A preliminary edge image \\(E_{\text{pre}}(x,y)\\) can be obtained by
 $$
 E_{\text{pre}}(x,y) = 
 \begin{cases} 
-\text{Strong} & \text{if } N(x,y) \geq T_{\text{high}} \\ 
-\text{Weak} & \text{if } T_{\text{low}} \leq N(x,y) < T_{\text{high}} \\ 
-0 & \text{if } N(x,y) < T_{\text{low}} 
+    \text{Strong} & \text{if } N(x,y) \geq T_{\text{high}} \\ 
+    \text{Weak} & \text{if } T_{\text{low}} \leq N(x,y) < T_{\text{high}} \\ 
+    0 & \text{if } N(x,y) < T_{\text{low}} 
 \end{cases}
-
 $$
 
 Where
-- \\(T_{\text{high}\\) denotes the high threshold
-- \\(T_{\text{low}\\) denotes the low threshold
+- \\(T_{\text{high}}\\) denotes the high threshold
+- \\(T_{\text{low}}\\) denotes the low threshold
 
 #### 2.6.2 Hysteresis Tracking
+The final edge image \\(E_{\text{final}}(x,y)\\) can be obtained by
+
+$$
+E_{\text{final}}(x,y) = 
+\begin{cases} 
+    1 & \text{if } E_{\text{pre}}(x,y) = \text{Strong} \\ 
+    1 & \text{if } E_{\text{pre}}(x,y) = \text{Weak and } \exists(i,j) \in \mathcal{N}_8(x,y) \text{ s.t. } E_{\text{final}}(i,j) = 1 \\ 
+    0 & \text{otherwise}
+\end{cases}
+$$
 
 ## 3. Implementation
 The block diagram of a Canny edge detector and testbench is shown in figure 2. 
@@ -237,10 +246,10 @@ This stage thins the thick gradient response into edges about one pixel wide, by
 $$
 (dx, dy) =
 \begin{cases}
-(1, 0)  & \theta = 0 \\
-(1, -1) & \theta = 45 \\
-(0, 1)  & \theta = 90 \\
-(1, 1)  & \theta = 135
+    (1, 0)  & \theta = 0 \\
+    (1, -1) & \theta = 45 \\
+    (0, 1)  & \theta = 90 \\
+    (1, 1)  & \theta = 135
 \end{cases}
 $$
 
@@ -252,9 +261,9 @@ This stage produces the final binary edge map: it keeps strong pixels as edges, 
 $$
 \texttt{tmp_5} =
 \begin{cases}
-1 & b_6 \ge \text{UPPER} \\
-0 & b_6 \le \text{LOWER} \\
-c & \text{otherwise (candidate)}
+    1 & b_6 \ge \text{UPPER} \\
+    0 & b_6 \le \text{LOWER} \\
+    c & \text{otherwise (candidate)}
 \end{cases}
 $$
 
