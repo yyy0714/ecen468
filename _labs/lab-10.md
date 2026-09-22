@@ -180,10 +180,10 @@ The final edge image \\(E_{\text{final}}(x,y)\\) can be obtained by
 $$
 E_{\text{final}}(x, y) = 
 \begin{cases} 
-    1 & \text{if } \alpha(x, y) = 0^\circ \text{ and } \big(E_{\text{pre}}(x, y-1) = \text{Strong} \lor E_{\text{pre}}(x, y+1) = \text{Strong}\big) \\ 
-    1 & \text{if } \alpha(x, y) = 90^\circ \text{ and } \big(E_{\text{pre}}(x-1, y) = \text{Strong} \lor E_{\text{pre}}(x+1, y) = \text{Strong}\big) \\ 
-    1 & \text{if } \alpha(x, y) = 45^\circ \text{ and } \big(E_{\text{pre}}(x-1, y+1) = \text{Strong} \lor E_{\text{pre}}(x+1, y-1) = \text{Strong}\big) \\ 
-    1 & \text{if } \alpha(x, y) = 135^\circ \text{ and } \big(E_{\text{pre}}(x-1, y-1) = \text{Strong} \lor E_{\text{pre}}(x+1, y+1) = \text{Strong}\big) \\ 
+    1 & \text{if } E_{\text{final}}(x, y) = 0^\circ \text{ and } \big(E_{\text{pre}}(x, y-1) = \text{Strong} \lor E_{\text{pre}}(x, y+1) = \text{Strong}\big) \\ 
+    1 & \text{if } E_{\text{final}}(x, y) = 90^\circ \text{ and } \big(E_{\text{pre}}(x-1, y) = \text{Strong} \lor E_{\text{pre}}(x+1, y) = \text{Strong}\big) \\ 
+    1 & \text{if } E_{\text{final}}(x, y) = 45^\circ \text{ and } \big(E_{\text{pre}}(x-1, y+1) = \text{Strong} \lor E_{\text{pre}}(x+1, y-1) = \text{Strong}\big) \\ 
+    1 & \text{if } E_{\text{final}}(x, y) = 135^\circ \text{ and } \big(E_{\text{pre}}(x-1, y-1) = \text{Strong} \lor E_{\text{pre}}(x+1, y+1) = \text{Strong}\big) \\ 
     0 & \text{otherwise} 
 \end{cases}
 
