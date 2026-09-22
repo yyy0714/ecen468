@@ -55,11 +55,13 @@ $$
 ### 2.4 Gradient Calculation
 The purpose of gradient calculation is to measure the **magnitude** and **direction** of pixel intensity changes across the image to locate potential edge boundaries.
 
-The horizontal gradient (\(G_x\)) and vertical gradient (\(G_y\)) can be calculated by
+The horizontal gradient (\(G_x\)) and vertical gradient (\(G_y\)) can be calculated by convolving the smoothed image (\(I(x,y)\)) with two Sobel kernels (\(S_x\) and \(S_y\)):
 
 $$
-G_x = \frac{\partial I}{\partial x}, \quad G_y = \frac{\partial I}{\partial y}
+G_x = I * S_x, \quad G_y = I * G_y
 $$
+
+
 
 #### 2.4.1 Gradient Magnitude Calculation
 The gradient magnitude (\(|G|\)) can be calculated by
@@ -68,7 +70,7 @@ $$
 |G| = \sqrt{G_x^2 + G_y^2}
 $$
 
-However, the following approximation will be used in this lab for faster calculation:
+In this lab, the following approximation will be used for faster calculation:
 
 $$
 |G| = |G_x| + |G_y|
@@ -78,8 +80,10 @@ $$
 The gradient direction (\(\theta\)) can be calculated by
 
 $$
+\theta = \operatorname{arctan2}(G_y, G_x)
 $$
 
+In this lab, the following approximation will be used for faster calculation
 
 Figure 1 shows the overall image-processing flow.
 
