@@ -156,7 +156,7 @@ N(x,y) =
 $$
 
 ### 2.6 Hysteresis Thresholding
-The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values \\(T_{\text{low}}\\) and \\(T_{\text{high}}\\) (**double thresholding**) and resolving the "weak" pixels by looking at their 8-connected neighborhood \\(\mathcal{N}_8(x,y)\\) (**hysteresis tracking**).
+The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values \\(T_{\text{low}}\\) and \\(T_{\text{high}}\\) (**double thresholding**) and resolving the "weak" pixels by checking their two neighbor pixels on their edge directions (**hysteresis tracking**).
 
 #### 2.6.1 Double Thresholding
 A preliminary edge image \\(E_{\text{pre}}(x,y)\\) can be obtained by
@@ -178,12 +178,15 @@ Where
 The final edge image \\(E_{\text{final}}(x,y)\\) can be obtained by
 
 $$
-E_{\text{final}}(x,y) = 
+E_{\text{final}}(x, y) = 
 \begin{cases} 
-    1 & \text{if } E_{\text{pre}}(x,y) = \text{Strong} \\ 
-    1 & \text{if } E_{\text{pre}}(x,y) = \text{Weak and } \exists(i,j) \in \mathcal{N}_8(x,y) \text{ s.t. } E_{\text{final}}(i,j) = 1 \\ 
-    0 & \text{otherwise}
+    1 & \text{if } \alpha(x, y) = 0^\circ \text{ and } \big(E_{\text{pre}}(x, y-1) = \text{Strong} \lor E_{\text{pre}}(x, y+1) = \text{Strong}\big) \\ 
+    1 & \text{if } \alpha(x, y) = 90^\circ \text{ and } \big(E_{\text{pre}}(x-1, y) = \text{Strong} \lor E_{\text{pre}}(x+1, y) = \text{Strong}\big) \\ 
+    1 & \text{if } \alpha(x, y) = 45^\circ \text{ and } \big(E_{\text{pre}}(x-1, y+1) = \text{Strong} \lor E_{\text{pre}}(x+1, y-1) = \text{Strong}\big) \\ 
+    1 & \text{if } \alpha(x, y) = 135^\circ \text{ and } \big(E_{\text{pre}}(x-1, y-1) = \text{Strong} \lor E_{\text{pre}}(x+1, y+1) = \text{Strong}\big) \\ 
+    0 & \text{otherwise} 
 \end{cases}
+
 $$
 
 ## 3. Implementation
