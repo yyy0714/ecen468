@@ -61,8 +61,6 @@ $$
 G_x = I * S_x, \quad G_y = I * G_y
 $$
 
-
-
 #### 2.4.1 Gradient Magnitude Calculation
 The gradient magnitude (\(|G|\)) can be calculated by
 
@@ -83,7 +81,11 @@ $$
 \theta = \operatorname{arctan2}(G_y, G_x)
 $$
 
-In this lab, the following approximation will be used for faster calculation
+In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \(0\degree\), \(45\degree\), \(90\degree\), or \(135\degree\) using the following two steps:
+
+$$
+\text{if} \quad G_y < 0: \quad G_x = -G_x, \quad G_y = -G_y
+$$
 
 Figure 1 shows the overall image-processing flow.
 
