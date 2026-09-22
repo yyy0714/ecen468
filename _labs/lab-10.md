@@ -27,21 +27,22 @@ The processing steps of the Canny edge detector is shown in figure 1. Each proce
 4. Hysteresis Thresholding
 
 ### 2.3 Noise Reduction
-The purpose of this step is to smooth the original image using a 2D Gaussian filter. This is achieve by convolving the original image with the Gaussian filter:
+The purpose of this step is to smooth the original image using a 2D Gaussian filter (\(GF\)). This is achieve by convolving the original image with the Gaussian filter:
 
 $$
-I(x,y) = f(x,y) * G(x,y)
+I(x,y) = f(x,y) * GF(x,y)
 $$
 
 Where
 - \(I(x,y)\) denotes the smoothed image
 - \(f(x,y)\) denotes the original image
-- \(G(x,y)\) denotes the Gaussian filter
+- \(GF(x,y)\) denotes the Gaussian filter
 
 In this lab, the Gaussian filter is
 
 $$
-G(x,y) = 
+GF(x,y) = 
+\frac{1}{128}
 \begin{bmatrix}
 1 & 3 & 4 & 3 & 1 \\
 3 & 7 & 10 & 7 & 3 \\
@@ -49,6 +50,34 @@ G(x,y) =
 3 & 7 & 10 & 7 & 3 \\
 1 & 3 & 4 & 3 & 1
 \end{bmatrix}
+$$
+
+### 2.4 Gradient Calculation
+The purpose of gradient calculation is to measure the **magnitude** and **direction** of pixel intensity changes across the image to locate potential edge boundaries.
+
+The horizontal gradient (\(G_x\)) and vertical gradient (\(G_y\)) can be calculated by
+
+$$
+G_x = \frac{\partial I}{\partial x}, \quad G_y = \frac{\partial I}{\partial y}
+$$
+
+#### 2.4.1 Gradient Magnitude Calculation
+The gradient magnitude (\(|G|\)) can be calculated by
+
+$$
+|G| = \sqrt{G_x^2 + G_y^2}
+$$
+
+However, the following approximation will be used in this lab for faster calculation:
+
+$$
+|G| = |G_x| + |G_y|
+$$
+
+#### 2.4.2 Gradient Direction Calculation
+The gradient direction (\(\theta\)) can be calculated by
+
+$$
 $$
 
 
