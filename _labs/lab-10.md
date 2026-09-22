@@ -83,9 +83,15 @@ $$
 
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \(0\degree\), \(45\degree\), \(90\degree\), or \(135\degree\) using the following two steps:
 
+If \(G_y < 0\):
 $$
-\text{if} \quad G_y < 0: \quad G_x = -G_x, \quad G_y = -G_y
+G_x = -G_x \quad G_y = -G_y
 $$
+
+### 2.5 Non-Maximum Suppression
+
+
+### 2.6 Hysteresis Thresholding
 
 Figure 1 shows the overall image-processing flow.
 
