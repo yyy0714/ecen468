@@ -9,6 +9,7 @@ report_due: 'Week 12 (Nov 9 – Nov 13)'
 ---
 
 ## 1. Objectives
+- Understand the mechanism of Canny edge detector.
 - Complete RTL design of a Canny edge detector in Verilog.
 - Simulate the RTL design.
 
@@ -154,8 +155,27 @@ M(x,y) & \text{if } M(x,y) \geq M(x-1, y+1) \text{ and } M(x,y) \geq M(x+1, y-1)
 \end{cases}
 $$
 
-
 ### 2.6 Hysteresis Thresholding
+The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values (double thresholding) and resolving the "weak" pixels by looking at their 8-connected neighborhood (hysteresis tracking).
+
+#### 2.6.1 Double Thresholding
+A preliminary edge image \\(E_{\text{pre}}(x,y)\\) can be obtained by
+
+$$
+E_{\text{pre}}(x,y) = 
+\begin{cases} 
+\text{Strong} & \text{if } N(x,y) \geq T_{\text{high}} \\ 
+\text{Weak} & \text{if } T_{\text{low}} \leq N(x,y) < T_{\text{high}} \\ 
+0 & \text{if } N(x,y) < T_{\text{low}} 
+\end{cases}
+
+$$
+
+Where
+- \\(T_{\text{high}\\) denotes the high threshold
+- \\(T_{\text{low}\\) denotes the low threshold
+
+#### 2.6.2 Hysteresis Tracking
 
 ## 3. Implementation
 The block diagram of a Canny edge detector and testbench is shown in figure 2. 
