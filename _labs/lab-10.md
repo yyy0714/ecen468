@@ -8,14 +8,49 @@ report_due: 'Week 12 (Nov 9 – Nov 13)'
 #     file: /assets/files/lab10/lab10_code.tar.gz
 ---
 
-# 1. Objectives
+## 1. Objectives
 - Complete RTL design of a Canny edge detector in Verilog.
 - Simulate the RTL design.
 
 ---
 
-# 2. Introduction
-Canny edge detection is a multi-stage image-processing algorithm that identifies object boundaries while reducing the effects of noise and weak intensity variations. In this lab, the input is a \\(200 \times 200\\) grayscale image (Image 0), and the successive processing stages generate intermediate images that can be stored and observed through the testbench.
+## 2. Canny Edge Detector
+
+### 2.1 Overview
+The Canny edge detector is a widely used edge detection algorithm in computer vision and image processing. Its purpose is to identify and extract the boundaries of objects within an image by detecting significant intensity changes, which correspond to edges.
+
+### 2.2 Processing Steps
+The processing steps of the Canny edge detector is shown in figure 1. Each processing step will be explained in details in the following sections.
+1. Noise Reduction
+2. Gradient Calculation
+3. Non-Maximum Suppression
+4. Hysteresis Thresholding
+
+### 2.3 Noise Reduction
+The purpose of this step is to smooth the original image using a 2D Gaussian filter. This is achieve by convolving the original image with the Gaussian filter:
+
+$$
+I(x,y) = f(x,y) * G(x,y)
+$$
+
+Where
+- \(I(x,y)\) denotes the smoothed image
+- \(f(x,y)\) denotes the original image
+- \(G(x,y)\) denotes the Gaussian filter
+
+In this lab, the Gaussian filter is
+
+$$
+G(x,y) = 
+\begin{bmatrix}
+1 & 3 & 4 & 3 & 1 \\
+3 & 7 & 10 & 7 & 3 \\
+4 & 10 & 16 & 10 & 4 \\
+3 & 7 & 10 & 7 & 3 \\
+1 & 3 & 4 & 3 & 1
+\end{bmatrix}
+$$
+
 
 Figure 1 shows the overall image-processing flow.
 
@@ -31,11 +66,11 @@ Figure 2 shows the system that you will implement in this lab.
 
 In the equations below, \\(b_i\\) denotes `buf_x[i]` and \\(z_i\\) denotes `buf_z[i]` (the pixel windows written in by the testbench), and `buf_y[6]` holds the direction code \\(\theta\\). Each stage writes the result register shown; the module spreads the arithmetic over a few clock cycles.
 
-## 2.1 Blurred Image
+### 2.3 Blurred Image
 This stage blurs the input image to suppress noise, preventing small intensity fluctuations from being mistaken for edges in later stages. It is computed as a \\(5 \times 5\\) Gaussian smoothing with the kernel `gf`, whose weights sum to 128 (so the division becomes a right shift by 7):
 
 $$
-\texttt{tmp_1} = \left( \sum_{i=0}^{24} b_i \cdot \texttt{gf}[i] \right) \gg 7
+\texttt{tmp_1} = \frac{\sum_{i=0}^{24} b_i \cdot \texttt{gf}[i]}{128}
 $$
 
 ## 2.2 Gradient Image
@@ -50,7 +85,7 @@ G_y = (b_0 + 2b_1 + b_2) - (b_{10} + 2b_{11} + b_{12})
 $$
 
 $$
-\texttt{tmp_2} = \frac{\big(|G_x| + |G_y|\big)}{8}
+\texttt{tmp_2} = \frac{|G_x| + |G_y|}{8}
 $$
 
 ## 2.3 Direction Image
