@@ -63,7 +63,27 @@ The purpose of gradient calculation is to measure the **magnitude** and **direct
 The horizontal gradient \\(G_x\\) and vertical gradient \\(G_y\\) can be calculated by convolving the smoothed image \\(I(x,y)\\) with two Sobel kernels \\(S_x\\) and \\(S_y\\):
 
 $$
-G_x = I * S_x, \quad G_y = I * G_y
+G_x = I * S_x, \quad G_y = I * S_y
+$$
+
+In this lab, the Sobel kernels are
+
+$$
+S_x =
+\begin{bmatrix}
+-1 & 0 & +1 \\
+-2 & 0 & +2 \\
+-1 & 0 & +1
+\end{bmatrix}
+
+\quad
+
+S_y =
+\begin{bmatrix}
++1 & +2 & +1 \\
+0 & 0 & 0 \\
+-1 & -2 & -1
+\end{bmatrix}
 $$
 
 #### 2.4.1 Gradient Magnitude Calculation
