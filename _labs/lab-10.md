@@ -242,7 +242,6 @@ The workflow of noise reduction mentioned in section 2.3 is shown in figure 3. D
         - `generic.sdb`
     - `rtl` (directory for RTL verilog code)
         - `canny_edge_detector.v`
-        - `system_bus_canny_edge_detector_wrapper.v`
     - `sim` (directory where Synopsys VCS will be run)
     - `syn` (directory where Synopsys Design Vision will be run)
         - `netlist` (directory for gate-level verilog code)
