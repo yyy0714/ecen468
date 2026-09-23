@@ -140,17 +140,39 @@ $$
 \theta = \operatorname{arctan2}(G_y, G_x)
 $$
 
-In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following logic:
+In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following steps:
 
+Step 1
 
-| \\(G_x\\) Condition | \\(G_y\\) Condition               | Resulting Direction |
-| :------------------ | :-------------------------------- | :-----------------: |
-| \\(G_x \ge 0\\)     | \\(G_y \le 0.5 G_x\\)             | \\(0^\circ\\)       |
-|                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | \\(45^\circ\\)      |
-|                     | \\(G_y > 2.5 G_x\\)               | \\(90^\circ\\)      |
-| \\(G_x < 0\\)       | \\(G_y \le -0.5 G_x\\)            | \\(0^\circ\\)       |
-|                     | \\(-0.5 G_x < G_y \le -2.5 G_x\\) | \\(135^\circ\\)     |
-|                     | \\(G_y > -2.5 G_x\\)              | \\(90^\circ\\)      |
+```
+if G_y < 0
+    G_x = -1*G_x
+    G_y = -1*G_y 
+```
+
+Step 2
+
+```
+if G_x >= 0
+    if G_y <= 0.5*G_x
+        theta = 0
+
+    if 0.5*G_x < G_y <= 2.5*G_x
+        theta = 45
+
+    if 2.5*G_x < G_y
+        theta = 90
+
+if G_x < 0
+    if G_y <= -0.5*G_x
+        theta = 0
+
+    if -0.5*G_x < G_y <= -2.5*G_x
+        theta = 135
+
+    if -2.5*G_x < G_y
+        theta = 90
+```
 
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
