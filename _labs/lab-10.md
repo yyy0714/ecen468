@@ -109,7 +109,7 @@ $$
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following logic:
 
 
-| \\(G_x\\) Condition | Slope Threshold Formula           | Resulting Direction |
+| \\(G_x\\) Condition | \\(G_y\\) Condition              | Resulting Direction |
 | :------------------ | :-------------------------------- | :-----------------: |
 | **\\(G_x \ge 0\\)** | \\(G_y \le 0.5 G_x\\)             | **\\(0^\circ\\)**   |
 |                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | **\\(45^\circ\\)**  |
@@ -121,7 +121,7 @@ In this lab, the exact continuous angle will be rounded to the nearest of four s
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
 
-The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta\\):
+The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta(x,y)\\):
 
 For \\(\theta(x,y) = 0\\):
 
@@ -163,7 +163,7 @@ N(x,y) =
 \end{cases}
 $$
 
-### 2.6 Hysteresis Thresholding
+#### 2.6 Hysteresis Thresholding
 The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values \\(T_{\text{low}}\\) and \\(T_{\text{high}}\\) (**double thresholding**) and resolving the "weak" pixels by checking their two neighbor pixels on their edge directions (**hysteresis tracking**).
 
 #### 2.6.1 Double Thresholding
@@ -208,7 +208,10 @@ The block diagram of a Canny edge detector and testbench is shown in figure 2.
 
 *Figure 2. System Overview (clock and reset signals are ommited)*
 
-## 3.2 Requirements
+### 3.2 Noise Reduction Implementation Example
+The block diagram of noise reduction mentioned in section 2.3 is shown in figure 3. During every compute cycle, a \\(5 \times 5\\) image window is read from the original image (`img_0`) into `buf_x` to be convolved with the \\(5 \times 5\\) Gaussian filter `gf`. The scalar result will be stored in `tmp_1` before being written into the smoothed image (`img_1`).
+
+### 3.3 Requirements
 - Implement Canny edge detector in `canny_edge_detector.v`.
 - Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector_wrapper.v`.
 
