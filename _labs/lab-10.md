@@ -264,6 +264,14 @@ The workflow of noise reduction mentioned in section 2.3 is shown in figure 3. D
   - `rm lab10_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
+    - `images` (directory for images)
+        - `generated` (directory for generated images)
+        - `reference` (directory for reference images)
+            - `img_1.bmp`
+            - `img_2.bmp`
+            - `img_3.bmp`
+            - `img_4.bmp`
+            - `img_5.bmp`
     - `lib` (directory for technology libraries)
         - `osu018_stdcells.db`
         - `osu018_stdcells.v`
