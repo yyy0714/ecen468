@@ -88,6 +88,34 @@ S_y =
 \end{bmatrix}
 $$
 
+Below is an example of the convolution:
+
+$$
+I = \begin{bmatrix}
+0 & 0 & 30 & 100 & 100 \\
+0 & 0 & 30 & 100 & 100 \\
+0 & 0 & 30 & 100 & 100 \\
+0 & 0 & 30 & 100 & 100 \\
+0 & 0 & 30 & 100 & 100
+\end{bmatrix}
+
+G_x = \begin{bmatrix}
+\cdot & \cdot & \cdot & \cdot & \cdot \\
+\cdot & 120 & 400 & 280 & \cdot \\
+\cdot & 120 & 400 & 280 & \cdot \\
+\cdot & 120 & 400 & 280 & \cdot \\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{bmatrix}
+
+G_y = \begin{bmatrix}
+\cdot & \cdot & \cdot & \cdot & \cdot \\
+\cdot & 0 & 0 & 0 & \cdot \\
+\cdot & 0 & 0 & 0 & \cdot \\
+\cdot & 0 & 0 & 0 & \cdot \\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{bmatrix}
+$$
+
 #### 2.4.1 Gradient Magnitude Calculation
 The gradient magnitude image \\(M\\) can be obtained by
 
