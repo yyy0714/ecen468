@@ -219,7 +219,6 @@ The workflow of noise reduction mentioned in section 2.3 is shown in figure 3. D
 
 ### 3.3 Requirements
 - Implement Canny edge detector in `canny_edge_detector.v`.
-- Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector_wrapper.v`.
 
 ---
 
@@ -285,6 +284,5 @@ Please submit a single PDF file containing the following:
 
 - Canny edge detector RTL design:
     1. Screenshot of the terminal output after running `python calculate_match_ratio.py`.
-    2. Screenshots or copy of the content of the following files:
+    2. Screenshots or copy of the content of the following file:
         - `canny_edge_detector.v`
-        - `system_bus_canny_edge_detector_wrapper.v`
