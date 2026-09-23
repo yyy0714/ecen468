@@ -257,8 +257,22 @@ The block diagram of noise reduction mentioned in section 2.3 is shown in figure
 2. Execute the following command to run the simulation.
     - `./simv_canny_edge_detector_tb`
 
-3. Execute the following command to compare the generated images with the reference images.
-    - `python compare.py`
+3. Take a screenshot of the terminal output of the simulation.
+
+4. Five BMP images should be generated in `../images/generated`.
+
+### 4.2 Calculate the Match Ratio of the Generated Images
+1. Execute the following commands to create a Python virtual environment and install the necessary packages.
+    - `cd $HOME/ecen468/lab10/images`
+    - `python3.12 -m venv .venv`
+    - `source .venv/bin/activate`
+    - `pip install --upgrade pip`
+    - `pip install pillow numpy`
+
+2. Execute the following command to run the Python script to calculate the match ratio.
+    - `python calculate_match_ratio.py`
+
+3. Take a screenshot of the terminal output of the script. Match ratio no less than 98% is required for a full score.   
 
 ---
 
@@ -266,7 +280,8 @@ The block diagram of noise reduction mentioned in section 2.3 is shown in figure
 Please submit a single PDF file containing the following:
 
 - Canny edge detector RTL design:
-    1. Screenshot of the terminal output after running `./simv_canny_edge_detector_tb`.
+    1. Screenshot of the terminal output after running `simv_canny_edge_detector_tb`.
+    2. Screenshot of the terminal output after running `python calculate_match_ratio.py`.
     2. Screenshots or copy of the content of the following files:
         - `canny_edge_detector.v`
         - `system_bus_canny_edge_detector_wrapper.v`
