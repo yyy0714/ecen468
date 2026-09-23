@@ -99,6 +99,8 @@ I = \begin{bmatrix}
 0 & 0 & 30 & 100 & 100
 \end{bmatrix}
 
+\quad
+
 G_x = \begin{bmatrix}
 \cdot & \cdot & \cdot & \cdot & \cdot \\
 \cdot & 120 & 400 & 280 & \cdot \\
@@ -106,6 +108,8 @@ G_x = \begin{bmatrix}
 \cdot & 120 & 400 & 280 & \cdot \\
 \cdot & \cdot & \cdot & \cdot & \cdot
 \end{bmatrix}
+
+\quad
 
 G_y = \begin{bmatrix}
 \cdot & \cdot & \cdot & \cdot & \cdot \\
@@ -141,19 +145,19 @@ In this lab, the exact continuous angle will be rounded to the nearest of four s
 
 | \\(G_x\\) Condition | \\(G_y\\) Condition               | Resulting Direction |
 | :------------------ | :-------------------------------- | :-----------------: |
-| **\\(G_x \ge 0\\)** | \\(G_y \le 0.5 G_x\\)             | **\\(0^\circ\\)**   |
-|                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | **\\(45^\circ\\)**  |
-|                     | \\(G_y > 2.5 G_x\\)               | **\\(90^\circ\\)**  |
-| **\\(G_x < 0\\)**   | \\(G_y \le -0.5 G_x\\)            | **\\(0^\circ\\)**   |
-|                     | \\(-0.5 G_x < G_y \le -2.5 G_x\\) | **\\(135^\circ\\)** |
-|                     | \\(G_y > -2.5 G_x\\)              | **\\(90^\circ\\)**  |
+| \\(G_x \ge 0\\)     | \\(G_y \le 0.5 G_x\\)             | \\(0^\circ\\)       |
+|                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | \\(45^\circ\\)      |
+|                     | \\(G_y > 2.5 G_x\\)               | \\(90^\circ\\)      |
+| \\(G_x < 0\\)       | \\(G_y \le -0.5 G_x\\)            | \\(0^\circ\\)       |
+|                     | \\(-0.5 G_x < G_y \le -2.5 G_x\\) | \\(135^\circ\\)     |
+|                     | \\(G_y > -2.5 G_x\\)              | \\(90^\circ\\)      |
 
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
 
 The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta(x,y)\\):
 
-For \\(\theta(x,y) = 0\\):
+For \\(\theta(x,y) = 0^\circ\\):
 
 $$
 N(x,y) = 
@@ -163,7 +167,7 @@ N(x,y) =
 \end{cases}
 $$
 
-For \\(\theta(x,y) = 45\\):
+For \\(\theta(x,y) = 45^\circ\\):
 
 $$
 N(x,y) = 
@@ -173,7 +177,7 @@ N(x,y) =
 \end{cases}
 $$
 
-For \\(\theta(x,y) = 90\\):
+For \\(\theta(x,y) = 90^\circ\\):
 
 $$
 N(x,y) = 
@@ -183,7 +187,7 @@ N(x,y) =
 \end{cases}
 $$
 
-For \\(\theta(x,y) = 135\\):
+For \\(\theta(x,y) = 135^\circ\\):
 
 $$
 N(x,y) = 
