@@ -1,11 +1,13 @@
 ---
 layout: manual
 title: 'Lab 10: Design of Canny Edge Detector (Verilog)'
-session: 'Week 11 (Nov 2 – Nov 6)'
-report_due: 'Week 12 (Nov 9 – Nov 13)'
-# downloads:
-#   - label: code (tar.gz)
-#     file: /assets/files/lab10/lab10_code.tar.gz
+session: 'Week 5 (Sep 21 – Sep 25)'
+report_due: 'Week 6 (Sep 28 – Oct 2)'
+# session: 'Week 11 (Nov 2 – Nov 6)'
+# report_due: 'Week 12 (Nov 9 – Nov 13)'
+downloads:
+  - label: code (tar.gz)
+    file: /assets/files/lab10/lab10_code.tar.gz
 ---
 
 ## 1. Objectives
@@ -27,7 +29,7 @@ The processing steps of the Canny edge detector is shown in figure 1. Each proce
 3. Non-Maximum Suppression
 4. Hysteresis Thresholding
 
-![Canny Edge Detector Workflow]({{ "/assets/files/lab10/img/workflow.png" | relative_url }}){: style="zoom: 0.6;" }
+![Canny Edge Detector Workflow]({{ "/assets/files/lab10/img/canny_edge_detector_workflow.png" | relative_url }}){: style="zoom: 0.6;" }
 
 *Figure 1. Canny Edge Detector Workflow*
 
@@ -109,7 +111,7 @@ $$
 In this lab, the exact continuous angle will be rounded to the nearest of four standardized directions: \\(0^\circ\\), \\(45^\circ\\), \\(90^\circ\\), or \\(135^\circ\\) using the following logic:
 
 
-| \\(G_x\\) Condition | \\(G_y\\) Condition              | Resulting Direction |
+| \\(G_x\\) Condition | \\(G_y\\) Condition               | Resulting Direction |
 | :------------------ | :-------------------------------- | :-----------------: |
 | **\\(G_x \ge 0\\)** | \\(G_y \le 0.5 G_x\\)             | **\\(0^\circ\\)**   |
 |                     | \\(0.5 G_x < G_y \le 2.5 G_x\\)   | **\\(45^\circ\\)**  |
@@ -209,7 +211,11 @@ The block diagram of a Canny edge detector and testbench is shown in figure 2.
 *Figure 2. System Overview (clock and reset signals are ommited)*
 
 ### 3.2 Noise Reduction Implementation Example
-The block diagram of noise reduction mentioned in section 2.3 is shown in figure 3. During every compute cycle, a \\(5 \times 5\\) image window is read from the original image (`img_0`) into `buf_x` to be convolved with the \\(5 \times 5\\) Gaussian filter `gf`. The scalar result will be stored in `tmp_1` before being written into the smoothed image (`img_1`).
+The workflow of noise reduction mentioned in section 2.3 is shown in figure 3. During every compute cycle, a \\(5 \times 5\\) image window is read from the original image (`img_0`) into `buf_x` to be convolved with the \\(5 \times 5\\) Gaussian filter `gf`. The scalar result will be stored in `tmp_1` before being written into the smoothed image (`img_1`).
+
+![Noise Reduction Workflow]({{ "/assets/files/lab10/img/noise_reduction_workflow.png" | relative_url }}){: style="zoom: 0.6;"}
+
+*Figure 3. Noise Reduction Workflow*
 
 ### 3.3 Requirements
 - Implement Canny edge detector in `canny_edge_detector.v`.
@@ -257,8 +263,6 @@ The block diagram of noise reduction mentioned in section 2.3 is shown in figure
 2. Execute the following command to run the simulation.
     - `./simv_canny_edge_detector_tb`
 
-3. Take a screenshot of the terminal output of the simulation.
-
 4. Five BMP images should be generated in `../images/generated`.
 
 ### 4.2 Calculate the Match Ratio of the Generated Images
@@ -280,8 +284,7 @@ The block diagram of noise reduction mentioned in section 2.3 is shown in figure
 Please submit a single PDF file containing the following:
 
 - Canny edge detector RTL design:
-    1. Screenshot of the terminal output after running `simv_canny_edge_detector_tb`.
-    2. Screenshot of the terminal output after running `python calculate_match_ratio.py`.
+    1. Screenshot of the terminal output after running `python calculate_match_ratio.py`.
     2. Screenshots or copy of the content of the following files:
         - `canny_edge_detector.v`
         - `system_bus_canny_edge_detector_wrapper.v`
