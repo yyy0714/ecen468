@@ -179,75 +179,53 @@ The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge r
 
 The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta(x,y)\\) using the following logic:
 
+Step 1:
+```
+N(x,y) = M(x,y)
+```
+
+Step 2:
 ```
 if theta(x,y) == 0
     if M(x,y) >= M(x-1,y) and M(x,y) >= M(x+1,y)
         N(x-1,y) = 0
         N(x+1,y) = 0
+        N(x,y) = M(x,y)
     else
-        N(x) = 0
+        N(x-1,y) = M(x-1,y)
+        N(x+1,y) = M(x+1,y)
+        N(x,y) = 0
 
 if theta(x,y) == 45
     if M(x,y) >= M(x+1,y+1) and M(x,y) >= M(x-1,y-1)
         N(x+1,y+1) = 0
         N(x-1,y-1) = 0
+        N(x,y) = M(x,y)
     else
-        N(x) = 0
+        N(x+1,y+1) = M(x+1,y+1)
+        N(x-1,y-1) = M(x-1,y-1)
+        N(x,y) = 0
 
 if theta(x,y) == 90
     if M(x,y) >= M(x,y-1) and M(x,y) >= M(x,y+1)
         N(x,y-1) = 0
         N(x,y+1) = 0
+        N(x,y) = M(x,y)
     else
-        N(x) = 0
+        N(x,y-1) = M(x,y-1)
+        N(x,y+1) = M(x,y+1)
+        N(x,y) = 0
 
 if theta(x,y) == 135
     if M(x,y) >= M(x-1,y+1) and M(x,y) >= M(x+1,y-1)
         N(x-1,y+1) = 0
         N(x+1,y-1) = 0
+        N(x,y) = M(x,y)
     else
-        N(x) = 0
+        N(x-1,y+1) = M(x-1,y+1)
+        N(x+1,y-1) = M(x+1,y-1)
+        N(x,y) = 0
 ```
-
-For \\(\theta(x,y) = 0^\circ\\):
-
-$$
-N(x,y) = 
-\begin{cases} 
-    M(x,y) & \text{if } M(x,y) \geq M(x+1, y) \text{ and } M(x,y) \geq M(x-1, y) \\ 
-    0 & \text{otherwise}
-\end{cases}
-$$
-
-For \\(\theta(x,y) = 45^\circ\\):
-
-$$
-N(x,y) = 
-\begin{cases} 
-    M(x,y) & \text{if } M(x,y) \geq M(x+1, y+1) \text{ and } M(x,y) \geq M(x-1, y-1) \\ 
-    0 & \text{otherwise}
-\end{cases}
-$$
-
-For \\(\theta(x,y) = 90^\circ\\):
-
-$$
-N(x,y) = 
-\begin{cases} 
-    M(x,y) & \text{if } M(x,y) \geq M(x, y+1) \text{ and } M(x,y) \geq M(x, y-1) \\ 
-    0 & \text{otherwise}
-\end{cases}
-$$
-
-For \\(\theta(x,y) = 135^\circ\\):
-
-$$
-N(x,y) = 
-\begin{cases} 
-    M(x,y) & \text{if } M(x,y) \geq M(x-1, y+1) \text{ and } M(x,y) \geq M(x+1, y-1) \\ 
-    0 & \text{otherwise}
-\end{cases}
-$$
 
 #### 2.6 Hysteresis Thresholding
 The purpose of hysteresis thresholding is to isolate true edge pixels from background noise by keeping weak edge pixels only if they are connected to strong edge pixels. The process consists of classifying pixels into three categories based on two threshold values \\(T_{\text{low}}\\) and \\(T_{\text{high}}\\) (**double thresholding**) and resolving the "weak" pixels by checking their two neighbor pixels on their edge directions (**hysteresis tracking**).
