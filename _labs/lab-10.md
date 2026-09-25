@@ -177,7 +177,37 @@ if G_x < 0
 ### 2.5 Non-Maximum Suppression
 The purpose of Non-Maximum Suppression (NMS) is to thin out thick, blurry edge regions by suppressing all pixels that are not local maxima along the gradient direction, leaving sharp, one-pixel-wide lines.
 
-The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta(x,y)\\):
+The NMS image \\(N(x,y)\\) can be calcualted using the gradient magnitude image \\(M(x,y)\\) and gradient direction image \\(\theta(x,y)\\) using the following logic:
+
+```
+if theta(x,y) == 0
+    if M(x,y) >= M(x-1,y) and M(x,y) >= M(x+1,y)
+        N(x-1,y) = 0
+        N(x+1,y) = 0
+    else
+        N(x) = 0
+
+if theta(x,y) == 45
+    if M(x,y) >= M(x+1,y+1) and M(x,y) >= M(x-1,y-1)
+        N(x+1,y+1) = 0
+        N(x-1,y-1) = 0
+    else
+        N(x) = 0
+
+if theta(x,y) == 90
+    if M(x,y) >= M(x,y-1) and M(x,y) >= M(x,y+1)
+        N(x,y-1) = 0
+        N(x,y+1) = 0
+    else
+        N(x) = 0
+
+if theta(x,y) == 135
+    if M(x,y) >= M(x-1,y+1) and M(x,y) >= M(x+1,y-1)
+        N(x-1,y+1) = 0
+        N(x+1,y-1) = 0
+    else
+        N(x) = 0
+```
 
 For \\(\theta(x,y) = 0^\circ\\):
 
