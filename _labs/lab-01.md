@@ -1,21 +1,22 @@
 ---
 layout: manual
 title: 'Lab 1: Introduction to SystemC and Simulator'
-session: 'Week 2 (Aug 31 – Sep 4)'
-report_due: 'Week 3 (Sep 7 – Sep 11)'
-manual_pdf: /assets/files/lab01/lab01_manual.pdf
+# session: 'Week 2 (Aug 31 – Sep 4)'
+# report_due: 'Week 3 (Sep 7 – Sep 11)'
+session: 'Week 6 (Sep 28 – Oct 2)'
+report_due: 'Week 7 (Oct 5 – Oct 9)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab01/lab01_code.tar.gz
 ---
 
-## Objectives
+# 1. Objectives
+- Complete design of SRAM in SystemC.
+- Build and simulate the design.
 
-In the first several labs, we will design a separate module of our whole system for every lab and simulate it with a test bench. Finally, we will simulate the entire module, which is designed using SystemC.
+---
 
-SystemC is a system-level modeling language, and Vista is a platform for architecture design. In this lab, we will design a simple memory application with SystemC and use Vista as a tool for simulation and verification.
-
-## Introduction
+## 2. Introduction
 
 **SystemC** is a set of C++ classes and macros which provides an event-driven simulation kernel in C++. These facilities enable a designer to simulate concurrent processes, and each is described using plain C++ syntax. SystemC processes can communicate in a simulated real-time environment, using signals of all the datatypes either offered by C++, provided by the SystemC library, or defined by a designer. In certain respects, SystemC deliberately mimics the hardware description language (VHDL and Verilog) but is more aptly described as a system-level modeling language.
 
@@ -39,7 +40,9 @@ An address decoder in the SRAM structure activates the cell-select signal (`CS_b
 
 *Figure 3. The entire structure of 8 x 8 SRAM*
 
-## Implementation
+---
+
+## 3. Implementation
 
 We will now implement a 256K (262,144) x 8 SRAM, which has 18 address pins and 8 data pins. To generate `CS_b` for every memory cell, the 18-bit address must be decoded to control all 256K cells. The amount of decoding logic grows as the number of address pins increases. To reduce the size of the address decoder, a two-level addressing scheme can be used. Figure 4 shows an example of two-level addressing for an 8 x 1 SRAM.
 
@@ -49,77 +52,87 @@ We will now implement a 256K (262,144) x 8 SRAM, which has 18 address pins and 8
 
 We will use Vista to implement the design. Vista is a native electronic system level (ESL) platform for architecture design, verification, analysis, and virtual prototyping, with an advanced toolset aimed at high-level transaction-level modeling (TLM) hardware platforms.
 
+---
+
 # 3. Lab Procedures
 
 ## 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
-  - `mkdir -p $HOME/ecen468/lab01/`
-  - `cd $HOME/ecen468/lab01/`
+  - `cd $HOME/ecen468/`
 
-2. Download `lab01_code.tar.gz` from the lab website and put it the working directory.
+2. Download `lab01_code.tar.gz` from the lab website and put it in the working directory.
 
 3. Execute the following commands to extract the files.
   - `tar -xvf lab01_code.tar.gz`
   - `rm lab01_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
-    - 
+    - `SRAM` (directory for C++ source code and header files)
+        - `main.cpp`
+        - `RAM.cpp`
+        - `test.cpp`
+        - `RAM.h`
+        - `test.h`
+
+    - `workspace` (directory where Siemens Vista will be run)
 
 5. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-
 ## 3.1 Building SystemC Design Using Siemens Vista
+1. Execute the following commands in sequence to open Siemens Vista.
+    - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
+    - `source /opt/rh/gcc-toolset-13/enable`
+    - `cd $HOME/ecen468/lab01/workspace`
+    - `vista &`
+
+2. In Vista graphical interface, click **Project** on the menu bar, then click **New Project...**.
+
+3. In the **New Project** dialog, click **Save** (You don't need to change the default file name).
+
+4. In the **Create New Project** dialog, click **Files** on the tab bar, then click **Add Files** on the bottom right.
+
+5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, then click **Open**.
+
+6. In the **Create New Project** dialog, click **Compilation** on the menu bar, then add the following flag in **Compilation Options** (Make sure these is a space between flags), then click **OK**.
+    - `-std=c++11`
+
+7. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
+
+8. If no errors occur, proceed to the next section.
 
 ## 3.2 Simulating SystemC Design Using Siemens Vista
+1. On the side bar, click the **+** next to **Project** expand its content.
 
-## Simulation
+2. Click the **+** next to **Simulation**, then right click on **main.cpp** and click **Simulate**.
 
-Once the design is complete, we test its functionality by applying a test bench and checking the outputs. The test bench instantiates the design under test (DUT) and drives its input signals. It is compiled together with the design module, and the simulation results are displayed at the end of compilation. Figure 7 shows the block diagram of the 256K x 8 RAM and its test bench.
+3. In the **simulation** dialog, deselect **Stop after elaboration** under **Debugging**, then click **OK**.
 
-![Figure 7. The block diagram of the SRAM and its test bench]({{ "/assets/files/lab01/img/7.png" | relative_url }})
+4. After the simulation exits, a waveform file named `wave.vcd` will be generated in `workspace`.
 
-*Figure 7. The block diagram of the SRAM and its test bench*
+5. In the terminal, execute the following commands to Synopsys WaveView.
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
 
-To simulate the design, expand the hierarchy and click **Simulate**, as shown in Figure 8. In the pop-up window, make sure the target is set to the design name, de-select the **Stop After Elaboration** option (Figure 9), and click **OK**.
+6. In WaveView, open `wave.vcd` to view the simulation waveform.
 
-![Figure 8. Screenshot of simulating the project]({{ "/assets/files/lab01/img/8.png" | relative_url }})
+7. Take a screenshot of the waveform for the lab report.
 
-*Figure 8. Screenshot of simulating the project*
+---
 
-![Figure 9. The window of simulation settings]({{ "/assets/files/lab01/img/9.png" | relative_url }})
-
-*Figure 9. The window of simulation settings*
-
-After simulation, click the simulation output frame at the bottom of the window and press `Ctrl-X` then `Ctrl-S` to save the output. Enter `sim.out` as the filename and press `Enter` to save, as shown in Figure 10.
-
-![Figure 10. Saving the simulation]({{ "/assets/files/lab01/img/10.png" | relative_url }})
-
-*Figure 10. Saving the simulation*
-
-Once the simulation completes, the waveform is saved as a `*.vcd` file. We can view it using WaveView. To launch WaveView, open a new terminal on the server and run the following commands.
-
-```bash
-load-ecen-468   # skip this line on machines in ZACH 127
-source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh
-wv &
-```
-
-In WaveView, open the `*.vcd` file generated by the simulation to see the waveform. Refer to Figure 11 for the expected result, then take a screenshot of your waveform and include it in your lab report.
-
-![Figure 11. The waveform of the SRAM]({{ "/assets/files/lab01/img/11.png" | relative_url }})
-
-*Figure 11. The waveform of the SRAM*
-
-## Submission
-
+## 4. Submission
 Please submit a single PDF file containing the following:
 
-1. Screenshots of the waveform with analysis.
-2. Screenshots of your code in this design with reasonable comments.
-3. Q1: What are the differences between asynchronous and synchronous SRAM?
+1. Screenshot of the waveform with analysis.
+2. Screenshots or copy of the content of the following files:
+    - `RAM.cpp`
+    - `RAM.h`
+3. Answer to the following question:
+    - What are the differences between asynchronous and synchronous SRAM?
 
-## Code Example
+---
+
+## Appendix: Code Example
 
 ```cpp
 //===========================================
@@ -130,9 +143,9 @@ Please submit a single PDF file containing the following:
 #define DATA_WIDTH 4
 
 SC_MODULE (mAdder) {
-    sc_in <sc_uint<DATA_WIDTH> > dInA ;
-    sc_in <sc_uint<DATA_WIDTH> > dInB ;
-    sc_out <sc_uint<DATA_WIDTH+1> > dOut ;
+    sc_in <sc_uint<DATA_WIDTH>> dInA;
+    sc_in <sc_uint<DATA_WIDTH>> dInB;
+    sc_out <sc_uint<DATA_WIDTH+1>> dOut;
 
     // ----- Code Starts Here -----
     void function_adder () {
@@ -149,9 +162,9 @@ SC_MODULE (mAdder) {
 
 int sc_main (int argc, char* argv[]) {
     // Declare Input/Output Signals
-    sc_signal < sc_uint<DATA_WIDTH> > tInA;
-    sc_signal < sc_uint<DATA_WIDTH> > tInB;
-    sc_signal < sc_uint<DATA_WIDTH+1> > tOut;
+    sc_signal <sc_uint<DATA_WIDTH>> tInA;
+    sc_signal <sc_uint<DATA_WIDTH>> tInB;
+    sc_signal <sc_uint<DATA_WIDTH+1>> tOut;
 
     int i,j;
 
