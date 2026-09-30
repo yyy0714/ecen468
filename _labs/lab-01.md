@@ -92,7 +92,7 @@ We will use Vista to implement the design. Vista is a native electronic system l
 
 4. In the **Create New Project** dialog, click **Files** on the tab bar, then click **Add Files** on the bottom right.
 
-5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, then click **Open**.
+5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, click **Open**, then click **OK**.
 
 <!-- 6. In the **Create New Project** dialog, click **Compilation** on the menu bar, then add the following flag in **Compilation Options** (Make sure these is a space between flags), then click **OK**.
     - `-std=c++11` -->
