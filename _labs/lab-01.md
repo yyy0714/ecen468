@@ -94,12 +94,12 @@ We will use Vista to implement the design. Vista is a native electronic system l
 
 5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, then click **Open**.
 
-6. In the **Create New Project** dialog, click **Compilation** on the menu bar, then add the following flag in **Compilation Options** (Make sure these is a space between flags), then click **OK**.
-    - `-std=c++11`
+<!-- 6. In the **Create New Project** dialog, click **Compilation** on the menu bar, then add the following flag in **Compilation Options** (Make sure these is a space between flags), then click **OK**.
+    - `-std=c++11` -->
 
-7. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
+6. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
 
-8. If no errors occur, proceed to the next section.
+7. If no errors occur, proceed to the next section.
 
 ## 3.2 Simulating SystemC Design Using Siemens Vista
 1. On the side bar, click the **+** next to **Project** expand its content.
