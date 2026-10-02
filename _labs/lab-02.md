@@ -1,20 +1,21 @@
 ---
 layout: manual
 title: 'Lab 2: Design of UART Transmitter (SystemC)'
-session: 'Week 3 (Sep 7 – Sep 11)'
-report_due: 'Week 4 (Sep 14 – Sep 18)'
+session: 'Week 7 (Oct 5 – Oct 9)'
+report_due: 'Week 8 (Oct 12 – Oct 16)'
 manual_pdf: /assets/files/lab02/lab02_manual.pdf
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab02/lab02_code.tar.gz
 ---
 
-## Objectives
+# 1. Objectives
+- Complete design of UART transmitter in SystemC.
+- Build and simulate the design.
 
-In this lab, we will design the transmitter of a Universal Asynchronous Receiver/Transmitter (UART) using SystemC. This module will later be attached to our complete system to transmit data to other devices or processors.
+---
 
-## Introduction
-
+## 2. Introduction
 A UART is a piece of computer hardware that translates data between parallel and serial forms. UARTs are commonly used with communication standards such as EIA RS-232, RS-422, and RS-485. The term *universal* indicates that the data format and transmission speed are configurable. Figure 1 shows communication between processors over a serial channel. These processors use parallel data internally for speed, but communicate with one another over a serial channel to reduce the number of wires, and therefore the hardware cost.
 
 ![Figure 1. Communication over a serial channel]({{ "/assets/files/lab02/img/1.png" | relative_url }})
@@ -54,54 +55,85 @@ The ASMD chart of the state machine controlling the transmitter is shown in Figu
 
 Figure 5 shows an example of the transmission timing. You can use this timing diagram both to design your test bench and to check your results.
 
-## Implementation & Simulation
+# 3. Lab Procedures
 
-We will now implement the transmitter portion of the UART design.
+## 3.0 Setup
+1. Execute the following commands to create and enter the working directory.
+  - `cd $HOME/ecen468/`
 
-Please login to the Olympus server and create a working directory for this lab using the following commands.
+2. Download `lab02_code.tar.gz` from the lab website and put it in the working directory.
 
-```bash
-## Create and navigate to the working directory.
-mkdir -p $HOME/ECEN468/Lab2/src
-cd $HOME/ECEN468/Lab2/src
-```
+3. Execute the following commands to extract the files.
+  - `tar -xvf lab01_code.tar.gz`
+  - `rm lab01_code.tar.gz`
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+4. Confirm the following directories and files exist in the working directory.
+    - `SRAM` (directory for C++ source code and header files)
+        - `main.cpp`
+        - `RAM.cpp`
+        - `test.cpp`
+        - `RAM.h`
+        - `test.h`
 
-- `UART_XMTR.cpp`
-- `UART_XMTR.h`
-- `test.cpp`
-- `test.h`
-- `main.cpp`
+    - `UART` (directory for C++ source code and header files)
+        - `main.cpp`
+        - `test.cpp`
+        - `UART_XMTR.cpp`
+        - `test.h`
+        - `UART_XMTR.cpp`
 
-Copy them to the working directory.
+    - `workspace` (directory where Siemens Vista will be run)
 
-You will write your code in `UART_XMTR.cpp`, `UART_XMTR.h`, and `main.cpp`. Figure 6 shows the file hierarchy for this lab.
+5. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
 
-![Figure 6. Hierarchy of the files for the UART system]({{ "/assets/files/lab02/img/6.png" | relative_url }})
+## 3.1 Building SystemC Design Using Siemens Vista
+1. Execute the following commands in sequence to open Siemens Vista.
+    - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
+    - `source /opt/rh/gcc-toolset-13/enable`
+    - `cd $HOME/ecen468/lab02/workspace`
+    - `vista &`
 
-*Figure 6. Hierarchy of the files for the UART system*
+2. In Vista graphical interface, click **Project** on the menu bar, then click **New Project...**.
 
-Once you complete the implementation, verify your design by simulating it and viewing the waveform as in Lab 1. Take screenshots of the simulation output and the waveform, and include them in your report.
+3. In the **New Project** dialog, click **Save** (You don't need to change the default file name).
 
-Commands for reference:
+4. In the **Create New Project** dialog, click **Files** on the tab bar, then click **Add Files** on the bottom right.
 
-```bash
-load-ecen-468   # skip this line on machines in ZACH 127
-source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh
-wv &
-```
+5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, click **Open**, then click **OK**.
 
-## Submission
+6. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
 
+7. If no errors occur, proceed to the next section.
+
+## 3.2 Simulating SystemC Design Using Siemens Vista
+1. On the side bar, click the **+** next to **Project** expand its content.
+
+2. Click the **+** next to **Simulation**, then right click on **main.cpp** and click **Simulate**.
+
+3. In the **simulation** dialog, deselect **Stop after elaboration** under **Debugging**, then click **OK**.
+
+4. After the simulation exits, a waveform file named `wave.vcd` will be generated in `workspace`.
+
+5. In the terminal, execute the following commands to Synopsys WaveView.
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
+
+6. In WaveView, open `wave.vcd` to view the simulation waveform.
+
+7. Take a screenshot of the waveform for the lab report.
+
+---
+
+## 4. Submission
 Please submit a single PDF file containing the following:
-
 1. Screenshots of the waveform with analysis.
 2. Screenshots of the simulation output in Vista.
-3. Screenshots of your code in this design with reasonable comments.
+3. Screenshots or copy of the content of the following files:
+    - `UART_XMTR.cpp`
+    - `UART_XMTR.h`
 
-## Code Example
-
+## Appendix: Code Example
 Pseudocode of the UART state machine:
 
 ```
