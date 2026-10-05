@@ -3,7 +3,6 @@ layout: manual
 title: 'Lab 2: Design of UART Transmitter (SystemC)'
 session: 'Week 7 (Oct 5 – Oct 9)'
 report_due: 'Week 8 (Oct 12 – Oct 16)'
-manual_pdf: /assets/files/lab02/lab02_manual.pdf
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab02/lab02_code.tar.gz
