@@ -68,13 +68,6 @@ Figure 5 shows an example of the transmission timing. You can use this timing di
   - `rm lab01_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
-    - `SRAM` (directory for C++ source code and header files)
-        - `main.cpp`
-        - `RAM.cpp`
-        - `test.cpp`
-        - `RAM.h`
-        - `test.h`
-
     - `UART` (directory for C++ source code and header files)
         - `main.cpp`
         - `test.cpp`
