@@ -1,9 +1,8 @@
 ---
 layout: manual
 title: 'Lab 3: Design of System Bus (SystemC)'
-session: 'Week 4 (Sep 14 – Sep 18)'
-report_due: 'Week 5 (Sep 21 – Sep 25)'
-manual_pdf: /assets/files/lab03/lab03_manual.pdf
+session: 'Week 8 (Oct 12 – Oct 16)'
+report_due: 'Week 9 (Oct 19 – Oct 23)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab03/lab03_code.tar.gz
@@ -125,7 +124,7 @@ In our design, we assume the test bench has the highest priority and the UART mo
 
 ---
 
-## Submission
+## 4. Submission
 Please submit a single PDF file containing the following:
 
 1. Screenshot of the waveform with analysis.
