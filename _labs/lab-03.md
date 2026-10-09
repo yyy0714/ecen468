@@ -9,11 +9,11 @@ downloads:
     file: /assets/files/lab03/lab03_code.tar.gz
 ---
 
-## Objectives
+## 1. Objectives
+- Complete design of system bus in SystemC.
+- Build and simulate the design.
 
-In this lab, we will design a system bus with SystemC and use it to connect the 256K SRAM and the UART implemented in previous labs.
-
-## Introduction
+## 2. Introduction
 
 In computer architecture, a bus is a subsystem that transfers data between components inside a computer or between computers. Early computer buses were parallel electrical wires with multiple connections, but the term is now used for any physical arrangement that provides the same logical function as a parallel electrical bus. A system bus sharply reduces the number of data pins needed to connect all the devices, which is especially clear when the system includes multiple CPUs and memory devices. A typical system bus is shown in Figure 1.
 
@@ -51,41 +51,96 @@ In our design, we assume the test bench has the highest priority and the UART mo
 
 *Figure 6. Address map to the UART*
 
-## Implementation & Simulation
+# 3. Lab Procedures
 
-Please login to the Olympus server and create a working directory for this lab using the following commands.
+## 3.0 Setup
+1. Execute the following commands to create and enter the working directory.
+    - `cd $HOME/ecen468/`
 
-```bash
-## Create and navigate to the working directory.
-mkdir -p $HOME/ECEN468/Lab3/src
-cd $HOME/ECEN468/Lab3/src
-```
+2. Download `lab02_code.tar.gz` from the lab website and put it in the working directory.
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+3. Execute the following commands to extract the files.
+    - `tar -xvf lab01_code.tar.gz`
+    - `rm lab01_code.tar.gz`
 
-- `SRAM_WRAP.cpp`
-- `SRAM_WRAP.h`
-- `UART_XMTR_WRAP.cpp`
-- `UART_XMTR_WRAP.h`
-- `Arbiter.cpp`
-- `Arbiter.h`
-- `test.cpp`
-- `test.h`
-- `main.cpp`
+4. Confirm the following directories and files exist in the working directory.
+    - `Arbiter.cpp`
+    - `main.cpp`
+    - `SRAM.cpp`
+    - `SRAM_WRAP.cpp`
+    - `test.cpp`
+    - `UART_XMTR_WRAP.cpp`
+    - `Arbiter.h`
+    - `SRAM.h`
+    - `SRAM_WRAP.h`
+    - `test.h`
+    - `UART_XMTR_WRAP.h`
+    - `workspace` (directory where Siemens Vista will be run)
+    Please use the `SRAM.cpp` and `SRAM.h` given instead of using the `RAM.cpp` and `RAM.h` from lab 1.
 
-Copy them to the working directory. Also copy `SRAM.cpp` from Lab 1 (rename `RAM.cpp` to `SRAM.cpp`) and `UART_XMTR.cpp` and `UART_XMTR.h` from Lab 2 into the working directory.
+5. Copy and paste the following file from lab 2 in the working directory.
+    - `UART_XMTR.cpp`
+    - `UART_XMTR.h`
 
-Figure 7 shows the file hierarchy for this lab.
+6. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
 
-![Figure 7. Hierarchical structure of the files in this lab]({{ "/assets/files/lab03/img/7.png" | relative_url }})
+## 3.1 Building SystemC Design Using Siemens Vista
+1. Execute the following commands in sequence to open Siemens Vista.
+    - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
+    - `source /opt/rh/gcc-toolset-13/enable`
+    - `cd $HOME/ecen468/lab02/workspace`
+    - `vista &`
 
-*Figure 7. Hierarchical structure of the files in this lab*
+2. In Vista graphical interface, click **Project** on the menu bar, then click **New Project...**.
 
-The `Arbiter` and `test` modules are already implemented in the provided code. Review them briefly to understand how they work.
+3. In the **New Project** dialog, click **Save** (You don't need to change the default file name).
 
-Once you complete the implementation, verify your design by simulating it and viewing the waveform. Take screenshots of the simulation output and the waveform, and include them in your report.
+4. In the **Create New Project** dialog, click **Files** on the tab bar, then click **Add Files** on the bottom right.
 
-## Tips for Common Errors
+5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, click **Open**, then click **OK**.
+
+6. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
+
+7. If no errors occur, proceed to the next section.
+
+## 3.2 Simulating SystemC Design Using Siemens Vista
+1. On the side bar, click the **+** next to **Project** expand its content.
+
+2. Click the **+** next to **Simulation**, then right click on **main.cpp** and click **Simulate**.
+
+3. In the **simulation** dialog, deselect **Stop after elaboration** under **Debugging**, then click **OK**.
+
+4. Take a screenshot of the simulation output in Vista for the lab report.
+
+5. After the simulation exits, a waveform file named `wave.vcd` will be generated in `workspace`.
+
+6. In the terminal, execute the following commands to Synopsys WaveView.
+    - `source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh`
+    - `wv &`
+
+7. In WaveView, open `wave.vcd` to view the simulation waveform.
+
+8. Take a screenshot of the waveform for the lab report.
+
+---
+
+## Submission
+Please submit a single PDF file containing the following:
+
+1. Screenshot of the waveform with analysis.
+2. Screenshot of the simulation output in Vista.
+3. Screenshots or copy of the content of the following files:
+    - `SRAM_WRAP.cpp`
+    - `UART_XMTR_WRAP.cpp`
+    - `SRAM_WRAP.h`
+    - `UART_XMTR_WRAP.h`
+4. Answer to the following question: 
+    - Suppose three devices (A, B, C) are connected to the `Arbiter` on ports 2, 1, and 0 in `Arbiter.h`. List the three devices in order of priority, from highest to lowest.
+
+---
+
+## Appendix: Tips for Common Errors
 
 Declaring and using an inout signal:
 
@@ -111,24 +166,9 @@ If you see type-mismatch errors on some signals in `SRAM.cpp`, modify your SRAM 
 
 ![Reference waveform of the system bus simulation]({{ "/assets/files/lab03/img/8.png" | relative_url }})
 
-Commands for reference:
+---
 
-```bash
-load-ecen-468   # skip this line on machines in ZACH 127
-source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh
-wv &
-```
-
-## Submission
-
-Please submit a single PDF file containing the following:
-
-1. Screenshots of the waveform with analysis.
-2. Screenshots of the simulation output in the terminal.
-3. Screenshots of your code in this design with reasonable comments.
-4. Question: Suppose three devices (A, B, C) are connected to the `Arbiter` on ports 2, 1, and 0 in `Arbiter.h`. List the three devices in order of priority, from highest to lowest.
-
-## Code Example
+## Appendix: Code Example
 
 ```cpp
 SC_MODULE (SRAM) {

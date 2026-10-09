@@ -121,7 +121,7 @@ In this lab, the ID of the devices are as follows:
         - `top_netlist_tb.v`
         - `top_tb.v`
 
-5. Copy and paste the following Verilog code into the `rtl` directory:
+5. Copy and paste the following Verilog code into the `rtl` directory.
     - `uart_tx_controller.v`
     - `uart_tx_datapath.v`
     - `uart_tx.v`

@@ -8,7 +8,7 @@ downloads:
     file: /assets/files/lab02/lab02_code.tar.gz
 ---
 
-# 1. Objectives
+## 1. Objectives
 - Complete design of UART transmitter in SystemC.
 - Build and simulate the design.
 
@@ -58,13 +58,13 @@ Figure 5 shows an example of the transmission timing. You can use this timing di
 
 ## 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
-  - `cd $HOME/ecen468/`
+    - `cd $HOME/ecen468/`
 
 2. Download `lab02_code.tar.gz` from the lab website and put it in the working directory.
 
 3. Execute the following commands to extract the files.
-  - `tar -xvf lab01_code.tar.gz`
-  - `rm lab01_code.tar.gz`
+    - `tar -xvf lab01_code.tar.gz`
+    - `rm lab01_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
     - `UART` (directory for C++ source code and header files)
@@ -119,6 +119,7 @@ Figure 5 shows an example of the transmission timing. You can use this timing di
 
 ## 4. Submission
 Please submit a single PDF file containing the following:
+
 1. Screenshots of the waveform with analysis.
 2. Screenshots of the simulation output in Vista.
 3. Screenshots or copy of the content of the following files:

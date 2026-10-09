@@ -10,7 +10,7 @@ downloads:
     file: /assets/files/lab01/lab01_code.tar.gz
 ---
 
-# 1. Objectives
+## 1. Objectives
 - Complete design of SRAM in SystemC.
 - Build and simulate the design.
 
