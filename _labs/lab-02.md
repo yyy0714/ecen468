@@ -63,8 +63,8 @@ Figure 5 shows an example of the transmission timing. You can use this timing di
 2. Download `lab02_code.tar.gz` from the lab website and put it in the working directory.
 
 3. Execute the following commands to extract the files.
-    - `tar -xvf lab01_code.tar.gz`
-    - `rm lab01_code.tar.gz`
+    - `tar -xvf lab02_code.tar.gz`
+    - `rm lab02_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
     - `UART` (directory for C++ source code and header files)

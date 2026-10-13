@@ -56,11 +56,11 @@ In our design, we assume the test bench has the highest priority and the UART mo
 1. Execute the following commands to create and enter the working directory.
     - `cd $HOME/ecen468/`
 
-2. Download `lab02_code.tar.gz` from the lab website and put it in the working directory.
+2. Download `lab03_code.tar.gz` from the lab website and put it in the working directory.
 
 3. Execute the following commands to extract the files.
     - `tar -xvf lab01_code.tar.gz`
-    - `rm lab01_code.tar.gz`
+    - `rm lab03_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
     - `Arbiter.cpp`
@@ -88,7 +88,7 @@ In our design, we assume the test bench has the highest priority and the UART mo
 1. Execute the following commands in sequence to open Siemens Vista.
     - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
     - `source /opt/rh/gcc-toolset-13/enable`
-    - `cd $HOME/ecen468/lab02/workspace`
+    - `cd $HOME/ecen468/lab03/workspace`
     - `vista &`
 
 2. In Vista graphical interface, click **Project** on the menu bar, then click **New Project...**.
