@@ -1,19 +1,22 @@
 ---
 layout: manual
 title: 'Lab 4: Design of Canny Edge Detector (SystemC)'
-session: 'Week 5 (Sep 21 – Sep 25)'
-report_due: 'Week 6 (Sep 28 – Oct 2)'
-manual_pdf: /assets/files/lab04/lab04_manual.pdf
+session: 'Week 9 (Oct 19 – Oct 23)'
+report_due: 'Week 10 (Oct 26 – Oct 30)'
 downloads:
   - label: code (tar.gz)
     file: /assets/files/lab04/lab04_code.tar.gz
 ---
 
-## Objectives
+## 1. Objectives
+- Complete design of Canny edge detector in SystemC.
+- Build and simulate the design.
 
-In this lab, we will implement a canny edge detector and use Vista for simulation and verification.
+---
 
-## Introduction
+## 2 Introduction
+
+### 2.1 Overview
 
 **Edge detection** refers to identifying and locating sharp discontinuities in an image. These discontinuities are abrupt changes in pixel intensity that characterize the boundaries of objects in a scene. Classical edge detection methods convolve the image with an operator (a 2-D filter) designed to be sensitive to large gradients while returning zero in uniform regions.
 
@@ -25,7 +28,7 @@ There are many ways to perform edge detection, but most methods fall into two ca
 
 *Figure 1. An example of Canny Edge Detection*
 
-### Edge Detection Flow
+### 2.2 Edge Detection Flow
 
 ![Figure 2. Data flow of Edge Detection]({{ "/assets/files/lab04/img/2.png" | relative_url }})
 
@@ -33,7 +36,7 @@ There are many ways to perform edge detection, but most methods fall into two ca
 
 Figure 2 shows the data flow of a Canny Edge Detector. The input image goes through four operations: **Noise Reduction**, **Gradient Calculation**, **Non-maximum Suppression**, and **Thresholding**. The following sections describe each in detail.
 
-### Noise Reduction
+### 2.3 Noise Reduction
 
 The first step is to filter out noise in the original image with a Gaussian filter. The filter must be chosen carefully, because filtering removes noise but can also degrade image quality.
 
@@ -49,7 +52,7 @@ Once a suitable mask has been chosen, Gaussian smoothing is performed using stan
 
 Figure 4 shows the convolution process. For the grey pixel p[i,j] in the left image, the window M is selected from the original image and used in the convolution. The value of the corresponding pixel in the smoothed image is computed using the equation shown in the figure.
 
-### Gradient Calculation
+### 2.4 Gradient Calculation
 
 After smoothing the image and removing the noise, the next step is to find the edge strength by taking the gradient of the image. We use the Sobel operators in Figure 5 to perform a 2-D gradient measurement. The Sobel operator uses a pair of 3x3 convolution masks: one estimates the gradient in the x-direction (vertical edges) and the other in the y-direction (horizontal edges). The equations in Figure 6 give the gradient values Gx and Gy in the x and y directions.
 
@@ -95,7 +98,7 @@ We compute the gradient direction in order to determine the edge direction. Edge
 
 *Figure 11. An approximation method for gradient directions*
 
-### Non-maximum Suppression
+### 2.5 Non-maximum Suppression
 
 Because of multiple responses, the edge magnitude M(x,y) may contain wide ridges around the local maxima. Non-maximum suppression removes the non-maximum pixels while preserving the connectivity of the contours.
 
@@ -108,7 +111,7 @@ Figure 12 shows an example of non-maximum suppression. Suppose we want to do a n
 
 *Figure 12. Non-maximum suppression*
 
-### Hysteresis Thresholding
+### 2.6 Hysteresis Thresholding
 
 The output of non-maximum suppression still contains noisy local maxima. In this lab, we use hysteresis thresholding to further remove noise and improve image quality.
 
@@ -133,6 +136,8 @@ In our lab, please use `T_high` = 20 and `T_low` = 5.
 
 *Figure 13. Hysteresis thresholding*
 
+---
+
 ## Implementation & Simulation
 
 ![Figure 14. Data flow of the top module and test bench.]({{ "/assets/files/lab04/img/14.png" | relative_url }})
@@ -151,56 +156,73 @@ Figures 14 and 15 show the structure of the design.
 
 Figure 16 shows the data flow of the noise reduction process. First, the top module receives a 5x5 block of the original image (`**X`) from the test bench. This block is convolved with a Gaussian mask to reduce noise. Finally, the result is loaded into the register `Out_gf` and sent to another memory area (`**XG`) in the test bench.
 
-Please login to the Olympus server and create a working directory for this lab using the following commands.
+## 3. Lab Procedures
 
-```bash
-## Create and navigate to the working directory.
-mkdir -p $HOME/ECEN468/Lab4/src
-cd $HOME/ECEN468/Lab4/src
-```
+### 3.0 Setup
+1. Execute the following commands to create and enter the working directory.
+    - `cd $HOME/ecen468/`
 
-Download the tar.gz file from the lab website and extract it. In the extracted folders, you will find the following files:
+2. Download `lab04_code.tar.gz` from the lab website and put it in the working directory.
 
-- `Canny_Edge.cpp`
-- `Canny_Edge.h`
-- `test.cpp`
-- `test.h`
-- `main.cpp`
-- `cman_200.bmp`
+3. Execute the following commands to extract the files.
+    - `tar -xvf lab04_code.tar.gz`
+    - `rm lab04_code.tar.gz`
 
-Copy them to the working directory.
+4. Confirm the following directories and files exist in the working directory.
+    - `Canny_Edge.cpp`
+    - `main.cpp`
+    - `test.cpp`
+    - `Canny_Edge.h`
+    - `test.h`
+    - `workspace` (directory where Siemens Vista will be run)
+      - `0.ref.bmp`
+      - `1.ref.bmp`
+      - `2.ref.bmp`
+      - `3.ref.bmp`
+      - `4.ref.bmp`
+      - `5.ref.bmp`
+      - `6.ref.bmp`
+      - `cman_200.bmp`
 
-Once you complete the implementation, verify your design by simulation. The output BMP files will appear in your working directory and the output messages in the Vista command window. Include screenshots of the simulation output messages and the output files in your report.
+6. Execute the following command if you are not using a computer in ZACH 127.
+    - `load-ecen-468`
 
-Description of the BMP files:
+### 3.1 Building SystemC Design Using Siemens Vista
+1. Execute the following commands in sequence to open Siemens Vista.
+    - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
+    - `source /opt/rh/gcc-toolset-13/enable`
+    - `cd $HOME/ecen468/lab03/workspace`
+    - `vista &`
 
-1. `OutputOrigin.bmp`: The original image saved in local memory.
-2. `OutputGauss.bmp`: The image after Gaussian filtering.
-3. `OutputGradient.bmp`: The gradient components of the `OutputGauss.bmp`.
-4. `OutputAngle.bmp`: The direction component based on the gradient Gx and Gy.
-5. `OutputNMS.bmp`: The image after Non-Maximum Suppression.
-6. `OutputThres.bmp`: The image after Hysteresis Threshold.
+2. In Vista graphical interface, click **Project** on the menu bar, then click **New Project...**.
 
-The provided code generates only the first two images. To generate the rest, complete the design in `Canny_Edge.cpp`.
+3. In the **New Project** dialog, click **Save** (You don't need to change the default file name).
 
-For convenience, the simulation reports the matching ratio between the images your implementation generates and the reference images.
+4. In the **Create New Project** dialog, click **Files** on the tab bar, then click **Add Files** on the bottom right.
 
-Commands for reference:
+5. In the **Select Files** dialog, click the folder icon and select the C++ source code and header files, click **Open**, then click **OK**.
 
-```bash
-load-ecen-468   # skip this line on machines in ZACH 127
-source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash
-vista &
+6. On the side bar, right click on **Project** and click **Build**. Every time you modify the source code or header files, you need to rebuild the project.
 
-source /opt/coe/synopsys/wv/V-2023.12-4/setup.wv.sh
-wv &
-```
+7. If no errors occur, proceed to the next section.
+
+### 3.2 Simulating SystemC Design Using Siemens Vista
+1. On the side bar, click the **+** next to **Project** expand its content.
+
+2. Click the **+** next to **Simulation**, then right click on **main.cpp** and click **Simulate**.
+
+3. In the **simulation** dialog, deselect **Stop after elaboration** under **Debugging**, then click **OK**.
+
+4. Take a screenshot of the simulation output in Vista for the lab report.
+
+---
 
 ## Submission
-
 Please submit a single PDF file containing the following:
 
 1. Screenshots of the images generated by the simulation.
-2. Screenshots of the simulation output in Vista.
-3. Screenshots of your code in this design with reasonable comments.
-4. Q1: The final output image shows many doubled edge lines. What are the possible causes and solutions?
+2. Screenshot of the simulation output in Vista.
+3. Screenshots or copy of the content of the following files:
+    - `Canny_Edge.cpp`
+4. Answer to the following question:
+    - The final output image shows many doubled edge lines. What are the possible causes and solutions?

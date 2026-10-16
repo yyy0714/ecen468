@@ -50,16 +50,16 @@ In our design, we assume the test bench has the highest priority and the UART mo
 
 *Figure 6. Address map to the UART*
 
-# 3. Lab Procedures
+## 3. Lab Procedures
 
-## 3.0 Setup
+### 3.0 Setup
 1. Execute the following commands to create and enter the working directory.
     - `cd $HOME/ecen468/`
 
 2. Download `lab03_code.tar.gz` from the lab website and put it in the working directory.
 
 3. Execute the following commands to extract the files.
-    - `tar -xvf lab01_code.tar.gz`
+    - `tar -xvf lab03_code.tar.gz`
     - `rm lab03_code.tar.gz`
 
 4. Confirm the following directories and files exist in the working directory.
@@ -84,7 +84,7 @@ In our design, we assume the test bench has the highest priority and the UART mo
 6. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
-## 3.1 Building SystemC Design Using Siemens Vista
+### 3.1 Building SystemC Design Using Siemens Vista
 1. Execute the following commands in sequence to open Siemens Vista.
     - `source /opt/coe/mentorgraphics/vista/2024_2/setup.vista.linux.bash`
     - `source /opt/rh/gcc-toolset-13/enable`
@@ -103,7 +103,7 @@ In our design, we assume the test bench has the highest priority and the UART mo
 
 7. If no errors occur, proceed to the next section.
 
-## 3.2 Simulating SystemC Design Using Siemens Vista
+### 3.2 Simulating SystemC Design Using Siemens Vista
 1. On the side bar, click the **+** next to **Project** expand its content.
 
 2. Click the **+** next to **Simulation**, then right click on **main.cpp** and click **Simulate**.
