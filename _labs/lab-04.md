@@ -175,16 +175,16 @@ Figure 16 shows the data flow of the noise reduction process. First, the top mod
     - `Canny_Edge.h`
     - `test.h`
     - `workspace` (directory where Siemens Vista will be run)
-      - `0.ref.bmp`
-      - `1.ref.bmp`
-      - `2.ref.bmp`
-      - `3.ref.bmp`
-      - `4.ref.bmp`
-      - `5.ref.bmp`
-      - `6.ref.bmp`
-      - `cman_200.bmp`
+        - `0.ref.bmp`
+        - `1.ref.bmp`
+        - `2.ref.bmp`
+        - `3.ref.bmp`
+        - `4.ref.bmp`
+        - `5.ref.bmp`
+        - `6.ref.bmp`
+        - `cman_200.bmp`
 
-6. Execute the following command if you are not using a computer in ZACH 127.
+5. Execute the following command if you are not using a computer in ZACH 127.
     - `load-ecen-468`
 
 ### 3.1 Building SystemC Design Using Siemens Vista
