@@ -73,9 +73,9 @@ The memory size depends on the size of the images to be processed, so you need t
 
 4. Confirm the following directories and files exist in the working directory.
     - `Arbiter.cpp`
-    - `Canny_Edge_WRAP.cpp`
+    - `Canny_Edge_WRAP.cpp` (functions to be implemented)
     - `main.cpp`
-    - `test.cpp`
+    - `test.cpp` (functions to be implemented)
     - `Arbiter.h`
     - `Canny_Edge_WRAP.h`
     - `test.h`
