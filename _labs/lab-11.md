@@ -3,9 +3,9 @@ layout: manual
 title: 'Lab 11: Combining Canny Edge Detector with System Bus, Memory and UART (Verilog)'
 session: 'Week 12 (Nov 9 – Nov 13)'
 report_due: 'Week 13 (Nov 16 – Nov 20)'
-# downloads:
-#   - label: code (tar.gz)
-#     file: /assets/files/lab11/lab11_code.tar.gz
+downloads:
+  - label: code (tar.gz)
+    file: /assets/files/lab11/lab11_code.tar.gz
 ---
 
 ## 1. Objectives
@@ -16,7 +16,7 @@ report_due: 'Week 13 (Nov 16 – Nov 20)'
 
 ## 2. Implementation
 
-## 2.1 Device IDs
+### 2.1 Device IDs
 The ID of the devices are as follows:
 
 | Item                | ID   |
@@ -26,7 +26,7 @@ The ID of the devices are as follows:
 | Testbench           | 0011 |
 | Canny Edge Detector | 0100 |
 
-## 2.2 Device Priorities
+### 2.2 Device Priorities
 The priorities of the devices are as follows:
 
 | Item                | Priority |
@@ -36,12 +36,12 @@ The priorities of the devices are as follows:
 | UART Transmitter    |          |
 | Canny Edge Detector | Lowest   |
 
-## 2.3 Canny Edge Detector Address Map
+### 2.3 Canny Edge Detector Address Map
 Figure 1 shows the address map of Canny edge detector.
 
 ![Canny Edge Detector Address Map]({{ "/assets/files/lab09/img/canny_edge_detector_addr_map.png" | relative_url }}){: style="zoom: 0.6;" }
 
-## 2.4 Implementation Requirement
+### 2.4 Implementation Requirement
 - Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector.v`.
 
 ---
