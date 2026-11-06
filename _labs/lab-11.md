@@ -41,8 +41,8 @@ Figure 1 shows the address map of Canny edge detector.
 
 ![Canny Edge Detector Address Map]({{ "/assets/files/lab11/img/canny_edge_detector_addr_map.png" | relative_url }}){: style="zoom: 0.6;" }
 
-### 2.4 Implementation Requirement
-- Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector.v`.
+### 2.4 Requirement
+- Implement system bus Canny edge detector wrapper in `system_bus_canny_edge_detector_wrapper.v`.
 
 ---
 
