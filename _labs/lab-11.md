@@ -77,7 +77,7 @@ Figure 1 shows the address map of Canny edge detector.
     - `rtl` (directory for RTL verilog code)
         - `sram.v`
         - `system_bus_arbiter.v`
-        - `system_bus_canny_edge_detector.v`
+        - `system_bus_canny_edge_detector_wrapper.v`
         - `top.v`
     - `sim` (directory where Synopsys VCS will be run)
     - `syn` (directory where Synopsys Design Vision will be run)
@@ -92,7 +92,7 @@ Figure 1 shows the address map of Canny edge detector.
     - `uart_tx.v`
 
 6. Copy the following files from lab 9 into the `rtl` directory:
-    - `system_bus_canny_edge_sram_wrapper.v`
+    - `system_bus_sram_wrapper.v`
     - `system_bus_uart_tx_wrapper.v`
 
 7. Copy the following files from lab 10 into the `rtl` directory:
@@ -133,4 +133,4 @@ Please submit a single PDF file containing the following:
 - Canny edge detector RTL design:
     1. Screenshot of the terminal output after running `python calculate_match_ratio.py`.
     2. Screenshots or copy of the content of the following file:
-        - `system_bus_canny_edge_detector.v`
+        - `system_bus_canny_edge_detector_wrapper.v`
